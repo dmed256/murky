@@ -7,3 +7,61 @@ body {
 a, a:visited {
     color: #2980B9;
 }
+
+/*---[ Code ]-------------------------*/
+code, pre {
+    font-family: Roboto Mono, Monaco, courier, monospace;
+}
+
+pre {
+    background-color: #f8f8f8;
+    line-height: 1.5em;
+    overflow: auto;
+    position: relative;
+    word-wrap: normal;
+    margin: 0;
+    padding: 1.5em;
+    margin-top: 1em;
+}
+
+pre:after {
+    font-size: 0.85em !important;
+    font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+    font-weight: 300;
+    color: #73797d;
+    content: attr(data-lang);
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+}
+
+code {
+    background-color: transparent;
+    color: #525252;
+    display: block;
+    font-size: 0.8em;
+    line-height: inherit;
+    margin: 0;
+    max-width: inherit;
+    overflow: inherit;
+    padding: 0;
+    white-space: inherit;
+}
+
+code .token.string,
+code .token.function {
+    color: var(--theme-primary-color, #2980b9);
+}
+
+code .token.keyword {
+    color: var(--theme-secondary-color, #e96900);
+}
+
+code .token.string {
+    color: #29b934;
+}
+
+code .token.number {
+    color: #ce5b5b;
+}
+/*====================================*/
