@@ -17,12 +17,12 @@ const Markdown = ({ content }: Props) => {
       {
         tokens
           .map((token, index) => {
-            if ('tokens' in token) {
+            if (token.tokenType === 'murky') {
               return (
                 <BlockToken
                   key={index}
                   type={token.type}
-                  tokens={token.tokens}
+                  children={token.children}
                 />
               );
             }

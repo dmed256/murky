@@ -1,10 +1,13 @@
 import mdit from 'markdown-it';
 
 
-export type MDToken = mdit.Token;
-export type Token = MDToken | BlockToken;
-
-export interface BlockToken {
-  type: string,
-  tokens: Token[],
+export interface MDToken extends mdit.Token {
+  tokenType: 'md',
 }
+
+export interface MurkyToken extends mdit.Token {
+  tokenType: 'murky',
+  children: Token[],
+}
+
+export type Token = MDToken | MurkyToken;

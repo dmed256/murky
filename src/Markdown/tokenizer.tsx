@@ -1,7 +1,7 @@
 import mdit from 'markdown-it';
 import mditContainer from 'markdown-it-container';
 
-import { MDToken, BlockToken } from './types';
+import { MurkyToken, Token } from './types';
 
 
 const md = mdit({
@@ -14,53 +14,79 @@ const md = mdit({
 
 interface BlockTokenInfo {
   i: number,
-  token: BlockToken,
+  token: MurkyToken,
 }
 
-const tokenizeBlock = (tokens: MDToken[], i: number, name: string): BlockTokenInfo => {
-  const blockTokens = [];
+const tokenizeBlock = (
+  tokens: mdit.Token[],
+  i: number,
+  blockOpenToken: mdit.Token
+): BlockTokenInfo => {
+  // Trim down name: container_X_open -> X
+  const blockType = blockOpenToken.type
+  let blockName = blockType.substr(0, blockType.length - 5);
+  if (blockName.startsWith('container_')) {
+    blockName = blockName.substr(10);
+  }
+  // Block token children
+  const children = [];
+
   while (i < tokens.length) {
     const token = tokens[i++];
     const { type } = token;
 
+    // Start a new block
     if (type.endsWith('_open')) {
-      // container_X_open -> X
-      let blockName = type.substr(0, type.length - 5);
-      if (blockName.startsWith('container_')) {
-        blockName = blockName.substr(10);
-      }
-
-      const { i: i2, token: blockToken } = tokenizeBlock(tokens, i, blockName);
+      const { i: i2, token: blockToken } = tokenizeBlock(tokens, i, token);
       i = i2;
-      blockTokens.push(blockToken);
+      children.push(blockToken);
     }
+    // Closing token
     else if (type.endsWith('_close')) {
       break;
     }
+    // Simplify inline elements
     else if (type === 'inline') {
-      blockTokens.push(tokenizeBlock(token.children, 0, 'inline').token);
+      children.push(tokenizeBlock(
+        token.children,
+        0,
+        { type: 'inline_open' } as any,
+      ).token);
     }
+    // Fence -> Code
     else if (type === 'fence') {
-      blockTokens.push({
+      children.push({
+        tokenType: 'md' as 'md',
         ...token,
         type: 'code',
         tag: '',
       });
-    } else {
-      blockTokens.push(token);
+    }
+    // Misc token
+    else {
+      children.push({
+        tokenType: 'md' as 'md',
+        ...token,
+      });
     }
   }
   return {
     i,
     token: {
-      type: name,
-      tokens: blockTokens,
+      tokenType: 'murky' as 'murky',
+      ...blockOpenToken,
+      type: blockName,
+      children,
     },
   };
 };
 
-const tokenizer = (content: string) => (
-  tokenizeBlock(md.parse(content, {}), 0, 'root').token.tokens
+const tokenizer = (content: string): Token[] => (
+  tokenizeBlock(
+    md.parse(content, {}),
+    0,
+    { type: 'root_open' } as any,
+  ).token.children
 );
 
 export default tokenizer;

@@ -5,10 +5,10 @@ import { Token } from './types';
 
 interface Props {
   type: string,
-  tokens: Token[],
+  children: Token[],
 }
 
-const BlockToken = ({ type, tokens }: Props) => {
+const BlockToken = ({ type, children }: Props) => {
   return <div />;
 };
 
