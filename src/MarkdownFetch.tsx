@@ -20,7 +20,7 @@ interface State {
 class MarkdownFetch extends React.Component<Props, State> {
   state: State = {
     fetchState: 'loading',
-    content: [],
+    content: undefined,
   }
 
   fetchContent = (pathname: string) => {
@@ -33,6 +33,9 @@ class MarkdownFetch extends React.Component<Props, State> {
     }
 
     if (pathname !== this.props.pathname) {
+      this.setState({
+        content: undefined,
+      });
       fetch(pathname)
         .then((res) => {
           const text = res.text();
@@ -43,7 +46,10 @@ class MarkdownFetch extends React.Component<Props, State> {
         })
         .then((content) => {
           if (this.props.pathname === newPathname) {
-            this.setState({ content });
+            this.setState({
+              fetchState: 'data',
+              content,
+            });
           }
         })
         .catch(() => {
@@ -75,7 +81,7 @@ class MarkdownFetch extends React.Component<Props, State> {
       case 'error':
         return <ErrorPage />;
       default:
-        return <Markdown content={content} />
+        return <Markdown content={content || ''} />
     }
   }
 };

@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import marked from 'marked';
 
 
@@ -7,8 +7,8 @@ interface Props {
 }
 
 const Markdown = ({ content }: Props) => {
-  console.log({ marked: marked(content) });
-  return null;
+  console.log({ marked: marked.lexer(content) });
+  return <div />;
 };
 
 export default Markdown;
