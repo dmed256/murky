@@ -1,0 +1,28 @@
+{
+  "name": "@dmed256/murky",
+  "author": "David Medina",
+  "description": "Markdown + React = website",
+  "license": "MIT",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmed256/murky.git"
+  },
+  "scripts": {
+    "start": "BROWSER=none react-scripts-ts start",
+    "start:prod": "node server.js",
+    "build": "react-scripts-ts build"
+  },
+  "dependencies": {
+    "marked": "^0.5.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts-ts": "2.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.10.3",
+    "@types/react": "^16.4.14",
+    "@types/react-dom": "^16.0.7",
+    "typescript": "^3.0.3"
+  }
+}
