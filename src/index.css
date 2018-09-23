@@ -8,11 +8,12 @@ body {
 a, a:visited {
     color: var(--theme-primary-color, #2980b9);
     font-weight: 600;
+    text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
-    text-decoration-color: var(--theme-secondary-color, #e96900);
+    text-decoration-color: #F7D096;
 }
 
 /*---[ Headers ]----------------------*/

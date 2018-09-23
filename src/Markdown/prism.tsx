@@ -1,4 +1,3 @@
-import React from 'react';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-c.min';
 import 'prismjs/components/prism-clike.min';
@@ -24,14 +23,12 @@ const extend = (newLang: string, lang: string, options?: any) => {
   Prism.languages[newLang] = Prism.languages.extend(lang, options);
 };
 
-const highlight = (text: string, lang?: string) => {
+const highlight = (text: string, lang?: string): string => {
   const grammar = lang && Prism.languages[lang];
   if (!lang || !grammar) {
     return text;
   }
-  return <div dangerouslySetInnerHTML={{
-      __html: Prism.highlight(text, grammar, lang as any),
-  }} />
+  return Prism.highlight(text, grammar, lang as any);
 };
 
 export {
