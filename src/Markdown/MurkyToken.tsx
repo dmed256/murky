@@ -8,8 +8,8 @@ interface Props {
   children: Token[],
 }
 
-const BlockToken = ({ type, children }: Props) => {
+const MurkyToken = ({ type, children }: Props) => {
   return <div />;
 };
 
-export default BlockToken;
+export default MurkyToken;

@@ -1,14 +1,14 @@
 import React from 'react';
 
 import Code from './Code';
-import { MDToken } from './types';
+import * as types from './types';
 
 
 interface Props {
-  token: MDToken,
+  token: types.MDToken,
 }
 
-const Token = ({ token }: Props) => {
+const MDToken = ({ token }: Props) => {
   if (token.type === 'code') {
     return (
       <Code
@@ -20,4 +20,4 @@ const Token = ({ token }: Props) => {
   return null;
 };
 
-export default Token;
+export default MDToken;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BlockToken from './BlockToken';
-import Token from './Token';
+import MurkyToken from './MurkyToken';
+import MDToken from './MDToken';
 import tokenizer from './tokenizer';
 
 
@@ -19,7 +19,7 @@ const Markdown = ({ content }: Props) => {
           .map((token, index) => {
             if (token.tokenType === 'murky') {
               return (
-                <BlockToken
+                <MurkyToken
                   key={index}
                   type={token.type}
                   children={token.children}
@@ -27,7 +27,7 @@ const Markdown = ({ content }: Props) => {
               );
             }
             return (
-              <Token
+              <MDToken
                 key={index}
                 token={token}
               />
