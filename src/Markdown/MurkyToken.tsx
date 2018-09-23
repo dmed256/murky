@@ -2,6 +2,7 @@ import React from 'react';
 
 import Token from './Token';
 import * as types from './types';
+import { attrProps } from './tokenizer';
 
 
 interface Props {
@@ -20,7 +21,7 @@ const MurkyToken = ({ token }: Props) => {
     case 'list_item':
     case 'paragraph':
       return (
-        <Component>
+        <Component {...attrProps(token.attrs)}>
           {
             token.children.map((childToken, index) => (
               <Token key={index} token={childToken} />

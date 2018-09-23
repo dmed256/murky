@@ -2,6 +2,7 @@ import mdit from 'markdown-it';
 import mditContainer from 'markdown-it-container';
 
 import { MurkyToken, Token } from './types';
+import { getHashPathname } from '../history';
 
 
 const md = mdit({
@@ -88,5 +89,26 @@ const tokenizer = (content: string): Token[] => (
     { type: 'root_open' } as any,
   ).token.children
 );
+
+const attrProps = (attrs: string[][] | null) => {
+  if (!attrs || !attrs.length) {
+    return {};
+  }
+  return attrs.reduce((obj: any, [prop, value]) => {
+    let reactProp = prop;
+    let reactValue = value;
+    switch (prop) {
+      case 'href':
+        reactValue = getHashPathname(value);
+        console.log(reactValue);
+        break;
+    }
+    return { ...obj, [reactProp]: reactValue };
+  }, {});
+};
+
+export {
+  attrProps,
+};
 
 export default tokenizer;

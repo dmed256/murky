@@ -35,7 +35,15 @@ class App extends React.Component<Props, State> {
 
   render() {
     return (
-      <MarkdownFetch pathname={this.state.pathname} />
+      <div style={{
+        maxWidth: 800,
+        padding: '30px 15px 40px',
+        margin: '0 auto',
+      }}>
+        <MarkdownFetch
+          pathname={this.state.pathname}
+        />
+      </div>
     );
   }
 };
