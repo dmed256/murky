@@ -1,5 +1,6 @@
 import React from 'react';
 
+import MarkdownFetch from './MarkdownFetch';
 import history from './history';
 
 interface Props {
@@ -11,7 +12,7 @@ interface State {
 
 class App extends React.Component<Props, State> {
   state: State = {
-    pathname: location.hash.substr(2) || '/',
+    pathname: location.hash.substr(1) || '/',
   }
 
   constructor(props: Props) {
@@ -27,7 +28,6 @@ class App extends React.Component<Props, State> {
   }
 
   onHistoryChange = (pathname: string) => {
-    console.log({ pathname });
     if (this.state.pathname !== pathname) {
       this.setState({ pathname });
     }
@@ -35,7 +35,7 @@ class App extends React.Component<Props, State> {
 
   render() {
     return (
-      <div />
+      <MarkdownFetch pathname={this.state.pathname} />
     );
   }
 };

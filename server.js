@@ -1,12 +1,12 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(express.static('build'))
+app.use(express.static('.'))
 
 app.get('*', (req, res) => {
-  express.static(path.join(__dirname, 'build/index.html'));
+  res.status(400).send("File doesn't exist");
 });
 
 app.listen(port, () => {
