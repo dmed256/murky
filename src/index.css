@@ -1,32 +1,83 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  color: #34495e;
+  font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
 }
 
 a, a:visited {
-    color: #2980B9;
+    color: var(--theme-primary-color, #2980b9);
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--theme-secondary-color, #e96900);
+}
+
+/*---[ Headers ]----------------------*/
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 36px;
+    margin: 0 0 16px;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 45px 0 18px;
+}
+
+h3 {
+    font-size: 24px;
+    margin: 40px 0 14px;
+}
+
+h4 {
+    font-size: 18px;
+    margin: 40px 0 14px;
+}
+
+h5, h6 {
+    font-size: 12px;
+    margin: 40px 0 14px;
+}
+/*====================================*/
+
+.hr {
+    height: 1px;
+    width: 98%;
+    margin: 18px 1%;
+    background-color: #dadada;
+}
+
+p {
+    line-height: 1.6rem;
+    word-spacing: .05rem;
+    margin: 1.2em 0;
 }
 
 /*---[ Code ]-------------------------*/
 code, pre {
-    font-family: Roboto Mono, Monaco, courier, monospace;
+    font-family: 'Ubuntu Mono', monospace;
 }
 
 pre {
     background-color: #f8f8f8;
-    line-height: 1.5em;
+    line-height: 1.3em;
     overflow: auto;
     position: relative;
     word-wrap: normal;
     margin: 0;
-    padding: 1.5em;
+    padding: 1.3em;
     margin-top: 1em;
 }
 
 pre:after {
     font-size: 0.85em !important;
-    font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
     font-weight: 300;
     color: #73797d;
     content: attr(data-lang);

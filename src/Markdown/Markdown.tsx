@@ -2,6 +2,9 @@ import React from 'react';
 import marked from 'marked';
 
 import Code from './Code';
+import Heading from './Heading';
+
+
 /*
 type Token =
     Tokens.Space
@@ -101,29 +104,37 @@ interface Props {
 }
 
 const Markdown = ({ content }: Props) => (
-  <React.Fragment> {
-    marked.lexer(content).map((token, index) => {
-      switch (token.type) {
-        case 'code':
-          return <Code key={index} lang={token.lang} text={token.text} />
-        case 'heading':
-        case 'table':
-        case 'hr':
-        case 'blockquote_start':
-        case 'blockquote_end':
-        case 'list_start':
-        case 'loose_item_start':
-        case 'list_item_start':
-        case 'list_item_end':
-        case 'list_end':
-        case 'paragraph':
-        case 'html':
-        case 'text':
-        default:
-          return null;
-      }
-    })
-  } </React.Fragment>
+  <React.Fragment>
+    {
+      marked.lexer(content).map((token, index) => {
+        switch (token.type) {
+          case 'code':
+            return <Code key={index} lang={token.lang} text={token.text} />;
+          case 'heading':
+            return <Heading key={index} depth={token.depth} text={token.text} />;
+          case 'hr':
+            return <div key={index} className="hr" />;
+          case 'paragraph':
+            return <p key={index}>{token.text}</p>;
+          case 'text':
+            return token.text;
+          case 'space':
+            return null;
+          case 'table':
+          case 'blockquote_start':
+          case 'blockquote_end':
+          case 'list_start':
+          case 'loose_item_start':
+          case 'list_item_start':
+          case 'list_item_end':
+          case 'list_end':
+          case 'html':
+          default:
+            return <div key={index}>{JSON.stringify(token)}</div>;
+        }
+      })
+    }
+  </React.Fragment>
 );
 
 export default Markdown;
