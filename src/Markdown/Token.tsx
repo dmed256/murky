@@ -11,14 +11,8 @@ interface Props {
 
 const Token = ({ token }: Props) => (
   (token.tokenType === 'murky')
-  ? (
-    <MurkyToken
-      type={token.type}
-      children={token.children}
-    />
-  ) : (
-    <MDToken token={token} />
-  )
+  ? <MurkyToken token={token} />
+  : <MDToken token={token} />
 );
 
 export default Token;
