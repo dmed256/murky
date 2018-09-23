@@ -1,6 +1,8 @@
 import mdit from 'markdown-it';
 import mditContainer from 'markdown-it-container';
 
+import { MDToken, BlockToken } from './types';
+
 
 const md = mdit({
   html: true,
@@ -10,18 +12,12 @@ const md = mdit({
   validate: () => true,
 });
 
-
-interface Token {
-  type: string,
-  tokens: (Token | mdit.Token)[],
-}
-
-interface BlockToken {
+interface BlockTokenInfo {
   i: number,
-  token: Token,
+  token: BlockToken,
 }
 
-const tokenizeBlock = (tokens: mdit.Token[], i: number, name: string): BlockToken => {
+const tokenizeBlock = (tokens: MDToken[], i: number, name: string): BlockTokenInfo => {
   const blockTokens = [];
   while (i < tokens.length) {
     const token = tokens[i++];
@@ -44,7 +40,13 @@ const tokenizeBlock = (tokens: mdit.Token[], i: number, name: string): BlockToke
     else if (type === 'inline') {
       blockTokens.push(tokenizeBlock(token.children, 0, 'inline').token);
     }
-    else {
+    else if (type === 'fence') {
+      blockTokens.push({
+        ...token,
+        type: 'code',
+        tag: '',
+      });
+    } else {
       blockTokens.push(token);
     }
   }

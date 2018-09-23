@@ -9,7 +9,7 @@ interface Props {
 };
 
 const Code = ({ source, lang }: Props) => (
-  <pre data-lang={(lang || '').toUpperCase()}>
+  <pre data-lang={lang || ''}>
     <code className={lang ? `lang-${lang}` : undefined}>
       {highlight(source, lang)}
     </code>

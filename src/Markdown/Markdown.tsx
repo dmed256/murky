@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Code from './Code';
+import BlockToken from './BlockToken';
+import Token from './Token';
 import tokenizer from './tokenizer';
 
 
@@ -8,20 +9,33 @@ interface Props {
   content: string,
 }
 
-const Markdown = ({ content }: Props) => (
-  <React.Fragment>
-  {
-    tokenizer(content)
-      .filter((token) => token.type === 'fence')
-      .map((token: any, index) => (
-        <Code
-          key={index}
-          source={token.content}
-          lang={token.info}
-        />
-      ))
-  }
-  </React.Fragment>
-);
+const Markdown = ({ content }: Props) => {
+  const tokens = tokenizer(content);
+  console.log(tokens);
+  return (
+    <React.Fragment>
+      {
+        tokens
+          .map((token, index) => {
+            if ('tokens' in token) {
+              return (
+                <BlockToken
+                  key={index}
+                  type={token.type}
+                  tokens={token.tokens}
+                />
+              );
+            }
+            return (
+              <Token
+                key={index}
+                token={token}
+              />
+            );
+          })
+      }
+    </React.Fragment>
+  );
+};
 
 export default Markdown;
