@@ -48,11 +48,19 @@ h5, h6 {
 }
 /*====================================*/
 
-.hr {
+hr {
     height: 1px;
     width: 98%;
     margin: 18px 1%;
     background-color: #dadada;
+    border: none;
+}
+
+blockquote {
+    margin: 0 10px;
+    padding-left: 10px;
+    border-left: 1px solid #dadada;
+    font-weight: 300;
 }
 
 p {
@@ -73,18 +81,18 @@ pre {
     position: relative;
     word-wrap: normal;
     margin: 0;
-    padding: 1.3em;
     margin-top: 1em;
 }
 
 pre:after {
-    font-size: 0.85em !important;
-    font-weight: 300;
-    color: #73797d;
     content: attr(data-lang);
     position: absolute;
     right: 0.5em;
     top: 0.5em;
+    color: #73797d;
+    font-size: 0.85em !important;
+    font-weight: 300;
+    text-transform: uppercase;
 }
 
 code {
@@ -93,10 +101,9 @@ code {
     display: block;
     font-size: 0.8em;
     line-height: inherit;
-    margin: 0;
+    padding: 1.3em;
     max-width: inherit;
     overflow: inherit;
-    padding: 0;
     white-space: inherit;
 }
 
@@ -115,5 +122,23 @@ code .token.string {
 
 code .token.number {
     color: #ce5b5b;
+}
+/*====================================*/
+
+/*---[ Tabs ]-------------------------*/
+.tabs {
+    display: block;
+}
+
+.tabs > ul {
+    display: block;
+}
+
+.tabs > ul > li {
+    display: none;
+}
+
+.tabs > ul > li.active {
+    display: block;
 }
 /*====================================*/

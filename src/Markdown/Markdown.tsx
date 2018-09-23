@@ -1,15 +1,7 @@
 import React from 'react';
-import mdit from 'markdown-it';
 
-import { highlight } from './prism';
-
-
-const md = mdit({
-  html: true,
-  linkify: true,
-  typographer: true,
-  highlight,
-});
+import Code from './Code';
+import tokenizer from './tokenizer';
 
 
 interface Props {
@@ -17,9 +9,19 @@ interface Props {
 }
 
 const Markdown = ({ content }: Props) => (
-  <div dangerouslySetInnerHTML={{
-    __html: md.render(content)
-  }} />
+  <React.Fragment>
+  {
+    tokenizer(content)
+      .filter((token) => token.type === 'fence')
+      .map((token: any, index) => (
+        <Code
+          key={index}
+          source={token.content}
+          lang={token.info}
+        />
+      ))
+  }
+  </React.Fragment>
 );
 
 export default Markdown;

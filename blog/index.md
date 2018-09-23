@@ -1,186 +1,141 @@
----
-__Advertisement :)__
+[a](b)
 
-- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
-  resize in browser.
-- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
-  i18n with plurals support and easy syntax.
+# Introduction
 
-You will like those projects!
+## What is OCCA?
 
----
+In a nutshell, OCCA (like *oca*-rina) is an open-source library which aims to
 
-# h1 Heading 8-)
-## h2 Heading
-### h3 Heading
-#### h4 Heading
-##### h5 Heading
-###### h6 Heading
+- Make it easy to program different types of devices (e.g. _CPU_, _GPU_, _FPGA_)
+- Provide a [unified API](/guide/occa/introduction) for interacting with backend device APIs (e.g. _OpenMP_, _CUDA_, _OpenCL_)
+- Use just-in-time compilation to build backend kernels
+- Provide a [kernel language](/guide/okl/introduction), a minor extension to C, to abstract programming for each backend
 
 
-## Horizontal Rules
+## Getting Started
 
-___
+The OCCA source code can be found in [Github](https://github.com/libocca/occa) under an MIT License
 
----
+Use git to download OCCA or download the latest release `.tar.gz` from the [Github releases](https://github.com/libocca/occa/releases)
 
-***
-
-
-## Typographic replacements
-
-Enable typographer option to see result.
-
-(c) (C) (r) (R) (tm) (TM) (p) (P) +-
-
-test.. test... test..... test?..... test!....
-
-!!!!!! ???? ,,  -- ---
-
-"Smartypants, double quotes" and 'single quotes'
-
-
-## Emphasis
-
-**This is bold text**
-
-__This is bold text__
-
-*This is italic text*
-
-_This is italic text_
-
-~~Strikethrough~~
-
-
-## Blockquotes
-
-
-> Blockquotes can also be nested...
->> ...by using additional greater-than signs right next to each other...
-> > > ...or with spaces between arrows.
-
-
-## Lists
-
-Unordered
-
-+ Create a list by starting a line with `+`, `-`, or `*`
-+ Sub-lists are made by indenting 2 spaces:
-  - Marker character change forces new list start:
-    * Ac tristique libero volutpat at
-    + Facilisis in pretium nisl aliquet
-    - Nulla volutpat aliquam velit
-+ Very easy!
-
-Ordered
-
-1. Lorem ipsum dolor sit amet
-2. Consectetur adipiscing elit
-3. Integer molestie lorem at massa
-
-
-1. You can use sequential numbers...
-1. ...or keep all the numbers as `1.`
-
-Start numbering with offset:
-
-57. foo
-1. bar
-
-
-## Code
-
-Inline `code`
-
-Indented code
-
-    // Some comments
-    line 1 of code
-    line 2 of code
-    line 3 of code
-
-
-Block code "fences"
-
-```
-Sample text here...
+```bash
+git clone --depth 1 https://github.com/libocca/occa.git
+cd occa
+make -j4
 ```
 
-Syntax highlighting
+We also need to add the shared library (`libocca.so`) to our linker path
 
-``` js
-var foo = function (bar) {
-  return bar++;
-};
+::: tabs os
 
-console.log(foo(5));
+- Linux
+
+    ```bash
+    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${PWD}/lib"
+    ```
+
+- MacOS
+
+    ```bash
+    export DYLD_LIBRARY_PATH="${DYLD_LIBRARY_PATH}:${PWD}/lib"
+    ```
+:::
+
+## Testing Installation
+
+OCCA comes with a command called `occa`, found inside the `bin` directory.
+The purpose of `occa` is to help gather device information as well as other useful utilities
+
+For more information, please see the [Command-Line Interface](/guide/user-guide/command-line-interface) section.
+
+```bash
+./bin/occa info
 ```
 
-## Tables
+Output:
 
-| Option | Description |
-| ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+```bash
+==========+======================+==========================================
+ CPU Info | Cores                | 16
+          | Memory (RAM)         | 31 GB
+          | Clock Frequency      | 32.623 GHz
+          | SIMD Instruction Set | SSE2
+          | SIMD Width           | 128 bits
+==========+======================+==========================================
+ OpenCL   | Device Name          | GeForce GTX 980
+          | Driver Vendor        | NVIDIA
+          | Platform ID          | 0
+          | Device ID            | 0
+          | Memory               | 3 GB
+          |----------------------+------------------------------------------
+          | Device Name          | GeForce GTX 980
+          | Driver Vendor        | NVIDIA
+          | Platform ID          | 0
+          | Device ID            | 1
+          | Memory               | 3 GB
+          |----------------------+------------------------------------------
+          | Device Name          | GeForce GTX 980
+          | Driver Vendor        | NVIDIA
+          | Platform ID          | 0
+          | Device ID            | 2
+          | Memory               | 3 GB
+          |----------------------+------------------------------------------
+          | Device Name          | Intel(R) Core(TM) i7-5960X CPU @ 3.00GHz
+          | Driver Vendor        | Intel
+          | Platform ID          | 1
+          | Device ID            | 0
+          | Memory               | 31 GB
+==========+======================+==========================================
+ CUDA     | Device ID            | 0
+          | Device Name          | GeForce GTX 980
+          | Memory               | 3 GB
+          |----------------------+------------------------------------------
+          | Device ID            | 1
+          | Device Name          | GeForce GTX 980
+          | Memory               | 3 GB
+          |----------------------+------------------------------------------
+          | Device ID            | 2
+          | Device Name          | GeForce GTX 980
+          | Memory               | 3 GB
+==========+======================+==========================================
+```
 
-Right aligned columns
+## Running an Example
 
-| Option | Description |
-| ------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+The simplest example is to create and add two vectors together
 
+```bash
+cd examples/1_add_vectors/cpp
+make
+OCCA_VERBOSE=1 ./main
+```
 
-## Links
+```bash
+Compiling [addVectors]
+clang++ -x c++ -fPIC -shared -I. -D__extern_always_inline=inline -O3 -mtune=native -ftree-vectorize -funroll-loops -ffast-math /home/david/.occa/cache/4c38ebbf648a4b23/source.occa -o /home/david/.occa/cache/4c38ebbf648a4b23/binary -I/home/david/git/night/include -L/home/david/git/night/lib -locca
+0: 1
+1: 1
+2: 1
+3: 1
+4: 1
+```
 
-[link text](http://dev.nodeca.com)
+## Kernel Caching
 
-[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+Note that when running `addVectors` is run a second time, the compilation info changes.
+Compiled kernels are cached and its binaries are reused if nothing changed in the compilation step (e.g. device information, kernel defines, etc)
 
-Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+?> Compiled kernels are cached for fast consecutive builds!
 
+First run
 
-## Images
+```bash
+Compiling [addVectors]
+clang++ -x c++ -fPIC -shared -I. -D__extern_always_inline=inline -O3 -mtune=native -ftree-vectorize -funroll-loops -ffast-math /home/david/.occa/cache/4c38ebbf648a4b23/source.occa -o /home/david/.occa/cache/4c38ebbf648a4b23/binary -I/home/david/git/night/include -L/home/david/git/night/lib -locca
+```
 
-![Minion](https://octodex.github.com/images/minion.png)
-![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+Second run
 
-Like links, Images also have a footnote style syntax
-
-![Alt text][id]
-
-With a reference later in the document defining the URL location:
-
-[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
-
-
-## Plugins
-
-The killer feature of `markdown-it` is very effective support of
-[syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).
-
-
-### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
-
-> Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:
->
-> Shortcuts (emoticons): :-) :-( 8-) ;)
-
-see [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.
-
-
-### [Subscript](https://github.com/markdown-it/markdown-it-sub) / [Superscript](https://github.com/markdown-it/markdown-it-sup)
-
-- 19^th^
-- H~2~O
-
-
-### [\<ins>](https://github.com/markdown-it/markdown-it-ins)
-
-++Inserted text++
-
-
-### [\<mark>](https://github.com/markdown-it/markdown-it-mark)
+```bash
+Loading cached [addVectors0] from [2d38aae833d7e36a/parsed-source.cpp] in [e60679bfca62c2f2/device-binary]
+```
