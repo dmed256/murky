@@ -1,7 +1,23 @@
-type Listener = (pathname: string) => void;
+export interface HashPath {
+  pathname: string,
+  hash: string,
+};
 
-const getPathname = (pathname: string) => {
-  const hashIndex = pathname.indexOf('/#');
+export type Listener = ({ pathname, hash }: HashPath) => void;
+
+export interface HashLocation {
+  hash: string,
+  host: string,
+  hostname: string,
+  href: string,
+  origin: string,
+  pathname: string,
+  port: string,
+  protocol: string,
+};
+
+const splitPathname = (pathname: string): HashPath => {
+  const hashIndex = pathname.indexOf('#/');
   // Get relative path
   if (hashIndex < 0) {
     pathname = '/';
@@ -11,23 +27,40 @@ const getPathname = (pathname: string) => {
       pathname = `/${pathname}`;
     }
   }
-  return pathname;
+
+  // Get hash out
+  const parts = pathname.split('#');
+  pathname = parts[0];
+  const hash = parts.slice(1).join('#');
+
+  return { pathname, hash };
 }
 
 const getHashPathname = (pathname: string) => {
   if (pathname.startsWith('/')) {
-    pathname = `/#${pathname}`;
+    return `/#${pathname}`;
   }
   return pathname;
 }
 
 class History {
   listeners: Set<Listener>;
+  pathname: string;
+  hash: string;
 
   constructor() {
     this.listeners = new Set();
+
+    const split = splitPathname(location.hash);
+    this.pathname = split.pathname;
+    this.hash = split.hash;
+
     window.addEventListener('hashchange', (event: any) => {
-      this.updateListeners(getPathname(event.newURL));
+      const split = splitPathname(event.newURL);
+      this.pathname = split.pathname;
+      this.hash = split.hash;
+
+      this.updateListeners(split);
     });
   }
 
@@ -39,9 +72,9 @@ class History {
     this.listeners.delete(listener);
   }
 
-  updateListeners = (pathname: string) => {
+  updateListeners = (hashPath: HashPath) => {
     this.listeners.forEach((listener) => {
-      listener(pathname);
+      listener(hashPath);
     });
   }
 
@@ -54,7 +87,6 @@ class History {
 }
 
 export {
-  getPathname,
   getHashPathname,
 }
 

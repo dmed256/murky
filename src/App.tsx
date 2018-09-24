@@ -2,25 +2,10 @@ import React from 'react';
 
 import MarkdownFetch from './MarkdownFetch';
 import Theme from './Theme';
-import history from './history';
+import history, { HashPath } from './history';
 
 
-interface Props {
-}
-
-interface State {
-  pathname: string,
-}
-
-class App extends React.Component<Props, State> {
-  state: State = {
-    pathname: location.hash.substr(1) || '/',
-  }
-
-  constructor(props: Props) {
-    super(props);
-  }
-
+class App extends React.Component {
   componentDidMount() {
     history.listen(this.onHistoryChange);
   }
@@ -29,13 +14,12 @@ class App extends React.Component<Props, State> {
     history.unlisten(this.onHistoryChange);
   }
 
-  onHistoryChange = (pathname: string) => {
-    if (this.state.pathname !== pathname) {
-      this.setState({ pathname });
-    }
+  onHistoryChange = ({ pathname, hash }: HashPath) => {
+    this.forceUpdate();
   }
 
   render() {
+    const { pathname, hash } = history;
     return (
       <div style={{
         maxWidth: 800,
@@ -44,7 +28,8 @@ class App extends React.Component<Props, State> {
       }}>
         <Theme>
           <MarkdownFetch
-            pathname={this.state.pathname}
+            pathname={pathname}
+            hash={hash}
           />
         </Theme>
       </div>

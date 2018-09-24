@@ -9,6 +9,7 @@ type FetchState = 'loading' | 'error' | 'data';
 
 interface Props {
   pathname: string,
+  hash: string,
 }
 
 interface State {
@@ -22,8 +23,10 @@ class MarkdownFetch extends React.Component<Props, State> {
     content: undefined,
   }
 
-  fetchContent = (pathname: string) => {
+  fetchContent = () => {
+    let { pathname } = this.props;
     const newPathname = pathname;
+
     if (pathname.startsWith('/')) {
       pathname = `${config.root}${pathname}`
     }
@@ -64,13 +67,19 @@ class MarkdownFetch extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.fetchContent(this.props.pathname);
+    this.fetchContent();
+  }
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return (
+      (this.props.pathname !== nextProps.pathname) ||
+      (this.state.content !== nextState.content)
+    );
   }
 
   componentDidUpdate(prevProps: Props) {
-    let { pathname } = this.props;
-    if (pathname !== prevProps.pathname) {
-      this.fetchContent(pathname);
+    if (this.props.pathname !== prevProps.pathname) {
+      this.fetchContent();
     }
   }
 

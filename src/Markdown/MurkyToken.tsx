@@ -1,8 +1,9 @@
 import React from 'react';
 
+import history from '../history';
 import Tokens from './Tokens';
 import { Indent, Note, Tabs } from './plugins';
-import { attrProps } from './tokenizer';
+import { attrProps, getText } from './tokenizer';
 import * as types from './types';
 
 
@@ -15,19 +16,39 @@ const MurkyToken = ({ token }: Props) => {
     case 'blockquote':
     case 'bullet_list':
     case 'em':
-    case 'heading':
     case 'inline':
     case 'link':
     case 'list_item':
     case 'paragraph':
     case 'strong':
+    case 'heading': {
+      let tag = token.tag as any;
+      let props = attrProps(token.attrs);
+      // Setup id and <a> wrapper for headers
+      if (token.type === 'heading') {
+        const Tag = tag;
+        const id = (
+          getText(token)
+          .replace(/\s+/g, '-')
+          .toLowerCase()
+        );
+        props = { ...props, id };
+        tag = ({ children, ...props }: any) => (
+          <Tag id={id} {...props}>
+            <a href={`#${history.pathname}#${id}`}>
+              {children}
+            </a>
+          </Tag>
+        );
+      }
       return (
         <Tokens
           tokens={token.children}
-          tag={token.tag}
-          props={attrProps(token.attrs)}
+          tag={tag}
+          props={props}
         />
       );
+    }
     case 'tabs':
       return (
         <Tabs
@@ -38,7 +59,7 @@ const MurkyToken = ({ token }: Props) => {
     case 'indent':
       return (
         <Indent tokens={token.children} />
-      )
+      );
     case 'note':
       return (
         <Note tokens={token.children} />

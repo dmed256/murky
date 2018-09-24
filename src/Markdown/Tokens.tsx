@@ -6,7 +6,7 @@ import * as types from './types';
 
 interface Props {
   tokens: types.Token[],
-  tag?: string,
+  tag?: React.SFC | string,
   props?: any,
 }
 

@@ -12,6 +12,8 @@ const MDToken = ({ token }: Props) => {
   switch (token.type) {
     case 'code_inline':
       return <code>{token.content}</code>;
+    case 'hr':
+      return <hr />;
     case 'softbreak':
       return <br />;
     case 'text':

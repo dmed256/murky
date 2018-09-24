@@ -122,8 +122,9 @@ const getBlockText = (token: Token): string => (
 
 const getText = (token: Token): string => {
   switch (token.type) {
-    case 'paragraph':
+    case 'heading':
     case 'inline':
+    case 'paragraph':
       return getBlockText(token);
     case 'text':
       return token.content;
