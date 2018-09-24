@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ErrorPage from './ErrorPage';
-import LoadingPage from './LoadingPage';
 import Markdown from './Markdown';
 import config from './config';
 
@@ -79,11 +78,15 @@ class MarkdownFetch extends React.Component<Props, State> {
     const { fetchState, content } = this.state;
     switch (fetchState) {
       case 'loading':
-        return <LoadingPage />;
+        return null;
       case 'error':
-        return <ErrorPage />;
+        return (
+          <ErrorPage pathname={this.props.pathname} />
+        );
       default:
-        return <Markdown content={content || ''} />
+        return (
+          <Markdown content={content || ''} />
+        );
     }
   }
 };
