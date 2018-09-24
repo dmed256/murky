@@ -20,6 +20,7 @@ const MurkyToken = ({ token }: Props) => {
     case 'link':
     case 'list_item':
     case 'paragraph':
+    case 'strong':
       return (
         <Component {...attrProps(token.attrs)}>
           {
@@ -30,6 +31,10 @@ const MurkyToken = ({ token }: Props) => {
         </Component>
       );
     case 'tabs':
+      console.log('tabs');
+      return null;
+    case 'indent':
+      console.log('indent');
       return null;
     default:
       console.error(`Cannot handle murky token with type: ${token.type}`);

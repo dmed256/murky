@@ -11,20 +11,23 @@ We'll showcase the basics by going through a simple example where we add 2 vecto
 
 ### Terminology
 
-<span style="font-size: 1.1em">_Host_</span>
+_Host_
+
 ::: indent
 The physical device running the application code.
 This is usually a CPU processor.
 :::
 
-<span style="font-size: 1.1em">_Device_</span>
+_Device_
+
 ::: indent
 A physical device we're communicating with, whether the same physical device as the host or an offload device.
 Examples include CPU processors, GPUs, and Xeon Phi.
 :::
 
 
-<span style="font-size: 1.1em">_Kernel_</span>
+_Kernel_
+
 ::: indent
 A function that runs on a device
 :::

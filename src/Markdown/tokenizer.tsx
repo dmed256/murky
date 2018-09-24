@@ -9,7 +9,7 @@ const md = mdit({
   html: true,
   linkify: true,
   typographer: true,
-}).use(mditContainer, 'tabs', {
+}).use(mditContainer, 'murky', {
   validate: () => true,
 });
 
@@ -24,11 +24,16 @@ const tokenizeBlock = (
   blockOpenToken: mdit.Token
 ): BlockTokenInfo => {
   // Trim down name: container_X_open -> X
-  const blockType = blockOpenToken.type
-  let blockName = blockType.substr(0, blockType.length - 5);
-  if (blockName.startsWith('container_')) {
-    blockName = blockName.substr(10);
+  const blockType = blockOpenToken.type;
+  if (blockType === 'container_murky_open') {
+    const args = blockOpenToken.info.trim().split(/\s+/);
+    blockOpenToken.type = args[0];
+    blockOpenToken.info = args.slice(1).join(' ');
   }
+  else if (blockType.endsWith('_open')) {
+    blockOpenToken.type = blockType.substr(0, blockType.length - 5);
+  }
+
   // Block token children
   const children = [];
 
@@ -76,7 +81,6 @@ const tokenizeBlock = (
     token: {
       tokenType: 'murky' as 'murky',
       ...blockOpenToken,
-      type: blockName,
       children,
     },
   };

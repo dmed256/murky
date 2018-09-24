@@ -30,6 +30,8 @@ class MarkdownFetch extends React.Component<Props, State> {
     }
     if (pathname.endsWith('/')) {
       pathname += 'index.md';
+    } else {
+      pathname += '.md';
     }
 
     if (pathname !== this.props.pathname) {
