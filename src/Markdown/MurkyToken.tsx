@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Tokens from './Tokens';
-import { Indent, Tabs } from './plugins';
+import { Indent, Note, Tabs } from './plugins';
 import { attrProps } from './tokenizer';
 import * as types from './types';
 
@@ -36,7 +36,13 @@ const MurkyToken = ({ token }: Props) => {
         />
       );
     case 'indent':
-      return <Indent children={token.children} />
+      return (
+        <Indent children={token.children} />
+      )
+    case 'note':
+      return (
+        <Note children={token.children} />
+      );
     default:
       console.error(`Cannot handle murky token with type: ${token.type}`);
       return null;

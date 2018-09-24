@@ -83,7 +83,9 @@ The only property field required by OCCA when creating a device is `mode`.
 However, each `mode` has its own requirements, such as CUDA requiring a `device_id`.
 In this case, we're initializing a device that runs code serially.
 
-?> **Serial** mode is useful for debugging kernel code by enabling the use of debuggers such as _lldb_ or _gdb_
+::: note
+**Serial** mode is useful for debugging kernel code by enabling the use of debuggers such as _lldb_ or _gdb_
+:::
 
 Here are examples for the all core modes supported in OCCA.
 
@@ -409,8 +411,10 @@ In this case, we'll use the `memcpy` approach to sync the host and look at `o_ab
 
 # Garbage Collection
 
-?> In C++, each `occa` object uses reference counting to automatically free itself.
+::: note
+In C++, each `occa` object uses reference counting to automatically free itself.
 Manually freeing an object won't cause a double free.
+:::
 
 Freeing must be done manually in C since there is no concept of an automatic destructor.
 However, we tried to make it as easy as possible to free `occa` objects.
