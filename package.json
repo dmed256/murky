@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^3.1.1",
+    "jump.js": "^1.0.2",
     "markdown-it": "^8.4.2",
     "markdown-it-container": "^2.0.0",
     "prismjs": "^1.15.0",
@@ -30,6 +31,7 @@
     "react-scripts-ts": "2.17.0"
   },
   "devDependencies": {
+    "@types/jump.js": "^1.0.2",
     "@types/markdown-it": "^0.0.5",
     "@types/markdown-it-container": "^2.0.0",
     "@types/node": "^10.10.3",

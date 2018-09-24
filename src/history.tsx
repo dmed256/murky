@@ -3,7 +3,8 @@ export interface HashPath {
   hash: string,
 };
 
-export type Listener = ({ pathname, hash }: HashPath) => void;
+export type Listener = (nextHashPath: HashPath,
+                        prevHashPath: HashPath) => void;
 
 export interface HashLocation {
   hash: string,
@@ -47,6 +48,10 @@ class History {
   listeners: Set<Listener>;
   pathname: string;
   hash: string;
+  prev: {
+    pathname: string,
+    hash: string,
+  };
 
   constructor() {
     this.listeners = new Set();
@@ -54,13 +59,21 @@ class History {
     const split = splitPathname(location.hash);
     this.pathname = split.pathname;
     this.hash = split.hash;
+    this.prev = {
+      pathname: '',
+      hash: '',
+    }
 
     window.addEventListener('hashchange', (event: any) => {
-      const split = splitPathname(event.newURL);
-      this.pathname = split.pathname;
-      this.hash = split.hash;
+      this.prev = {
+        pathname: this.pathname,
+        hash: this.hash,
+      }
+      const nextHashPath = splitPathname(event.newURL);
+      this.pathname = nextHashPath.pathname;
+      this.hash = nextHashPath.hash;
 
-      this.updateListeners(split);
+      this.updateListeners(nextHashPath, this.prev);
     });
   }
 
@@ -72,9 +85,9 @@ class History {
     this.listeners.delete(listener);
   }
 
-  updateListeners = (hashPath: HashPath) => {
+  updateListeners = (nextHashPath: HashPath, prevHashPath: HashPath) => {
     this.listeners.forEach((listener) => {
-      listener(hashPath);
+      listener(nextHashPath, prevHashPath);
     });
   }
 
