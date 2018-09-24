@@ -32,7 +32,9 @@ class App extends React.Component {
 
   componentDidMount() {
     history.listen(this.onHistoryChange);
-    this.scrollToHeader();
+    setTimeout(() => {
+      this.scrollToHeader();
+    }, 200);
   }
 
   componentWillUnmount() {
