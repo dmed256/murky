@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-    "module": "esnext",
+    "module": "amd",
     "target": "es5",
     "lib": ["es6", "dom"],
     "sourceMap": true,
@@ -29,6 +29,7 @@
     "jest",
     "src/setupTests.ts",
     "blog",
-    "server.js"
+    "server.js",
+    "webpack.config.js"
   ]
 }
