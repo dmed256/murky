@@ -3,15 +3,20 @@
   "author": "David Medina",
   "description": "Markdown + React = website",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/dmed256/murky.git"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "BROWSER=none react-scripts-ts start",
     "start:prod": "node server.js",
-    "build": "react-scripts-ts build"
+    "build": "rm -rf dist && NODE_ENV=production tsc"
   },
   "dependencies": {
     "@material-ui/core": "^3.1.1",
