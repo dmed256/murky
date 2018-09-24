@@ -54,15 +54,9 @@ Two things to note in the above code snippet include:
 
 We use annotations to explicitly expose loop-parallelism and different levels of parallel granularity
 
-- **CUDA:**
-<div style="width: 17px; display: inline-block"></div>
-block / thread
-- **OpenCL:**
-<div style="width: 2px; display: inline-block"></div>
-workgroup / workitem
-- **OKL:**
-<div style="width: 26px; display: inline-block"></div>
-`@outer` / `@inner`
+- **CUDA:** block / thread
+- **OpenCL:** workgroup / workitem
+- **OKL:** `@outer` / `@inner`
 
 ?> Checkout the [Loops in Depth](/guide/okl/loops-in-depth) section for more details about outer and inner loops
 

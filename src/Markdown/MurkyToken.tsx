@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Token from './Token';
-import * as types from './types';
+import Tokens from './Tokens';
+import { Indent, Tabs } from './plugins';
 import { attrProps } from './tokenizer';
+import * as types from './types';
 
 
 interface Props {
@@ -10,7 +11,6 @@ interface Props {
 }
 
 const MurkyToken = ({ token }: Props) => {
-  let Component = token.tag || React.Fragment;
   switch (token.type) {
     case 'blockquote':
     case 'bullet_list':
@@ -22,20 +22,16 @@ const MurkyToken = ({ token }: Props) => {
     case 'paragraph':
     case 'strong':
       return (
-        <Component {...attrProps(token.attrs)}>
-          {
-            token.children.map((childToken, index) => (
-              <Token key={index} token={childToken} />
-            ))
-          }
-        </Component>
+        <Tokens
+          children={token.children}
+          tag={token.tag}
+          props={attrProps(token.attrs)}
+        />
       );
     case 'tabs':
-      console.log('tabs');
-      return null;
+      return <Tabs children={token.children} />
     case 'indent':
-      console.log('indent');
-      return null;
+      return <Indent children={token.children} />
     default:
       console.error(`Cannot handle murky token with type: ${token.type}`);
       return null;

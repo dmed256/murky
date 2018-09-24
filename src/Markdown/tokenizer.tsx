@@ -111,8 +111,27 @@ const attrProps = (attrs: string[][] | null) => {
   }, {});
 };
 
+const getBlockText = (token: Token): string => (
+  (token.children as Token[] || []).map((child: Token) => (
+    getText(child)
+  )).join('')
+);
+
+const getText = (token: Token): string => {
+  switch (token.type) {
+    case 'paragraph':
+    case 'inline':
+      return getBlockText(token);
+    case 'text':
+      return token.content;
+    default:
+      return '';
+  }
+};
+
 export {
   attrProps,
+  getText,
 };
 
 export default tokenizer;

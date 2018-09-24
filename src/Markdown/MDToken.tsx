@@ -23,6 +23,7 @@ const MDToken = ({ token }: Props) => {
           lang={token.info}
         />
       );
+    case 'html_block':
     case 'html_inline':
     default:
       console.error(`Cannot handle md token with type: ${token.type}`);
