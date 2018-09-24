@@ -2,11 +2,11 @@ import React from 'react'
 
 import MDToken from './MDToken';
 import MurkyToken from './MurkyToken';
-import { Token } from './types';
+import * as types from './types';
 
 
 interface Props {
-  token: Token,
+  token: types.Token,
 }
 
 const Token = ({ token }: Props) => (

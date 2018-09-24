@@ -106,6 +106,9 @@ const attrProps = (attrs: string[][] | null) => {
         reactValue = getHashPathname(value);
         console.log(reactValue);
         break;
+      case 'children':
+      case 'key':
+        return obj;
     }
     return { ...obj, [reactProp]: reactValue };
   }, {});

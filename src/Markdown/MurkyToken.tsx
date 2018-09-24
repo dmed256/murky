@@ -23,7 +23,7 @@ const MurkyToken = ({ token }: Props) => {
     case 'strong':
       return (
         <Tokens
-          children={token.children}
+          tokens={token.children}
           tag={token.tag}
           props={attrProps(token.attrs)}
         />
@@ -32,16 +32,16 @@ const MurkyToken = ({ token }: Props) => {
       return (
         <Tabs
           namespace={token.info}
-          children={token.children}
+          tokens={token.children}
         />
       );
     case 'indent':
       return (
-        <Indent children={token.children} />
+        <Indent tokens={token.children} />
       )
     case 'note':
       return (
-        <Note children={token.children} />
+        <Note tokens={token.children} />
       );
     default:
       console.error(`Cannot handle murky token with type: ${token.type}`);

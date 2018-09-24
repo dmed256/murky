@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-    "module": "amd",
+    "module": "commonjs",
     "target": "es5",
     "lib": ["es6", "dom"],
     "sourceMap": true,
@@ -30,6 +30,7 @@
     "src/setupTests.ts",
     "blog",
     "server.js",
-    "webpack.config.js"
+    "webpack.config.js",
+    "webpack.production.config.js"
   ]
 }

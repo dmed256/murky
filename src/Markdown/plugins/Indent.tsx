@@ -1,21 +1,17 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 
-import Token from '../Token';
+import Tokens from '../Tokens';
 import * as types from '../types';
 
 interface Props {
   classes: any,
-  children: types.Token[],
+  tokens: types.Token[],
 }
 
-const Indent = ({ classes, children }: Props) => (
+const Indent = ({ classes, tokens }: Props) => (
   <div className={classes.root}>
-    {
-      children.map((token, index) => (
-        <Token key={index} token={token} />
-      ))
-    }
+    <Tokens tokens={tokens} />
   </div>
 );
 

@@ -15,7 +15,7 @@ import {
 
 interface Props {
   namespace: string,
-  children: types.Token[],
+  tokens: types.Token[],
 }
 
 interface State {
@@ -27,7 +27,7 @@ class MarkdownTabs extends React.Component<Props, State> {
     tab: 0,
   }
 
-  tabs = getTabs(this.props.children);
+  tabs = getTabs(this.props.tokens);
 
   componentDidMount() {
     listen(this.props.namespace, this.onChange);
