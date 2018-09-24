@@ -10,6 +10,11 @@ export interface TabInfo {
   content: any,
 };
 
+interface TabNamespace {
+  [namespace: string]: any,
+};
+
+
 const getTabs = (children: types.Token[]): TabInfo[] | null => {
   if (children.length !== 1) {
     console.error('Expected a \'bullet_list\' markdown child', children);
@@ -41,6 +46,38 @@ const getTabs = (children: types.Token[]): TabInfo[] | null => {
   return tabs;
 }
 
+
+const namespaceListeners: TabNamespace = {};
+
+const listen = (
+  namespace: string,
+  onChange: (tab: number) => void,
+) => {
+  if (!(namespace in namespaceListeners)) {
+    namespaceListeners[namespace] = new Set([onChange]);
+  } else {
+    namespaceListeners[namespace].add(onChange);
+  }
+};
+
+const unlisten = (
+  namespace: string,
+  onChange: (tab: number) => void,
+) => {
+  if (namespace in namespaceListeners) {
+    namespaceListeners[namespace].delete(onChange);
+  }
+}
+
+const onTabChange = (namespace: string) => (event: any, tab: number) => {
+  namespaceListeners[namespace].forEach((onChange: any) => {
+    onChange(tab);
+  });
+};
+
 export {
   getTabs,
+  listen,
+  unlisten,
+  onTabChange,
 };

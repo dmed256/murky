@@ -1,7 +1,9 @@
 import React from 'react';
 
 import MarkdownFetch from './MarkdownFetch';
+import Theme from './Theme';
 import history from './history';
+
 
 interface Props {
 }
@@ -40,9 +42,11 @@ class App extends React.Component<Props, State> {
         padding: '30px 15px 40px',
         margin: '0 auto',
       }}>
-        <MarkdownFetch
-          pathname={this.state.pathname}
-        />
+        <Theme>
+          <MarkdownFetch
+            pathname={this.state.pathname}
+          />
+        </Theme>
       </div>
     );
   }

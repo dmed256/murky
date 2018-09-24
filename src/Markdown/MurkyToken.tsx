@@ -29,7 +29,12 @@ const MurkyToken = ({ token }: Props) => {
         />
       );
     case 'tabs':
-      return <Tabs children={token.children} />
+      return (
+        <Tabs
+          namespace={token.info}
+          children={token.children}
+        />
+      );
     case 'indent':
       return <Indent children={token.children} />
     default:

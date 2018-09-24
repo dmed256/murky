@@ -5,10 +5,16 @@ import {
 } from '@material-ui/core';
 
 import * as types from '../../types';
-import { getTabs } from './utils';
+import {
+  getTabs,
+  listen,
+  unlisten,
+  onTabChange,
+} from './utils';
 
 
 interface Props {
+  namespace: string,
   children: types.Token[],
 }
 
@@ -23,11 +29,20 @@ class MarkdownTabs extends React.Component<Props, State> {
 
   tabs = getTabs(this.props.children);
 
-  onChange = (event: any, tab: number) => {
+  componentDidMount() {
+    listen(this.props.namespace, this.onChange);
+  }
+
+  componentWillUnMount() {
+    unlisten(this.props.namespace, this.onChange);
+  }
+
+  onChange = (tab: number) => {
     this.setState({ tab });
   }
 
   render() {
+    const { namespace } = this.props;
     const { tab } = this.state;
 
     if (!this.tabs) {
@@ -36,7 +51,11 @@ class MarkdownTabs extends React.Component<Props, State> {
 
     return (
       <React.Fragment>
-        <Tabs value={tab} onChange={this.onChange}>
+        <Tabs
+          value={tab}
+          indicatorColor="primary"
+          onChange={onTabChange(namespace)}
+        >
           {
             this.tabs.map(({ label }) => (
               <Tab key={label} label={label} />
