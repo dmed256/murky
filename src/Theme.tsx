@@ -1,15 +1,14 @@
 import React from 'react';
-import {
-  MuiThemeProvider,
-  createMuiTheme,
-  colors,
-} from '@material-ui/core';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import blue from '@material-ui/core/colors/blue';
+import amber from '@material-ui/core/colors/amber';
 
 
 const theme = createMuiTheme({
   palette: {
-    primary: colors.blue,
-    secondary: colors.amber,
+    primary: blue,
+    secondary: amber,
   },
   overrides: {
     MuiTab: {
@@ -22,7 +21,7 @@ const theme = createMuiTheme({
         fontWeight: 600,
       },
       selected: {
-        color: colors.blue[500],
+        color: blue[500],
       },
     },
   },
