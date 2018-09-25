@@ -51,10 +51,10 @@ const styles = {
   ohno: {
     position: 'relative' as 'relative',
     display: 'block',
-    margin: '0 auto',
+    margin: '0 auto 40px',
     width: 336,
     height: 200,
-    '@media(max-width: 600px)': {
+    '@media(max-width: 700px)': {
       width: 168,
       height: 100,
     },
