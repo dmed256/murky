@@ -3,7 +3,7 @@
   "author": "David Medina",
   "description": "Markdown + React = website",
   "license": "MIT",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "repository": {
     "type": "git",
     "url": "https://github.com/dmed256/murky.git"
@@ -39,7 +39,6 @@
     "@types/react-dom": "^16.0.7",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^1.0.0",
-    "file-loader": "^2.0.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.0",
     "typescript": "^3.0.3",
