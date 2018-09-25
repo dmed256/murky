@@ -91,6 +91,9 @@ const styles = {
     flex: 1,
     zIndex: 2,
     backgroundColor: '#e7ecf0',
+    '@media(max-width: 700px)': {
+      backgroundColor: 'white',
+    },
   },
   paper: {
     maxWidth: 1100,
@@ -103,6 +106,7 @@ const styles = {
       width: '100%',
       padding: '2em 0',
       margin: 0,
+      boxShadow: 'none',
     },
   },
   innerPaper: {
