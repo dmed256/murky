@@ -37,9 +37,6 @@ class MarkdownFetch extends React.Component<Props, State> {
     }
 
     if (pathname !== this.props.pathname) {
-      this.setState({
-        content: undefined,
-      });
       fetch(pathname)
         .then((res) => {
           const text = res.text();
@@ -60,6 +57,7 @@ class MarkdownFetch extends React.Component<Props, State> {
           if (this.props.pathname === newPathname) {
             this.setState({
               fetchState: 'error',
+              content: undefined,
             });
           }
         })
@@ -88,14 +86,13 @@ class MarkdownFetch extends React.Component<Props, State> {
     const { fetchState, content } = this.state;
     switch (fetchState) {
       case 'loading':
-        return null;
+      case 'data':
+        return (
+          <Markdown content={content || ''} />
+        );
       case 'error':
         return (
           <ErrorPage pathname={this.props.pathname} />
-        );
-      default:
-        return (
-          <Markdown content={content || ''} />
         );
     }
   }
