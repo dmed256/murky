@@ -53,6 +53,9 @@ const styles = {
     height: 150,
     zIndex: 1,
     backgroundColor: '#2980b9',
+    '@media(max-width: 700px)': {
+      height: 75,
+    },
   },
   appbar: {
     display: 'flex' as 'flex',
@@ -69,13 +72,19 @@ const styles = {
     },
   },
   me: {
-    fontSize: 25,
+    fontSize: '1.5em',
+    '@media(max-width: 700px)': {
+      fontSize: '1.3em',
+    },
   },
   button: {
     padding: '0.5em 1.0em',
     '&:hover': {
       backgroundColor: '#4796ca',
       boxShadow: '0 5px 20px 0 rgba(0, 0, 0, 0.15)',
+    },
+    '@media(max-width: 700px)': {
+      padding: '0.2em 0.5em',
     },
   },
   paperBg: {
@@ -86,16 +95,21 @@ const styles = {
   paper: {
     maxWidth: 1100,
     width: '93%',
-    padding: '5em 0 5em',
+    padding: '5em 0',
     margin: '-75px auto 50px',
     backgroundColor: 'white',
     boxShadow: '0 7px 15px 0 rgba(1, 1, 1, 0.15)',
     '@media(max-width: 700px)': {
       width: '100%',
+      padding: '2em 0',
+      margin: 0,
     },
   },
   innerPaper: {
     padding: '0 5em',
+    '@media(max-width: 700px)': {
+      padding: '0 2em',
+    },
   },
 };
 

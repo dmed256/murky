@@ -55,8 +55,7 @@ const styles = {
     width: 336,
     height: 200,
     '@media(max-width: 700px)': {
-      width: 168,
-      height: 100,
+      height: 'auto',
     },
   },
   ohnoText: {
