@@ -72,8 +72,9 @@ class MarkdownFetch extends React.Component<Props, State> {
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     return (
-      (this.props.pathname !== nextProps.pathname) ||
-      (this.state.content !== nextState.content)
+      (this.props.pathname !== nextProps.pathname)
+      || (this.state.content !== nextState.content)
+      || (this.state.fetchState !== nextState.fetchState)
     );
   }
 

@@ -1,12 +1,18 @@
 import React from 'react';
 import jump from 'jump.js';
+import withStyles from '@material-ui/core/styles/withStyles';
 
+// import LandingPage from './LandingPage';
 import MarkdownFetch from './MarkdownFetch';
 import Theme from './Theme';
 import history, { HashPath } from './history';
 
 
-class App extends React.Component {
+interface Props {
+  classes: any,
+}
+
+class App extends React.Component<Props> {
   onHistoryChange = (
     nextHashPath: HashPath,
     prevHashPath: HashPath,
@@ -46,22 +52,28 @@ class App extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     const { pathname, hash } = history;
     return (
-      <div style={{
-        maxWidth: 800,
-        padding: '30px 15px 40px',
-        margin: '0 auto',
-      }}>
+      <div className={classes.root}>
         <Theme>
           <MarkdownFetch
             pathname={pathname}
             hash={hash}
           />
+          {/*<LandingPage />*/}
         </Theme>
       </div>
     );
   }
 };
 
-export default App;
+const styles = {
+  root: {
+    maxWidth: 800,
+    padding: '30px 15px 40px',
+    margin: '0 auto',
+  },
+};
+
+export default withStyles(styles)(App);
