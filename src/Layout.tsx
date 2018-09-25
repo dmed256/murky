@@ -98,7 +98,7 @@ const styles = {
   paper: {
     maxWidth: 1100,
     width: '93%',
-    padding: '5em 0',
+    padding: '75px 0',
     margin: '-75px auto 50px',
     backgroundColor: 'white',
     boxShadow: '0 7px 15px 0 rgba(1, 1, 1, 0.15)',

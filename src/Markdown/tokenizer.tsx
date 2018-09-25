@@ -23,19 +23,48 @@ const tokenizeBlock = (
   i: number,
   blockOpenToken: mdit.Token
 ): BlockTokenInfo => {
+  // Block token children
+  const children = [];
+
   // Trim down name: container_X_open -> X
   const blockType = blockOpenToken.type;
   if (blockType === 'container_murky_open') {
     const args = blockOpenToken.info.trim().split(/\s+/);
     blockOpenToken.type = args[0];
-    blockOpenToken.info = args.slice(1).join(' ');
+    if (args[args.length - 1] !== ':::') {
+      blockOpenToken.info = args.slice(1).join(' ');
+    } else {
+      // Inline container
+      blockOpenToken.info = '';
+      children.push({
+        tokenType: 'md' as 'md',
+        type: "paragraph",
+        tag: "",
+        attrs: null,
+        map: null,
+        nesting: 0,
+        level: 0,
+        children: null,
+        content: args.slice(1, args.length - 1).join(' '),
+        markup: "",
+        info: "",
+        meta: null,
+        block: false,
+        hidden: false
+      } as any)
+      return {
+        i,
+        token: {
+          tokenType: 'murky' as 'murky',
+          ...blockOpenToken,
+          children,
+        },
+      };
+    }
   }
   else if (blockType.endsWith('_open')) {
     blockOpenToken.type = blockType.substr(0, blockType.length - 5);
   }
-
-  // Block token children
-  const children = [];
 
   while (i < tokens.length) {
     const token = tokens[i++];
@@ -121,13 +150,14 @@ const getBlockText = (token: Token): string => (
 );
 
 const getText = (token: Token): string => {
+  if (token.content) {
+    return token.content;
+  }
   switch (token.type) {
     case 'heading':
     case 'inline':
     case 'paragraph':
       return getBlockText(token);
-    case 'text':
-      return token.content;
     default:
       return '';
   }

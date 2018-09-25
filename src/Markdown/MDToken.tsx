@@ -18,6 +18,8 @@ const MDToken = ({ token }: Props) => {
       return <React.Fragment> </React.Fragment>;
     case 'text':
       return <React.Fragment>{token.content}</React.Fragment>;
+    case 'paragraph':
+      return <p>{token.content}</p>;
     case 'code':
       return (
         <Code

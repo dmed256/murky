@@ -1,10 +1,12 @@
+::: html
 <img
     src="./assets/images/logo/blue.svg"
     width="250"
     style="display: block; width: 250px; margin: auto; margin-bottom: 3em"
 />
+:::
 
-### What is OCCA?
+# What is OCCA?
 
 In a nutshell, OCCA (like *oca*-rina) is an open-source library which aims to
 
@@ -13,7 +15,7 @@ In a nutshell, OCCA (like *oca*-rina) is an open-source library which aims to
 - Use just-in-time compilation to build backend kernels
 - Provide a [kernel language](/guide/okl/introduction), a minor extension to C, to abstract programming for each backend
 
-### Quick Navigation
+# Quick Navigation
 
 - [Getting started](/guide/user-guide/introduction)
 - [Guide to the OCCA API](/guide/occa/introduction)

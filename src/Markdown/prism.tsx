@@ -29,9 +29,11 @@ const highlight = (text: string, lang?: string) => {
   if (!lang || !grammar) {
     return text;
   }
-  return <div dangerouslySetInnerHTML={{
+  return (
+    <div dangerouslySetInnerHTML={{
       __html: Prism.highlight(text, grammar, lang as any),
-  }} />
+    }} />
+  );
 };
 
 export {

@@ -1,4 +1,12 @@
 # About
 
-I'm really passionate about coding and like to get out of my comfort zone for learning and producing neat stuff.
-I've been lucky to work with an awesome advisor, Professor Warburton, and folks from LLNL.
+::: html <br /> :::
+
+Howdy, my name is David Medina!
+
+I currently work at **Two Sigma** as a Software Engineer, where I work on a large variety of projects.
+At night I work as a contractor with the **Lawrence Livermore National Laboratory** with the [Center for Efficient Exascale Discretizations](http://ceed.exascaleproject.org/).
+
+When not spending time with family, I'm usually coding up some project :)
+
+Feel free to reach out if you're interested in chatting!
