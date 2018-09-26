@@ -1,8 +1,32 @@
 import mdit from 'markdown-it';
 import mditContainer from 'markdown-it-container';
 
-import { MurkyToken, Token } from './types';
+import {
+  MurkyToken,
+  MurkyPluginToken,
+  Token,
+} from './types';
 import { getHashPathname } from '../history';
+
+
+//---[ Types ]--------------------------
+interface BlockTokenInfo {
+  i: number,
+  token: MurkyToken,
+}
+
+interface Plugin {
+  name: string,
+  Component: any,
+  requiredProps: string[],
+  optionalProps: string[],
+  varArgs: boolean,
+}
+
+interface Plugins {
+  [plugin: string]: Plugin,
+}
+//======================================
 
 
 const md = mdit({
@@ -13,57 +37,86 @@ const md = mdit({
   validate: () => true,
 });
 
-interface BlockTokenInfo {
-  i: number,
-  token: MurkyToken,
+
+//---[ Plugins ]------------------------
+const plugins: Plugins = {};
+
+const addPlugin = (plugin: Plugin) => {
+  plugins[plugin.name] = plugin;
+};
+
+const getPlugin = (plugin: string): any => (
+  plugins[plugin]
+);
+
+const processMurkyContainer = (
+  token: mdit.Token,
+  children: any[],
+): MurkyPluginToken | undefined => {
+  const args = token.info.trim().split(/\s+/);
+
+  // Check if plugin exists
+  const pluginName = args.splice(0, 1)[0];
+  const plugin = plugins[pluginName];
+  if (!plugin) {
+    console.error(`Unknown plugin: ${pluginName}`);
+    return undefined;
+  }
+
+  // Required props aren't set
+  const rProps = plugin.requiredProps;
+  const oProps = plugin.optionalProps;
+  if (args.length < rProps.length) {
+    console.error(
+      `Plugin [${pluginName}] is missing props [${rProps.slice(args.length)}]`
+    );
+    return undefined;
+  }
+  // Too many props
+  const propCount = rProps.length + oProps.length;
+  if (!plugin.varArgs && (args.length > propCount)) {
+    console.error(
+      `Plugin [${pluginName}] has too many props [${args.slice(propCount)}]`
+    );
+    return undefined;
+  }
+
+  // Create plugin token
+  const pluginToken = {
+    tokenType: 'murky_plugin',
+    plugin: pluginName,
+  } as any;
+
+  // Set props
+  let argc = 0;
+  [...rProps, ...oProps].forEach((prop) => {
+    pluginToken[prop] = args[argc++];
+  });
+  // Set varargs
+  pluginToken.varargs = args.slice(propCount);
+
+  return pluginToken as MurkyPluginToken;
 }
+//======================================
 
 const tokenizeBlock = (
   tokens: mdit.Token[],
   i: number,
-  blockOpenToken: mdit.Token
-): BlockTokenInfo => {
+  blockToken: mdit.Token,
+): BlockTokenInfo | undefined => {
   // Block token children
-  const children = [];
+  const children: any[] = [];
 
   // Trim down name: container_X_open -> X
-  const blockType = blockOpenToken.type;
+  const blockType = blockToken.type;
   if (blockType === 'container_murky_open') {
-    const args = blockOpenToken.info.trim().split(/\s+/);
-    blockOpenToken.type = args[0];
-    if (args[args.length - 1] !== ':::') {
-      blockOpenToken.info = args.slice(1).join(' ');
-    } else {
-      // Inline container
-      blockOpenToken.info = '';
-      children.push({
-        tokenType: 'md' as 'md',
-        type: "paragraph",
-        tag: "",
-        attrs: null,
-        map: null,
-        nesting: 0,
-        level: 0,
-        children: null,
-        content: args.slice(1, args.length - 1).join(' '),
-        markup: "",
-        info: "",
-        meta: null,
-        block: false,
-        hidden: false
-      } as any)
-      return {
-        i,
-        token: {
-          tokenType: 'murky' as 'murky',
-          ...blockOpenToken,
-          children,
-        },
-      };
+    blockToken = processMurkyContainer(blockToken, children) as any;
+    if (!blockToken) {
+      return undefined;
     }
   }
   else if (blockType.endsWith('_open')) {
-    blockOpenToken.type = blockType.substr(0, blockType.length - 5);
+    blockToken.type = blockType.substr(0, blockType.length - 5);
   }
 
   while (i < tokens.length) {
@@ -72,9 +125,13 @@ const tokenizeBlock = (
 
     // Start a new block
     if (type.endsWith('_open')) {
-      const { i: i2, token: blockToken } = tokenizeBlock(tokens, i, token);
+      const ret = tokenizeBlock(tokens, i, token);
+      if (!ret) {
+        return undefined;
+      }
+      const { i: i2, token: newBlockToken } = ret;
       i = i2;
-      children.push(blockToken);
+      children.push(newBlockToken);
     }
     // Closing token
     else if (type.endsWith('_close')) {
@@ -82,11 +139,15 @@ const tokenizeBlock = (
     }
     // Simplify inline elements
     else if (type === 'inline') {
-      children.push(tokenizeBlock(
+      const ret = tokenizeBlock(
         token.children,
         0,
-        { type: 'inline_open' } as any,
-      ).token);
+        { type: 'inline_open' } as any
+      );
+      if (!ret) {
+        return undefined;
+      }
+      children.push(ret.token);
     }
     // Fence -> Code
     else if (type === 'fence') {
@@ -109,20 +170,22 @@ const tokenizeBlock = (
     i,
     token: {
       tokenType: 'murky' as 'murky',
-      ...blockOpenToken,
+      ...blockToken,
       children,
     },
   };
 };
 
-const tokenizer = (content: string): Token[] => (
-  tokenizeBlock(
+const tokenizer = (content: string): Token[] => {
+  const ret = tokenizeBlock(
     md.parse(content, {}),
     0,
     { type: 'root_open' } as any,
-  ).token.children
-);
+  );
+  return ret ? ret.token.children : [];
+};
 
+//---[ Utils ]--------------------------
 const attrProps = (attrs: string[][] | null) => {
   if (!attrs || !attrs.length) {
     return {};
@@ -162,8 +225,11 @@ const getText = (token: Token): string => {
       return '';
   }
 };
+//======================================
 
 export {
+  addPlugin,
+  getPlugin,
   attrProps,
   getText,
 };

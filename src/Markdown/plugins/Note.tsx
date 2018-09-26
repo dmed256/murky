@@ -23,4 +23,10 @@ const styles = {
   },
 };
 
-export default withStyles(styles)(Note);
+export default {
+  name: 'note',
+  Component: withStyles(styles)(Note),
+  requiredProps: [],
+  optionalProps: [],
+  varArgs: false,
+};

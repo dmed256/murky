@@ -24,4 +24,10 @@ const styles = {
   },
 };
 
-export default withStyles(styles)(Indent);
+export default {
+  name: 'indent',
+  Component: withStyles(styles)(Indent),
+  requiredProps: [],
+  optionalProps: [],
+  varArgs: false,
+};

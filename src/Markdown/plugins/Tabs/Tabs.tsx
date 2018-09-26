@@ -66,5 +66,10 @@ class MarkdownTabs extends React.Component<Props, State> {
   }
 };
 
-
-export default MarkdownTabs;
+export default {
+  name: 'tabs',
+  Component: MarkdownTabs,
+  requiredProps: ['namespace'],
+  optionalProps: [],
+  varArgs: false,
+};

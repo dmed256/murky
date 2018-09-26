@@ -1,6 +1,8 @@
 # About
 
-::: html <br /> :::
+::: html
+<br />
+:::
 
 Howdy, my name is David Medina!
 
@@ -10,5 +12,3 @@ At night I work as a contractor with the **Lawrence Livermore National Laborator
 When not spending time with family, I'm usually coding up some project :)
 
 Feel free to reach out if you're interested in chatting!
-
-::: social :::

@@ -10,4 +10,11 @@ export interface MurkyToken extends mdit.Token {
   children: Token[],
 }
 
-export type Token = MDToken | MurkyToken;
+export interface MurkyPluginToken extends mdit.Token {
+  tokenType: 'murky_plugin',
+  plugin: string,
+  props: object,
+  children: Token[],
+}
+
+export type Token = MDToken | MurkyToken | MurkyPluginToken;

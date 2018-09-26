@@ -49,28 +49,6 @@ const MurkyToken = ({ token }: Props) => {
         />
       );
     }
-    case 'tabs':
-      return (
-        <Tabs
-          namespace={token.info}
-          tokens={token.children}
-        />
-      );
-    case 'indent':
-      return (
-        <Indent tokens={token.children} />
-      );
-    case 'note':
-      return (
-        <Note tokens={token.children} />
-      );
-    case 'html':
-      // TODO: Create a proper html container
-      return (
-        <div dangerouslySetInnerHTML={{
-          __html: getText(token.children[0])
-        }} />
-      );
     default:
       console.error(`Cannot handle murky token with type: ${token.type}`);
       return null;
