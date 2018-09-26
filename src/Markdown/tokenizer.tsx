@@ -49,11 +49,24 @@ const getPlugin = (plugin: string): any => (
   plugins[plugin]
 );
 
+const argToProp = (arg: string) => {
+  let key = '';
+  let value = arg;
+  // Try to find a : to split the values
+  const splitMatch = arg.match(/[^\\]:/) as any;
+  if (splitMatch) {
+    let splitIndex = splitMatch.index + splitMatch[0].length - 1;
+    key = arg.slice(0, splitIndex);
+    value = arg.slice(splitIndex + 1);
+  }
+  return { key, value };
+}
+
 const processMurkyContainer = (
   token: mdit.Token,
   children: any[],
 ): MurkyPluginToken | undefined => {
-  const args = token.info.trim().split(/\s+/);
+  let args = token.info.trim().split(/\s+/);
 
   // Check if plugin exists
   const pluginName = args.splice(0, 1)[0];
@@ -63,9 +76,37 @@ const processMurkyContainer = (
     return undefined;
   }
 
+  // Split args into prop:value pairs (if : is included)
+  const positionArgs: string[] = [];
+  const kwargs = {};
+  let printedError = false;
+  args.forEach((arg) => {
+    const prop = argToProp(arg);
+    // Make sure we haven't found a kwarg before
+    if (!prop.key
+     && Object.keys(kwargs).length
+     && !printedError) {
+      console.error(
+        `${pluginName}: Found prop [${prop.key}] after a keyword arg: [${args}]`
+      );
+      printedError = true;
+    }
+    if (prop.key) {
+      kwargs[prop.key] = prop.value;
+    } else {
+      positionArgs.push(prop.value);
+    }
+  });
+  if (printedError) {
+    return undefined;
+  }
+
+  args = positionArgs;
+
+  const rProps = plugin.requiredProps.filter((prop) => !(prop in kwargs));
+  const oProps = plugin.optionalProps.filter((prop) => !(prop in kwargs));
+
   // Required props aren't set
-  const rProps = plugin.requiredProps;
-  const oProps = plugin.optionalProps;
   if (args.length < rProps.length) {
     console.error(
       `Plugin [${pluginName}] is missing props [${rProps.slice(args.length)}]`
@@ -85,12 +126,13 @@ const processMurkyContainer = (
   const pluginToken = {
     tokenType: 'murky_plugin',
     plugin: pluginName,
+    props: kwargs,
   } as any;
 
   // Set props
   let argc = 0;
   [...rProps, ...oProps].forEach((prop) => {
-    pluginToken[prop] = args[argc++];
+    pluginToken.props[prop] = args[argc++];
   });
   // Set varargs
   pluginToken.varargs = args.slice(propCount);

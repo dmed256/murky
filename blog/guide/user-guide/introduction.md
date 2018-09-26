@@ -24,7 +24,7 @@ make -j4
 
 We also need to add the shared library (`libocca.so`) to our linker path
 
-::: tabs os
+::: tabs namespace:os
 
 - Linux
 
