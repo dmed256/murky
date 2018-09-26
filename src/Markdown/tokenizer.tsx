@@ -135,7 +135,7 @@ const processMurkyContainer = (
     pluginToken.props[prop] = args[argc++];
   });
   // Set varargs
-  pluginToken.varargs = args.slice(propCount);
+  pluginToken.props.varargs = args.slice(propCount);
 
   return pluginToken as MurkyPluginToken;
 }
