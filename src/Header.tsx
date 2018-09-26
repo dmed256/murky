@@ -46,6 +46,9 @@ const styles = {
     '@media(max-width: 700px)': {
       height: 75,
     },
+    '@media print': {
+      display: 'none' as 'none',
+    },
   },
   header: {
     display: 'flex' as 'flex',

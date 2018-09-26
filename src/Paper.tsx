@@ -45,6 +45,11 @@ const styles = {
       margin: 0,
       boxShadow: 'none',
     },
+    '@media print': {
+      position: 'absolute' as 'absolute',
+      left: 0,
+      top: 0,
+    },
   },
   content: {
     padding: '0 5em',

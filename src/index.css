@@ -1,3 +1,8 @@
+@page {
+    size: auto;
+    margin: 0mm;
+}
+
 html {
     background-color: #e7ecf0;
 }
@@ -139,6 +144,12 @@ pre {
     word-wrap: normal;
     margin: 0;
     margin-top: 1em;
+}
+
+@media print {
+    pre {
+        border: 1px solid #cbd2da;
+    }
 }
 
 pre:after {
