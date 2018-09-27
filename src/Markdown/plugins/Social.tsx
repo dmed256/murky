@@ -2,6 +2,12 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import classnames from '../../classnames';
+import {
+  EmailIcon,
+  GithubIcon,
+  LinkedinIcon,
+  TwitterIcon,
+} from '../../icons';
 import * as types from '../types';
 
 interface Props {
@@ -24,16 +30,16 @@ const Social = ({
         let iconContent;
         switch (icon) {
           case 'email':
-            iconContent = 'email';
+            iconContent = <EmailIcon />;
             break;
           case 'github':
-            iconContent = 'github';
+            iconContent = <GithubIcon />;
             break;
           case 'linkedin':
-            iconContent = 'linkedin';
+            iconContent = <LinkedinIcon />;
             break;
           case 'twitter':
-            iconContent = 'twitter';
+            iconContent = <TwitterIcon />;
             break;
           default:
             return null;

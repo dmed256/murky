@@ -14,6 +14,12 @@ export interface MurkyConfig {
   header: {
     links: HeaderLink[],
   },
+  social: {
+    github?: string,
+    twitter?: string,
+    linkedin?: string,
+    email?: string[],
+  },
   pathname: (pathname: string) => string,
 };
 

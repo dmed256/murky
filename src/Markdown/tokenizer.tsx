@@ -79,21 +79,25 @@ const processMurkyContainer = (
   // Split args into prop:value pairs (if : is included)
   const positionArgs: string[] = [];
   const kwargs = {};
+  const varargs: string[] = [];
   let printedError = false;
   args.forEach((arg) => {
     const prop = argToProp(arg);
     // Make sure we haven't found a kwarg before
-    if (!prop.key
-     && Object.keys(kwargs).length
-     && !printedError) {
-      console.error(
-        `${pluginName}: Found prop [${prop.key}] after a keyword arg: [${args}]`
-      );
-      printedError = true;
+    if (!prop.key && Object.keys(kwargs).length) {
+      if (plugin.varArgs) {
+        varargs.push(prop.value);
+      } else if (!printedError) {
+        console.error(
+          `${pluginName}: Found prop [${prop.key}] after a keyword arg: [${args}]`
+        );
+        printedError = true;
+      }
     }
-    if (prop.key) {
+    else if (prop.key) {
       kwargs[prop.key] = prop.value;
-    } else {
+    }
+    else {
       positionArgs.push(prop.value);
     }
   });
@@ -103,21 +107,19 @@ const processMurkyContainer = (
 
   args = positionArgs;
 
-  const rProps = plugin.requiredProps.filter((prop) => !(prop in kwargs));
-  const oProps = plugin.optionalProps.filter((prop) => !(prop in kwargs));
+  const requiredProps = plugin.requiredProps.filter((prop) => !(prop in kwargs));
 
   // Required props aren't set
-  if (args.length < rProps.length) {
+  if (args.length < requiredProps.length) {
     console.error(
-      `Plugin [${pluginName}] is missing props [${rProps.slice(args.length)}]`
+      `Plugin [${pluginName}] is missing props [${requiredProps.slice(args.length)}]`
     );
     return undefined;
   }
   // Too many props
-  const propCount = rProps.length + oProps.length;
-  if (!plugin.varArgs && (args.length > propCount)) {
+  if (!plugin.varArgs && (args.length > requiredProps.length)) {
     console.error(
-      `Plugin [${pluginName}] has too many props [${args.slice(propCount)}]`
+      `Plugin [${pluginName}] has too many props [${args.slice(requiredProps.length)}]`
     );
     return undefined;
   }
@@ -131,11 +133,15 @@ const processMurkyContainer = (
 
   // Set props
   let argc = 0;
-  [...rProps, ...oProps].forEach((prop) => {
+  requiredProps.forEach((prop) => {
     pluginToken.props[prop] = args[argc++];
   });
+
   // Set varargs
-  pluginToken.props.varargs = args.slice(propCount);
+  pluginToken.props.varargs = [
+    ...varargs,
+    ...args.slice(requiredProps.length),
+  ];
 
   return pluginToken as MurkyPluginToken;
 }

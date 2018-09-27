@@ -13,5 +13,9 @@ When not spending time with family, I'm usually coding up some project :)
 
 Feel free to reach out if you're interested in chatting!
 
+::: html
+<br />
+:::
+
 ::: social email github linkedin twitter center:true
 :::
