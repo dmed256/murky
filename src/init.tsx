@@ -1,10 +1,12 @@
 import { extend } from './Markdown/prism';
 import { addPlugin } from './Markdown/tokenizer';
 import * as plugins from './Markdown/plugins';
+import { initBlog } from './blog';
 
 const init = () => {
   initPrism();
   initPlugins();
+  initBlog();
 };
 
 const initPrism = () => {

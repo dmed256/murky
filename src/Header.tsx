@@ -12,12 +12,9 @@ interface Props {
 const Header = ({ classes }: Props) => (
   <div className={classes.root}>
     <div className={classes.header}>
-      <a
-        className={classes.me}
-        href="/#/"
-      >
+      <div className={classes.me}>
         {config.name}
-      </a>
+      </div>
       <div style={{ flex: 1 }} />
       {
         config.header.links.map(({ label, href }) => (
@@ -57,7 +54,7 @@ const styles = {
     maxWidth: 1100,
     width: '93%',
     margin: 'auto',
-    '& > a': {
+    '& > a, & > div': {
       color: 'white !important',
       textTransform: 'uppercase' as 'uppercase',
       textDecoration: 'none !important',
