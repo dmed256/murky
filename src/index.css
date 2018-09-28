@@ -146,12 +146,6 @@ pre {
     margin-top: 1em;
 }
 
-@media print {
-    pre {
-        border: 1px solid #cbd2da;
-    }
-}
-
 pre:after {
     content: attr(data-lang);
     position: absolute;
@@ -190,5 +184,20 @@ code .token.string {
 
 code .token.number {
     color: #ce5b5b;
+}
+/*====================================*/
+
+
+/*---[ Print ]------------------------*/
+
+@media print {
+    pre, blockquote {
+        page-break-inside: avoid;
+    }
+
+    /* Convert background-color to border for printing */
+    pre {
+        border: 1px solid #cbd2da;
+    }
 }
 /*====================================*/

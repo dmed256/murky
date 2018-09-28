@@ -48,7 +48,7 @@ const styles = {
     '@media print': {
       position: 'absolute' as 'absolute',
       left: 0,
-      top: 0,
+      top: 25,
     },
   },
   content: {
