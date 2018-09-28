@@ -24,6 +24,11 @@ const theme = createMuiTheme({
         color: blue[500],
       },
     },
+    MuiSnackbarContent: {
+      root: {
+        flex: 'unset !important',
+      },
+    },
   },
 });
 

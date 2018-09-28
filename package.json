@@ -22,6 +22,7 @@
   "dependencies": {
     "@material-ui/core": "^3.1.1",
     "@material-ui/icons": "^3.0.1",
+    "clipboard": "^2.0.1",
     "jump.js": "^1.0.2",
     "markdown-it": "^8.4.2",
     "markdown-it-container": "^2.0.0",
@@ -31,6 +32,7 @@
     "react-scripts-ts": "2.17.0"
   },
   "devDependencies": {
+    "@types/clipboard": "^2.0.1",
     "@types/jump.js": "^1.0.2",
     "@types/markdown-it": "^0.0.5",
     "@types/markdown-it-container": "^2.0.0",

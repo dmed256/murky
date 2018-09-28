@@ -35,6 +35,7 @@ const makeSvgIcon = ({ d, hoverColor, ...staticProps }: SvgMakerProps) => {
   const Icon = withStyles({
     root: {
       color: '#6F6F6F',
+      transition: 'color 350ms',
       '&:hover': {
         color: hoverColor,
       },
