@@ -26,7 +26,11 @@ const BaseSvgIcon = ({ classes, d, ...props }: BaseProps) => {
     </SvgIcon>
   );
   if (link) {
-    icon = <a href={link}>{icon}</a>;
+    icon = (
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        {icon}
+      </a>
+    );
   }
   return icon;
 };
