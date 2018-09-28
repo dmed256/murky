@@ -41,6 +41,14 @@ const MurkyToken = ({ token }: Props) => {
           </Tag>
         );
       }
+      // Open links in another tab
+      else if (token.type === 'link') {
+        if (props.href && !props.href.startsWith('/')) {
+          props.target = '_blank';
+          props.rel = 'noopener noreferrer';
+        }
+      }
+
       return (
         <Tokens
           tokens={token.children}

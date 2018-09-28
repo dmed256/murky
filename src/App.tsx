@@ -2,7 +2,6 @@ import React from 'react';
 import jump from 'jump.js';
 
 import Layout from './Layout';
-import Sandbox from './Sandbox';
 import MarkdownFetch from './MarkdownFetch';
 import history, { HashPath } from './history';
 
