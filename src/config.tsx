@@ -14,6 +14,7 @@ export interface MurkyConfig {
   header: {
     links: HeaderLink[],
   },
+  blogJson: string | undefined,
   social: {
     github?: string,
     twitter?: string,

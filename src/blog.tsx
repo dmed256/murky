@@ -104,7 +104,11 @@ const processBlogEntries = (jsonPosts: types.BlogPostJson[]) => {
 }
 
 const initBlog = () => {
-  fetch(config.pathname('/blog.json'))
+  const { blogJson } = config;
+  if (!blogJson) {
+    return;
+  }
+  fetch(config.pathname(blogJson))
     .then((res) => {
       if (!res.ok) {
         throw new Error('Unable to fetch blog.json');
