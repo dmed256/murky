@@ -22,9 +22,10 @@ const Section = ({ classes, children, title }: Props) => (
 const styles = {
   root: {
     flex: 1,
+    display: 'flex',
     position: 'relative' as 'relative',
-    margin: '50px 0',
-    padding: '20px 0',
+    marginTop: 50,
+    paddingTop: 20,
     borderTop: '1px solid #c2c8ce',
     '&:before': {
       content: '""',
@@ -44,13 +45,12 @@ const styles = {
     textTransform: 'uppercase' as 'uppercase',
     lineHeight: '1.1em',
     '@media print': {
-      width: 120,
+      width: 110,
       fontSize: 15,
     },
   },
   content: {
     flex: 1,
-    backgroundColor: 'blue',
   },
 }
 
