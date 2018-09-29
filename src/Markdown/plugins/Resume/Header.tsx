@@ -103,10 +103,10 @@ const styles = {
     '& > svg': {
       marginRight: 14,
       fontSize: 18,
-      color: '#34495e',
+      color: 'var(--theme-grey, #34495e)',
     },
     '& > .link': {
-      color: '#34495e',
+      color: 'var(--theme-grey, #34495e)',
       fontWeight: 100,
       fontSize: 14,
       '&:hover': {

@@ -73,7 +73,7 @@ const styles = {
   button: {
     padding: '0.5em 1.0em',
     '&:hover': {
-      backgroundColor: '#4796ca',
+      backgroundColor: 'rgba(255, 255, 255, 0.18)',
       boxShadow: '0 5px 20px 0 rgba(0, 0, 0, 0.15)',
     },
     '@media(max-width: 700px)': {

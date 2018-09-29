@@ -12,7 +12,6 @@ interface Props {
   date?: string,
   start?: string,
   end?: string,
-  first?: boolean,
 }
 
 const SubSection = ({
@@ -22,10 +21,9 @@ const SubSection = ({
   date,
   start,
   end,
-  first,
 }: Props) => (
   <div className={classes.root}>
-    <div className={classnames(classes.date, first && 'first')}>
+    <div className={classnames(classes.date, 'subsection-date')}>
       <div>{date || start}</div>
       <div>{end}</div>
       <div className={classnames('dot', (end === 'Present') && 'present')} />
@@ -63,13 +61,6 @@ const styles = {
     borderRight: '1px solid #c3c8ce',
     fontWeight: 100,
     textAlign: 'right' as 'right',
-    '&.first': {
-      marginTop: 0,
-      paddingTop: 0,
-      '& .dot': {
-        top: 7,
-      },
-    },
     '& .dot': {
       position: 'absolute' as 'absolute',
       width: 7,
@@ -109,7 +100,7 @@ export const plugin = {
   name: 'resume-subsection',
   Component: SubSectionWithStyles,
   requiredProps: ['title'],
-  optionalProps: ['date', 'start', 'end', 'first'],
+  optionalProps: ['date', 'start', 'end'],
   varArgs: false,
 };
 

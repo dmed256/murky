@@ -2,9 +2,6 @@
 
 ::: resume-section Interests
 
-    TODO
-:::
-
 <!-- ::: resume-section Work-Experience -->
 
 <!--     ::: resume-subsection -->

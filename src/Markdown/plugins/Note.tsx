@@ -19,7 +19,7 @@ const styles = {
   root: {
     margin: 32,
     padding: '0 1.5em',
-    border: '1px solid #f9a753',
+    border: '1px solid var(--theme-secondary-color, #f9a753)',
   },
 };
 

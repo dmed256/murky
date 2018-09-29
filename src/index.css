@@ -1,15 +1,18 @@
 :root {
     --theme-primary-color: #2991b9;
+    --theme-secondary-color: #f9a753;
+    --theme-grey: #34495e;
+    --theme-bg: #e7ecf0;
 }
 
 html {
-    background-color: #e7ecf0;
+    background-color: var(--theme-bg, #e7ecf0);
 }
 
 body {
     margin: 0;
     padding: 0;
-    color: #34495e;
+    color: var(--theme-grey, #34495e);
     font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
 }
 
@@ -71,7 +74,7 @@ p > code {
     display: inline;
     margin: 0 0.1em;
     padding: 0;
-    color: var(--theme-secondary-color, #e96900);
+    color: var(--theme-secondary-color, #f9a753);
     background-color: transparent !important;
     font-size: 0.9em !important;
 }
@@ -174,7 +177,7 @@ code .token.function {
 }
 
 code .token.keyword {
-    color: var(--theme-secondary-color, #e96900);
+    color: var(--theme-secondary-color, #f9a753);
 }
 
 code .token.string {

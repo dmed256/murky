@@ -25,7 +25,7 @@ const styles = {
   root: {
     flex: 1,
     marginTop: 200,
-    backgroundColor: '#e7ecf0',
+    backgroundColor: 'var(--theme-bg, #e7ecf0)',
     zIndex: 2,
     '@media(max-width: 700px)': {
       marginTop: 80,

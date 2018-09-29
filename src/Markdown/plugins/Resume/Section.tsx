@@ -59,6 +59,14 @@ const styles = {
   },
   content: {
     flex: 1,
+    // End the divider line early and move the dot accordingly
+    '& > div:first-child .subsection-date': {
+      marginTop: 0,
+      paddingTop: 0,
+      '& .dot': {
+        top: 7,
+      },
+    },
   },
 }
 
