@@ -11,35 +11,16 @@ interface Props {
 }
 
 const ErrorPage = ({ classes, pathname }: Props) => {
-  // Add a credit label
-  let label;
-  if (config.error.label) {
-    if (config.error.creditUrl) {
-      label = (
-        <a
-          className={classes.imageCredit}
-          href={config.error.creditUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {config.error.label}
-        </a>
-      );
-    } else {
-      label = (
-        <div className={classes.imageCredit}>
-          {config.error.label}
-        </div>
-      );
-    }
-  }
-
   return (
     <div>
-      <div className={classes.imageContainer}>
+      <a
+        className={classes.image}
+        href={config.error.imageCredit}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img src={config.error.image} />
-        {label}
-      </div>
+      </a>
       <Code
         source={"Segmentation fault (core dumped)"}
         lang="cpp"
@@ -66,23 +47,27 @@ NotImplementedError: File not found
 };
 
 const styles = {
-  imageContainer: {
-    position: 'relative' as 'relative',
+  image: {
     display: 'block',
-    margin: '0 auto 40px',
+    position: 'relative' as 'relative',
     width: 336,
     height: 200,
+    margin: '0 auto 40px',
+    '&:hover:after': {
+      content: 'attr(href)',
+      position: 'absolute' as 'absolute',
+      left: 168,
+      bottom: -20,
+      transform: 'translateX(-50%) translateY(50%) rotate(15deg)',
+      fontSize: 14,
+      padding: '0.5em 1em',
+      color: 'white',
+      backgroundColor: 'rgba(88, 95, 101, 0.9)',
+    },
     '@media(max-width: 700px)': {
+      width: '100%',
       height: 'auto',
     },
-  },
-  imageCredit: {
-    position: 'absolute' as 'absolute',
-    right: 3,
-    bottom: 3,
-    fontSize: 10,
-    color: 'white !important',
-    textTransform: 'uppercase' as 'uppercase',
   },
 };
 

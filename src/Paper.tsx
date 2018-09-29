@@ -28,7 +28,7 @@ const styles = {
     backgroundColor: '#e7ecf0',
     zIndex: 2,
     '@media(max-width: 700px)': {
-      marginTop: 75,
+      marginTop: 80,
       backgroundColor: 'white',
     },
   },
@@ -43,7 +43,8 @@ const styles = {
       width: '100%',
       padding: '2em 0',
       margin: 0,
-      boxShadow: 'none',
+      boxShadow: 'none' as 'none',
+      overflow: 'auto' as 'auto',
     },
     '@media print': {
       position: 'absolute' as 'absolute',

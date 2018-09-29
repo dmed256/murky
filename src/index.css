@@ -1,4 +1,5 @@
 html {
+    letter-spacing: 0.05em;
     background-color: #e7ecf0;
 }
 
@@ -186,6 +187,10 @@ code .token.number {
 /*---[ Print ]------------------------*/
 
 @media print {
+    html {
+        background-color: white;
+    }
+
     html, body {
         margin: 0;
     }

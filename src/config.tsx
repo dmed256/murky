@@ -11,8 +11,7 @@ export interface MurkyConfig {
   },
   error: {
     image: string,
-    label?: string,
-    creditUrl?: string,
+    imageCredit?: string,
   },
   header: {
     links: HeaderLink[],
@@ -44,8 +43,7 @@ let config: MurkyConfig = {
   },
   error: {
     image: '/assets/images/ohno.png',
-    label: 'webcomicname.com',
-    creditUrl: 'http://webcomicname.com',
+    imageCredit: 'http://webcomicname.com',
     ...(murkyConfig.error || {}),
   },
   header: {

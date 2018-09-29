@@ -41,7 +41,7 @@ const styles = {
     zIndex: 1,
     backgroundColor: '#2980b9',
     '@media(max-width: 700px)': {
-      height: 75,
+      height: 80,
     },
     '@media print': {
       display: 'none' as 'none',
@@ -61,11 +61,13 @@ const styles = {
       textDecoration: 'none !important',
       fontWeight: '100 !important' as any,
     },
+    '@media(max-width: 700px)': {
+      height: 80,
+    },
   },
   me: {
     fontSize: '1.3em',
     '@media(max-width: 700px)': {
-      fontSize: '1.3em',
     },
   },
   button: {
@@ -75,7 +77,7 @@ const styles = {
       boxShadow: '0 5px 20px 0 rgba(0, 0, 0, 0.15)',
     },
     '@media(max-width: 700px)': {
-      padding: '0.2em 0.5em',
+      padding: '1em',
     },
   },
 };
