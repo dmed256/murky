@@ -53,19 +53,23 @@ const styles = {
     width: 336,
     height: 200,
     margin: '0 auto 40px',
-    '&:hover': {
-      filter: 'blur(1px)',
-    },
-    '&:hover:after': {
+    transition: 'transform 200ms',
+    '&:after': {
       content: 'attr(href)',
       position: 'absolute' as 'absolute',
       left: 168,
-      bottom: -20,
+      bottom: -15,
       transform: 'translateX(-50%) translateY(50%) rotate(15deg)',
       fontSize: 14,
-      padding: '0.5em 1em',
+      padding: '0.5em 0',
+      maxWidth: 0,
       color: 'white',
       backgroundColor: 'rgba(88, 95, 101, 0.9)',
+      transition: 'max-width 400ms',
+    },
+    '&:hover:after': {
+      maxWidth: '100%',
+      padding: '0.5em 1em',
     },
     '@media(max-width: 700px)': {
       width: '100%',
