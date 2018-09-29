@@ -53,6 +53,9 @@ const styles = {
     width: 336,
     height: 200,
     margin: '0 auto 40px',
+    '&:hover': {
+      filter: 'blur(1px)',
+    },
     '&:hover:after': {
       content: 'attr(href)',
       position: 'absolute' as 'absolute',
