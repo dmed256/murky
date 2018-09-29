@@ -1,10 +1,12 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import SubSection from './SubSection';
+
 
 interface Props {
   classes: any,
-  children?: any,
+  children: React.ReactNode[],
   title: string,
 }
 

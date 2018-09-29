@@ -1,6 +1,8 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import classnames from '../classnames';
+
 
 interface Props {
   classes: any,
@@ -9,6 +11,7 @@ interface Props {
   date?: string,
   start?: string,
   end?: string,
+  first?: boolean,
 }
 
 const SubSection = ({
@@ -18,11 +21,13 @@ const SubSection = ({
   date,
   start,
   end,
+  first,
 }: Props) => (
   <div className={classes.root}>
-    <div className={classes.date}>
+    <div className={classnames(classes.date, first && 'first')}>
       <div>{date || start}</div>
       <div>{end}</div>
+      <div className={classnames('dot', (end === 'Present') && 'present')} />
     </div>
     <div className={classes.content}>
       <div className="title">
@@ -48,10 +53,36 @@ const styles = {
     },
   },
   date: {
-    fontWeight: 100,
+    position: 'relative' as 'relative',
     width: 100,
-    marginRight: 20,
+    marginRight: 14,
+    paddingRight: 14,
+    marginTop: -24,
+    paddingTop: 24,
+    borderRight: '1px solid #c3c8ce',
+    fontWeight: 100,
     textAlign: 'right' as 'right',
+    '&.first': {
+      marginTop: 0,
+      paddingTop: 0,
+      '& .dot': {
+        top: 7,
+      },
+    },
+    '& .dot': {
+      position: 'absolute' as 'absolute',
+      width: 7,
+      height: 7,
+      right: -5,
+      top: 31,
+      borderRadius: 100,
+      border: '1px solid #c3c8ce',
+      backgroundColor: 'white',
+      '&.present': {
+        borderColor: 'var(--theme-primary-color, #2980b9)',
+        backgroundColor: 'var(--theme-primary-color, #2980b9)',
+      },
+    },
     '@media print': {
       width: 80,
     },
