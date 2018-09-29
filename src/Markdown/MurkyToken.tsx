@@ -58,7 +58,7 @@ const MurkyToken = ({ token }: Props) => {
       );
     }
     default:
-      console.error(`Cannot handle murky token with type: ${token.type}`);
+      throw Error(`Cannot handle murky token with type: ${token.type}`);
       return null;
   }
 };

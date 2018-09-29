@@ -30,7 +30,6 @@ export const plugin = {
   Component: ResumeWithStyles,
   requiredProps: [],
   optionalProps: [],
-  varArgs: false,
 };
 
 export default ResumeWithStyles;

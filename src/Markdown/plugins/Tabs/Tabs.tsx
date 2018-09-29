@@ -71,7 +71,6 @@ export const plugin = {
   Component: MarkdownTabs,
   requiredProps: ['namespace'],
   optionalProps: [],
-  varArgs: false,
 };
 
 export default MarkdownTabs;

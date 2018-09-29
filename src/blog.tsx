@@ -1,3 +1,5 @@
+import JSON5 from 'json5';
+
 import config from './config';
 import * as types from './types';
 
@@ -111,11 +113,13 @@ const initBlog = () => {
   fetch(config.pathname(blogJson))
     .then((res) => {
       if (!res.ok) {
-        throw new Error('Unable to fetch blog.json');
+        throw new Error(`Unable to fetch ${blogJson}`);
       }
-      return res.json();
+      return res.text();
     })
-    .then(processBlogEntries);
+    .then((info) => {
+      processBlogEntries(JSON5.parse(info))
+    });
 };
 
 export {

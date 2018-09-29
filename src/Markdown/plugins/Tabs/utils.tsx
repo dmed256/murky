@@ -17,7 +17,7 @@ interface TabNamespace {
 
 const getTabs = (tokens: types.Token[]): TabInfo[] | null => {
   if (tokens.length !== 1) {
-    console.error('Expected a \'bullet_list\' markdown child', tokens);
+    throw Error(`Expected a 'bullet_list' markdown child: ${tokens}`);
     return null;
   }
 
@@ -26,7 +26,7 @@ const getTabs = (tokens: types.Token[]): TabInfo[] | null => {
     token.type === 'list_item'
   ));
   if (!isValid) {
-    console.error('Expected \'list_items\' in markdown tokens', tabTokens);
+    throw Error(`Expected 'list_items' in markdown tokens: ${tabTokens}`);
     return null;
   }
 
@@ -39,7 +39,7 @@ const getTabs = (tokens: types.Token[]): TabInfo[] | null => {
 
   isValid = tabs.every(({ label }) => Boolean(label));
   if (!isValid) {
-    console.error('Expected tab names in each \'bullet_list\' entry', tabTokens);
+    throw Error(`Expected tab names in each 'bullet_list' entry: ${tabTokens}`);
     return null;
   }
 

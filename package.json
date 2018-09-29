@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "start": "BROWSER=none react-scripts-ts start",
+    "start": "BROWSER=none REACT_EDITOR=none react-scripts-ts start",
     "start:prod": "node server.js",
     "build": "rm -rf dist && NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "rm -rf dist && NODE_ENV=production webpack --config webpack.production.config.js",
@@ -25,6 +25,7 @@
     "@material-ui/core": "^3.1.1",
     "@material-ui/icons": "^3.0.1",
     "clipboard": "^2.0.1",
+    "json5": "^2.1.0",
     "jump.js": "^1.0.2",
     "markdown-it": "^8.4.2",
     "markdown-it-container": "^2.0.0",

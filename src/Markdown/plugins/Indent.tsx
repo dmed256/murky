@@ -31,7 +31,6 @@ export const plugin = {
   Component: IndentWithStyles,
   requiredProps: [],
   optionalProps: [],
-  varArgs: false,
 };
 
 export default IndentWithStyles;

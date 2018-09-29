@@ -41,8 +41,7 @@ class EmailIcon extends React.Component<Props, State> {
   componentDidMount() {
     const { fullEmail } = config.social;
     if (!fullEmail) {
-      console.error("Email must be set in murky config");
-      return;
+      throw Error("Email must be set in murky config");
     }
     clipboard = new ClipboardJS('.email-button', {
       text: () => fullEmail,

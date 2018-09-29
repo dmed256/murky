@@ -77,7 +77,6 @@ export const plugin = {
   Component: SectionWithStyles,
   requiredProps: ['title'],
   optionalProps: [],
-  varArgs: false,
 };
 
 export default SectionWithStyles;

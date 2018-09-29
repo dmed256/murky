@@ -5,20 +5,20 @@ import * as types from '../types';
 
 interface Props {
   tokens: types.Token[],
+  html: string,
 }
 
-const Html = ({ tokens }: Props) => (
+const Html = ({ html }: Props) => (
   <div dangerouslySetInnerHTML={{
-      __html: getText(tokens[0])
+      __html: html,
     }} />
 );
 
 export const plugin = {
   name: 'html',
   Component: Html,
-  requiredProps: [],
+  requiredProps: ['html'],
   optionalProps: [],
-  varArgs: false,
 };
 
 

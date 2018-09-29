@@ -30,7 +30,6 @@ export const plugin = {
   Component: NoteWithStyles,
   requiredProps: [],
   optionalProps: [],
-  varArgs: false,
 };
 
 export default NoteWithStyles;

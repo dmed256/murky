@@ -13,20 +13,20 @@ import * as types from '../types';
 interface Props {
   classes: any,
   tokens: types.Token[],
+  links: string[],
   center: boolean,
-  varargs: string[],
 }
 
 const Social = ({
   classes,
   tokens,
+  links,
   center,
-  varargs,
 }: Props) => (
   <div className={classnames(classes.root,
                              center && classes.center)}>
     {
-      varargs.map((icon) => {
+      links.map((icon) => {
         let iconContent;
         switch (icon) {
           case 'email':
@@ -72,9 +72,8 @@ const SocialWithStyles = withStyles(styles)(Social);
 export const plugin = {
   name: 'social',
   Component: SocialWithStyles,
-  requiredProps: [],
+  requiredProps: ['links'],
   optionalProps: ['center'],
-  varArgs: true,
 };
 
 export default SocialWithStyles;

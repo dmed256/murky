@@ -101,7 +101,6 @@ export const plugin = {
   Component: SubSectionWithStyles,
   requiredProps: ['title'],
   optionalProps: ['date', 'start', 'end'],
-  varArgs: false,
 };
 
 export default SubSectionWithStyles;
