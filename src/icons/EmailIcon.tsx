@@ -70,7 +70,7 @@ class EmailIcon extends React.Component<Props, State> {
                                 "email-button")}
           onClick={this.openSnackbar}
         >
-          <MailOutlineIcon className={classes.icon} />
+          <MailOutlineIcon />
         </button>
         <Snackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
@@ -91,7 +91,12 @@ const styles = {
     border: 'none' as 'none',
     padding: 0,
     outline: 'none' as 'none',
+    color: '#6F6F6F',
+    backgroundColor: 'inherit',
     cursor: 'pointer' as 'pointer',
+    '&:hover': {
+      color: 'var(--theme-primary-color, #2980b9)',
+    },
     '&:hover:after': {
       content: '"Click to copy email to clipboard"',
       position: 'absolute' as 'absolute',
@@ -103,12 +108,6 @@ const styles = {
       padding: '0.5em 0',
       color: 'white',
       backgroundColor: 'rgba(88, 95, 101, 0.9)',
-    },
-  },
-  icon: {
-    color: '#6F6F6F',
-    '&:hover': {
-      color: 'var(--theme-primary-color, #2980b9)',
     },
   },
   snackbarIcon: {
