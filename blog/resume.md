@@ -5,7 +5,7 @@
     TODO
 :::
 
-::: resume-section Work Experience
+::: resume-section Work-Experience
 
     ::: resume-subsection
         - title: Software Engineer at Two Sigma

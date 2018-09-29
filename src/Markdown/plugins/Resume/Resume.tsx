@@ -1,16 +1,18 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import Tokens from '../Tokens';
-import * as types from '../types';
+import Tokens from '../../Tokens';
+import * as types from '../../types';
+import Header from './Header';
 
 interface Props {
   classes: any,
   tokens: types.Token[],
 }
 
-const Note = ({ classes, tokens }: Props) => (
+const Resume = ({ classes, tokens }: Props) => (
   <div className={classes.root}>
+    <Header />
     <Tokens tokens={tokens} />
   </div>
 );
@@ -23,14 +25,14 @@ const styles = {
   },
 };
 
-const NoteWithStyles = withStyles(styles)(Note);
+const ResumeWithStyles = withStyles(styles)(Resume);
 
 export const plugin = {
-  name: 'note',
-  Component: NoteWithStyles,
+  name: 'resume',
+  Component: ResumeWithStyles,
   requiredProps: [],
   optionalProps: [],
   varArgs: false,
 };
 
-export default NoteWithStyles;
+export default ResumeWithStyles;

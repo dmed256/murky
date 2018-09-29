@@ -72,7 +72,7 @@ const processMurkyContainer = (
   const pluginName = args.splice(0, 1)[0];
   const plugin = plugins[pluginName];
   if (!plugin) {
-    console.error(`Unknown plugin: ${pluginName}`);
+    throw Error(`Unknown plugin: '${pluginName}' (args: '${args}')`);
     return undefined;
   }
 
@@ -88,7 +88,7 @@ const processMurkyContainer = (
       if (plugin.varArgs) {
         varargs.push(prop.value);
       } else if (!printedError) {
-        console.error(
+        throw Error(
           `${pluginName}: Found prop [${prop.key}] after a keyword arg: [${args}]`
         );
         printedError = true;
@@ -111,14 +111,14 @@ const processMurkyContainer = (
 
   // Required props aren't set
   if (args.length < requiredProps.length) {
-    console.error(
+    throw Error(
       `Plugin [${pluginName}] is missing props [${requiredProps.slice(args.length)}]`
     );
     return undefined;
   }
   // Too many props
   if (!plugin.varArgs && (args.length > requiredProps.length)) {
-    console.error(
+    throw Error(
       `Plugin [${pluginName}] has too many props [${args.slice(requiredProps.length)}]`
     );
     return undefined;
