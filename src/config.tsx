@@ -5,7 +5,10 @@ interface HeaderLink {
 
 export interface MurkyConfig {
   root: string,
-  name: string,
+  profile: {
+    name: string,
+    title: string,
+  },
   error: {
     image: string,
     label?: string,
@@ -20,6 +23,11 @@ export interface MurkyConfig {
     twitter?: string,
     linkedin?: string,
     email?: string[],
+    // Filled out entries
+    githubLink?: string,
+    twitterLink?: string,
+    linkedinLink?: string,
+    fullEmail?: string,
   },
   pathname: (pathname: string) => string,
 };
@@ -29,7 +37,11 @@ const murkyConfig = (window.murkyConfig || {}) as any;
 
 let config: MurkyConfig = {
   root: '/',
-  name: 'My Name',
+  profile: {
+    name: 'My Name',
+    title: 'My Title',
+    ...(murkyConfig.profile || {}),
+  },
   error: {
     image: '/assets/images/ohno.png',
     label: 'webcomicname.com',
@@ -46,6 +58,21 @@ let config: MurkyConfig = {
   },
   ...murkyConfig,
 };
+
+// Fill out filled-out social entries
+if (config.social.github) {
+  config.social.githubLink = `https://github.com/${config.social.github}`;
+}
+if (config.social.twitter) {
+  config.social.twitterLink = `https://twitter.com/${config.social.twitter}`;
+}
+if (config.social.linkedin) {
+  config.social.linkedinLink = `https://linkedin.com/in/${config.social.linkedin}`;
+}
+if (config.social.email) {
+  const [a, b, c] = config.social.email;
+  config.social.fullEmail = `${a}@${b}.${c}`;
+}
 
 // Reroute based on config's root
 config.pathname = (pathname: string) => (

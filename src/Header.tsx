@@ -13,7 +13,7 @@ const Header = ({ classes }: Props) => (
   <div className={classes.root}>
     <div className={classes.header}>
       <div className={classes.me}>
-        {config.name}
+        {config.profile.name}
       </div>
       <div style={{ flex: 1 }} />
       {
@@ -54,6 +54,7 @@ const styles = {
     maxWidth: 1100,
     width: '93%',
     margin: 'auto',
+    letterSpacing: 2,
     '& > a, & > div': {
       color: 'white !important',
       textTransform: 'uppercase' as 'uppercase',

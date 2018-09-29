@@ -12,6 +12,7 @@ import classnames from '../classnames';
 
 interface Props {
   classes: any,
+  link?: null,
 }
 
 interface State {
@@ -38,21 +39,26 @@ class EmailIcon extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const { email } = config.social;
-    if (!email) {
+    const { fullEmail } = config.social;
+    if (!fullEmail) {
       console.error("Email must be set in murky config");
       return;
     }
     clipboard = new ClipboardJS('.email-button', {
-      text: () => (
-        `${email[0]}@${email[1]}.${email[2]}`
-      ),
+      text: () => fullEmail,
     });
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, link } = this.props;
     const { snackbarOpened } = this.state;
+
+    const icon = (
+      <MailOutlineIcon className={classes.icon}/>
+    );
+    if (link === null) {
+      return icon;
+    }
 
     const snackbarAction = (
       <IconButton
@@ -70,7 +76,7 @@ class EmailIcon extends React.Component<Props, State> {
                                 "email-button")}
           onClick={this.openSnackbar}
         >
-          <MailOutlineIcon />
+          {icon}
         </button>
         <Snackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
@@ -94,6 +100,7 @@ const styles = {
     color: '#6F6F6F',
     backgroundColor: 'inherit',
     cursor: 'pointer' as 'pointer',
+    transition: 'color 350ms',
     '&:hover': {
       color: 'var(--theme-primary-color, #2980b9)',
     },
@@ -108,6 +115,12 @@ const styles = {
       padding: '0.5em 0',
       color: 'white',
       backgroundColor: 'rgba(88, 95, 101, 0.9)',
+    },
+  },
+  icon: {
+    transition: 'color 350ms',
+    '&:hover': {
+      color: 'var(--theme-primary-color, #2980b9)',
     },
   },
   snackbarIcon: {

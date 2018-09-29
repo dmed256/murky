@@ -3,6 +3,7 @@ import jump from 'jump.js';
 
 import Layout from './Layout';
 import MarkdownFetch from './MarkdownFetch';
+import Resume from './Resume';
 import history, { HashPath } from './history';
 
 
@@ -47,12 +48,19 @@ class App extends React.Component {
 
   render() {
     const { pathname, hash } = history;
+
+    let content = (
+      <MarkdownFetch
+        pathname={pathname}
+        hash={hash}
+      />
+    );
+    if (pathname === '/resume') {
+      content = <Resume />;
+    }
     return (
       <Layout>
-        <MarkdownFetch
-          pathname={pathname}
-          hash={hash}
-        />
+        {content}
       </Layout>
     );
   }
