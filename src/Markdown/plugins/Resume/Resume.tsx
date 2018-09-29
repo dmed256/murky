@@ -19,9 +19,7 @@ const Resume = ({ classes, tokens }: Props) => (
 
 const styles = {
   root: {
-    margin: 32,
-    padding: '0 1.5em',
-    border: '1px solid #f9a753',
+    letterSpacing: '0.05em',
   },
 };
 

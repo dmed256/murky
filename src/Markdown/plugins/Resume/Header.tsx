@@ -1,85 +1,127 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import {
+  EmailIcon,
+  GithubIcon,
+  LinkedinIcon,
+  TwitterIcon,
+} from '../../../icons';
 import config from '../../../config';
-import { getHashPathname } from '../../../history';
 
+
+// Either link or email
+const getLabelLink = (label: string) => {
+  if (label.search(/https?:/) === 0) {
+    return label;
+  }
+  return `mailto:${label}`;
+}
 
 interface Props {
   classes: any,
 }
 
-const Header = ({ classes }: Props) => (
-  <div className={classes.root}>
-    <div className={classes.header}>
-      <div className={classes.me}>
-        {config.profile.name}
+const Header = ({ classes }: Props) => {
+  const infoItems = [
+    { Component: EmailIcon, label: config.social.fullEmail },
+    { Component: GithubIcon, label: config.social.githubLink },
+    { Component: TwitterIcon, label: config.social.twitterLink },
+    { Component: LinkedinIcon, label: config.social.linkedinLink },
+  ].filter(({ label }) => label);
+
+  return (
+    <div className={classes.root}>
+      <div className={classes.profile}>
+        <div className="name">
+          {config.profile.name}
+        </div>
+        <div className="title">
+          {config.profile.title}
+        </div>
       </div>
-      <div style={{ flex: 1 }} />
-      {
-        config.header.links.map(({ label, href }) => (
-          <a
-            key={label}
-            className={classes.button}
-            href={getHashPathname(href)}
-          >
-            {label}
-          </a>
-        ))
-      }
+      <div className={classes.info}>
+        {
+          infoItems.map(({ Component, label }) => (
+            <div key={label} className={classes.infoItem}>
+              <Component link={null} />
+              <a
+                className="link"
+                href={getLabelLink(label as string)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {label}
+              </a>
+            </div>
+          ))
+        }
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const styles = {
   root: {
-    position: 'fixed' as 'fixed',
-    left: 0,
-    top: 0,
-    width: '100%',
-    height: 200,
-    zIndex: 1,
-    backgroundColor: 'var(--theme-primary-color, #2980b9)',
-    '@media(max-width: 700px)': {
-      height: 80,
+    display: 'flex',
+    alignItems: 'center' as 'center',
+  },
+  profile: {
+    flex: 1,
+    '& .name': {
+      fontSize: 40,
+      fontWeight: 600,
+      letterSpacing: 2,
+      textTransform: 'uppercase' as 'uppercase',
+      marginLeft: -2,
+    },
+    '& .title': {
+      fontSize: 20,
+      fontWeight: 200,
+      letterSpacing: 2,
+      textTransform: 'uppercase' as 'uppercase',
     },
     '@media print': {
-      display: 'none' as 'none',
+      '& .name': {
+        fontSize: 30,
+      },
+      '& .title': {
+        fontSize: 18,
+      },
     },
   },
-  header: {
-    display: 'flex' as 'flex',
-    height: 100,
-    alignItems: 'center' as 'center',
-    maxWidth: 1100,
-    width: '93%',
-    margin: 'auto',
-    letterSpacing: 2,
-    '& > a, & > div': {
-      color: 'white !important',
-      textTransform: 'uppercase' as 'uppercase',
-      textDecoration: 'none !important',
-      fontWeight: '100 !important' as any,
+  info: {
+    paddingLeft: 30,
+  },
+  infoItem: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 8,
+    '&:first-child': {
+      marginTop: 0,
     },
-    '@media(max-width: 700px)': {
-      height: 80,
+    '& > svg': {
+      marginRight: 14,
+      fontSize: 18,
+      color: '#34495e',
+    },
+    '& > .link': {
+      color: '#34495e',
+      fontWeight: 100,
+      fontSize: 14,
+      '&:hover': {
+        color: 'var(--theme-primary-color, #2980b9)',
+      },
+    },
+    '@media print': {
+      '& .svg': {
+        fontSize: 12,
+      },
+      '& .link': {
+        fontSize: 12,
+      },
     },
   },
-  me: {
-    fontSize: '1.3em',
-    '@media(max-width: 700px)': {
-    },
-  },
-  button: {
-    padding: '0.5em 1.0em',
-    '&:hover': {
-      backgroundColor: '#4796ca',
-      boxShadow: '0 5px 20px 0 rgba(0, 0, 0, 0.15)',
-    },
-    '@media(max-width: 700px)': {
-      padding: '1em',
-    },
-  },
-};
+}
 
 export default withStyles(styles)(Header);
