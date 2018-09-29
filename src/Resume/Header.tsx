@@ -67,7 +67,7 @@ const styles = {
     alignItems: 'center' as 'center',
   },
   profile: {
-    width: 400,
+    flex: 1,
     '& .name': {
       fontSize: 40,
       fontWeight: 600,
@@ -82,7 +82,6 @@ const styles = {
       textTransform: 'uppercase' as 'uppercase',
     },
     '@media print': {
-      flex: 1,
       '& .name': {
         fontSize: 30,
       },
