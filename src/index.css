@@ -191,6 +191,10 @@ code .token.number {
 /*---[ Print ]------------------------*/
 
 @media print {
+    html, body {
+        margin: 0;
+    }
+
     pre, blockquote {
         page-break-inside: avoid;
     }

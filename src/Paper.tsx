@@ -48,13 +48,20 @@ const styles = {
     '@media print': {
       position: 'absolute' as 'absolute',
       left: 0,
-      top: 25,
+      top: 0,
+      width: 'calc(100vw - 1in)',
+      margin: '0.5in 0.5in',
+      padding: 0,
+      boxShadow: 'none' as 'none',
     },
   },
   content: {
     padding: '0 5em',
     '@media(max-width: 700px)': {
       padding: '0 2em',
+    },
+    '@media print': {
+      padding: 0,
     },
   },
 };

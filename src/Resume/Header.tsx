@@ -82,7 +82,7 @@ const styles = {
       textTransform: 'uppercase' as 'uppercase',
     },
     '@media print': {
-      width: 300,
+      flex: 1,
       '& .name': {
         fontSize: 30,
       },
@@ -119,7 +119,7 @@ const styles = {
         fontSize: 12,
       },
       '& .link': {
-        fontSize: 10,
+        fontSize: 12,
       },
     },
   },

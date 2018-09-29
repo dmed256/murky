@@ -1,17 +1,12 @@
 import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 import Header from './Header';
 import Section from './Section';
 import SubSection from './SubSection';
 
 
-interface Props {
-  classes: any,
-}
-
-const Resume = ({ classes }: Props) => (
-  <div className={classes.root}>
+const Resume = () => (
+  <React.Fragment>
     <Header />
     <Section title="Interests">
     </Section>
@@ -73,15 +68,7 @@ const Resume = ({ classes }: Props) => (
     </Section>
     <Section title="Awards">
     </Section>
-  </div>
+  </React.Fragment>
 );
 
-const styles = {
-  root: {
-    '@media print': {
-      margin: '15px 30px',
-    },
-  },
-}
-
-export default withStyles(styles)(Resume);
+export default Resume;
