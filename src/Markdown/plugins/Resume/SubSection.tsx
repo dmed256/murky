@@ -90,6 +90,9 @@ const styles = {
     },
     '& .description': {
       fontWeight: 300,
+      '& ul': {
+        paddingLeft: 18,
+      },
     },
   },
 }
