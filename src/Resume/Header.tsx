@@ -81,10 +81,18 @@ const styles = {
       letterSpacing: 2,
       textTransform: 'uppercase' as 'uppercase',
     },
+    '@media print': {
+      width: 300,
+      '& .name': {
+        fontSize: 30,
+      },
+      '& .title': {
+        fontSize: 18,
+      },
+    },
   },
   info: {
     paddingLeft: 30,
-    fontSize: 14,
   },
   infoItem: {
     display: 'flex',
@@ -101,8 +109,17 @@ const styles = {
     '& > .link': {
       color: '#34495e',
       fontWeight: 100,
+      fontSize: 14,
       '&:hover': {
         color: 'var(--theme-primary-color, #2980b9)',
+      },
+    },
+    '@media print': {
+      '& .svg': {
+        fontSize: 12,
+      },
+      '& .link': {
+        fontSize: 10,
       },
     },
   },

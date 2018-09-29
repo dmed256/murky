@@ -34,6 +34,9 @@ const Resume = ({ classes }: Props) => (
 
 const styles = {
   root: {
+    '@media print': {
+      margin: '15px 30px',
+    },
   },
 }
 
