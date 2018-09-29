@@ -1,5 +1,8 @@
+:root {
+    --theme-primary-color: #2991b9;
+}
+
 html {
-    letter-spacing: 0.05em;
     background-color: #e7ecf0;
 }
 
@@ -59,8 +62,8 @@ li > p {
 }
 
 p {
-    line-height: 1.6rem;
-    word-spacing: .05rem;
+    line-height: 1.6em;
+    word-spacing: .05em;
     margin: 1em 0;
 }
 

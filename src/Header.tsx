@@ -39,7 +39,7 @@ const styles = {
     width: '100%',
     height: 200,
     zIndex: 1,
-    backgroundColor: '#2980b9',
+    backgroundColor: 'var(--theme-primary-color, #2980b9)',
     '@media(max-width: 700px)': {
       height: 80,
     },

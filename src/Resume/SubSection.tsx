@@ -85,6 +85,10 @@ const styles = {
     },
     '@media print': {
       width: 80,
+      '& .dot.present': {
+        borderColor: '#c3c8ce !important',
+        backgroundColor: 'white !important',
+      },
     },
   },
   content: {

@@ -1,12 +1,17 @@
 import React from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import Header from './Header';
 import Section from './Section';
 import SubSection from './SubSection';
 
 
-const Resume = () => (
-  <React.Fragment>
+interface Props {
+  classes: any,
+}
+
+const Resume = ({ classes }: Props) => (
+  <div className={classes.root}>
     <Header />
     <Section title="Interests">
     </Section>
@@ -17,7 +22,6 @@ const Resume = () => (
         end="Present"
         first
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
       </SubSection>
 
       <SubSection
@@ -71,7 +75,13 @@ const Resume = () => (
     </Section>
     <Section title="Awards">
     </Section>
-  </React.Fragment>
+  </div>
 );
 
-export default Resume;
+const styles = {
+  root: {
+    letterSpacing: '0.05em',
+  },
+}
+
+export default withStyles(styles)(Resume);
