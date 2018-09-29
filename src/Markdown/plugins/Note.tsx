@@ -23,9 +23,11 @@ const styles = {
   },
 };
 
-export default {
+const NoteWithStyles = withStyles(styles)(Note);
+
+export const plugin = {
   name: 'note',
-  Component: withStyles(styles)(Note),
+  Component: NoteWithStyles,
   requiredProps: [],
   optionalProps: [],
   varArgs: false,

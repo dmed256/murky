@@ -66,10 +66,12 @@ class MarkdownTabs extends React.Component<Props, State> {
   }
 };
 
-export default {
+export const plugin = {
   name: 'tabs',
   Component: MarkdownTabs,
   requiredProps: ['namespace'],
   optionalProps: [],
   varArgs: false,
 };
+
+export default MarkdownTabs;

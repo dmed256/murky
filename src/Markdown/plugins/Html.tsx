@@ -13,10 +13,13 @@ const Html = ({ tokens }: Props) => (
     }} />
 );
 
-export default {
+export const plugin = {
   name: 'html',
   Component: Html,
   requiredProps: [],
   optionalProps: [],
   varArgs: false,
 };
+
+
+export default Html;

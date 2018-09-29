@@ -67,10 +67,14 @@ const styles = {
   },
 };
 
-export default {
+const SocialWithStyles = withStyles(styles)(Social);
+
+export const plugin = {
   name: 'social',
-  Component: withStyles(styles)(Social),
+  Component: SocialWithStyles,
   requiredProps: [],
   optionalProps: ['center'],
   varArgs: true,
 };
+
+export default SocialWithStyles;

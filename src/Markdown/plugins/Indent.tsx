@@ -24,10 +24,14 @@ const styles = {
   },
 };
 
-export default {
+const IndentWithStyles = withStyles(styles)(Indent);
+
+export const plugin = {
   name: 'indent',
-  Component: withStyles(styles)(Indent),
+  Component: IndentWithStyles,
   requiredProps: [],
   optionalProps: [],
   varArgs: false,
 };
+
+export default IndentWithStyles;
