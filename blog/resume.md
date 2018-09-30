@@ -178,8 +178,8 @@ Double major in Computer Science
 
 - C++ library that enables JIT compilation for parallel architecture kernels (_CPU_, _GPU_, _FPGA_)
 - Unified API to program heterogeneous architectures
-- A C parser for the **OKL** language, introducing `@attributes` for ast-manipuation
-- **OKL** was designed to expose enough parallelism to directly convert kernels into _OpenMP_, _CUDA_, _OpenCL_, or _HIP_
+- A C parser for the [OKL](https://libocca.org/#/guide/okl/introduction) language, introducing `@attributes` for ast-manipuation
+- [OKL](https://libocca.org/#/guide/okl/introduction) was designed to expose enough parallelism to directly convert kernels into _OpenMP_, _CUDA_, _OpenCL_, or _HIP_
 
 :::::
 
