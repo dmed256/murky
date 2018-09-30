@@ -27,7 +27,11 @@ const BaseSvgIcon = ({ classes, d, ...props }: BaseProps) => {
   );
   if (link) {
     icon = (
-      <a href={link} target="_blank" rel="noopener noreferrer">
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {icon}
       </a>
     );

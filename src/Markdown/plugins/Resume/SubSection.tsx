@@ -9,6 +9,7 @@ interface Props {
   classes: any,
   tokens: types.Token[],
   title: string,
+  link?: string,
   date?: string,
   start?: string,
   end?: string,
@@ -19,31 +20,48 @@ const SubSection = ({
   classes,
   tokens,
   title,
+  link,
   date,
   start,
   end,
   location,
-}: Props) => (
-  <div className={classes.root}>
-    <div className={classnames(classes.date, 'subsection-date')}>
-      <div>{date || start}</div>
-      <div>{end}</div>
-      <div className={classnames(classes.dot, 'subsection-dot',
-                                 (end === 'Present') && 'present')} />
-    </div>
-    <div className={classes.content}>
-      <div className="title">
+}: Props) => {
+  let titleContent: any = title;
+  if (link) {
+    titleContent = (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {title}
+      </a>
+    );
+  }
+  return (
+    <div className={classes.root}>
+      <div className={classnames(classes.date,
+                                 'subsection-date',
+                                 (!date && !start && !end) && 'dateless')}>
+        <div>{date || start}</div>
+        <div>{end}</div>
+        <div className={classnames(classes.dot, 'subsection-dot',
+                                   (end === 'Present') && 'present')} />
       </div>
-      <div className="location">
-        {location}
-      </div>
-      <div className="description">
-        <Tokens tokens={tokens} />
+      <div className={classes.content}>
+        <div className="title">
+          {titleContent}
+        </div>
+        <div className="location">
+          {location}
+        </div>
+        <div className="description">
+          <Tokens tokens={tokens} />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+}
 
 const styles = {
   root: {
@@ -70,6 +88,12 @@ const styles = {
     fontSize: 14,
     fontWeight: 100,
     textAlign: 'right' as 'right',
+    '&.dateless': {
+      width: 0,
+      '& $dot': {
+        borderRadius: 0,
+      },
+    },
     '@media print': {
       width: 80,
       fontSize: 11,

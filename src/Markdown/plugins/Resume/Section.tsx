@@ -69,7 +69,7 @@ const styles = {
         top: 7,
       },
     },
-    '& > ul': {
+    '& > ul, p': {
       margin: 0,
     },
     '@media print': {

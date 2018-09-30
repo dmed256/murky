@@ -84,6 +84,10 @@ p > code {
     background-color: transparent !important;
     font-size: 0.9em !important;
 }
+
+.mini-br {
+    height: 0.3em;
+}
 /*====================================*/
 
 

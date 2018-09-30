@@ -1,6 +1,17 @@
 ::: resume
 
-:::: resume-section title: 'Interests' ::::
+:::: resume-section title: 'About'
+
+**I really enjoy programming**.
+From high performance computing applications running on thousands of hybrid architecture nodes,
+to building web apps with great user experiences.
+
+::: html html: '<div class="mini-br"></div>' :::
+
+I'm lucky to be in an interesting combination working in the finance industry at [Two Sigma](https://www.twosigma.com/) and being a contractor with an [exascale initiative](http://ceed.exascaleproject.org).
+The influx of projects from both sides keeps me busy with a wide spectrum of projects.
+
+::::
 
 :::: resume-section title: 'Work Experience'
 
@@ -160,9 +171,41 @@ Double major in Computer Science
 
 :::: resume-section title: 'Open-Source Projects'
 
-- OCCA: Hi
-- MFEM: Hi
-- Murky: Hi
+::::: resume-subsection {
+  title: 'OCCA',
+    link: 'https://libocca.org',
+}
+
+- C++ library that enables JIT compilation for parallel architecture kernels (_CPU_, _GPU_, _FPGA_)
+- Unified API to program heterogeneous architectures
+- A C parser for the **OKL** language, introducing `@attributes` for ast-manipuation
+- **OKL** was designed to expose enough parallelism to directly convert kernels into _OpenMP_, _CUDA_, _OpenCL_, or _HIP_
+
+:::::
+
+::::: resume-subsection {
+  title: 'occa.py',
+  link: 'https://nbviewer.jupyter.org/github/libocca/occa.py/blob/master/notebooks/Tutorial.ipynb',
+}
+
+A Cython-based package, integrating **numpy** objects with **OCCA** to provide JIT compiation for parallel architecture kernels (_CPU_, _GPU_, _FPGA_)
+
+:::::
+
+::::: resume-subsection {
+  title: 'Murky',
+  link: 'https://github.com/dmed256/murky',
+}
+
+Inspired by [docsify](https://docsify.js.org), a small web application written in Typescript and React to quickly build an extensible markdown-based blog.
+
+It provides:
+
+- Plugin-system to extend Markdown using [markdown-it](https://github.com/markdown-it/markdown-it)
+- Uses JSON5 to directly map properties from Markdown to their respective React components
+- Short hash routing to map paths to staticly-hosted Markdown files
+
+:::::
 
 ::::
 
