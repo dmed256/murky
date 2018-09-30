@@ -74,7 +74,6 @@ const styles = {
     '@media print': {
       fontSize: 12,
       marginTop: '0.7em',
-      breakInside: 'avoid' as 'avoid',
     },
   },
   date: {

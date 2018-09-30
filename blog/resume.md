@@ -9,7 +9,10 @@ to building web apps with great user experiences.
 ::: html html: '<div class="mini-br"></div>' :::
 
 I'm lucky to be in an interesting combination working in the finance industry at [Two Sigma](https://www.twosigma.com/) and being a contractor with an [exascale initiative](http://ceed.exascaleproject.org).
-The influx of projects from both sides keeps me busy with a wide spectrum of projects.
+
+::: html html: '<div class="mini-br"></div>' :::
+
+The influx of projects seen from both domains along with personal sideprojects require me to work with a high variety of technologies, frameworks, libraries, and languages.
 
 ::::
 
@@ -104,6 +107,46 @@ Double major in Computer Science
 
 ::::
 
+:::: resume-section title: 'Open-Source Projects'
+
+::::: resume-subsection {
+  title: 'OCCA',
+    link: 'https://libocca.org',
+}
+
+- C++ library that enables JIT compilation for parallel architecture kernels (_CPU_, _GPU_, _FPGA_)
+- Unified API to program heterogeneous architectures
+- A C parser for the [OKL](https://libocca.org/#/guide/okl/introduction) language, introducing `@attributes` for ast-manipuation
+- [OKL](https://libocca.org/#/guide/okl/introduction) was designed to expose enough parallelism to directly convert kernels into _OpenMP_, _CUDA_, _OpenCL_, or _HIP_
+
+:::::
+
+::::: resume-subsection {
+  title: 'occa.py',
+  link: 'https://nbviewer.jupyter.org/github/libocca/occa.py/blob/master/notebooks/Tutorial.ipynb',
+}
+
+A Cython-based package, integrating **numpy** objects with **OCCA** to provide JIT compiation for parallel architecture kernels (_CPU_, _GPU_, _FPGA_)
+
+:::::
+
+::::: resume-subsection {
+  title: 'Murky',
+  link: 'https://github.com/dmed256/murky',
+}
+
+Inspired by [docsify](https://docsify.js.org), a small web application written in Typescript and React to quickly build an extensible markdown-based blog.
+
+It provides:
+
+- Plugin-system to extend Markdown using [markdown-it](https://github.com/markdown-it/markdown-it)
+- Uses JSON5 to directly map properties from Markdown to their respective React components
+- Short hash routing to map paths to staticly-hosted Markdown files
+
+:::::
+
+::::
+
 :::: resume-section title: 'Publications'
 
 ::::: resume-subsection {
@@ -164,46 +207,6 @@ Double major in Computer Science
   me: 'Medina, D. S.',
   authors: 'Medina, D. S., St-Cyr, A. and Warburton T.',
 } ::::::
-
-:::::
-
-::::
-
-:::: resume-section title: 'Open-Source Projects'
-
-::::: resume-subsection {
-  title: 'OCCA',
-    link: 'https://libocca.org',
-}
-
-- C++ library that enables JIT compilation for parallel architecture kernels (_CPU_, _GPU_, _FPGA_)
-- Unified API to program heterogeneous architectures
-- A C parser for the [OKL](https://libocca.org/#/guide/okl/introduction) language, introducing `@attributes` for ast-manipuation
-- [OKL](https://libocca.org/#/guide/okl/introduction) was designed to expose enough parallelism to directly convert kernels into _OpenMP_, _CUDA_, _OpenCL_, or _HIP_
-
-:::::
-
-::::: resume-subsection {
-  title: 'occa.py',
-  link: 'https://nbviewer.jupyter.org/github/libocca/occa.py/blob/master/notebooks/Tutorial.ipynb',
-}
-
-A Cython-based package, integrating **numpy** objects with **OCCA** to provide JIT compiation for parallel architecture kernels (_CPU_, _GPU_, _FPGA_)
-
-:::::
-
-::::: resume-subsection {
-  title: 'Murky',
-  link: 'https://github.com/dmed256/murky',
-}
-
-Inspired by [docsify](https://docsify.js.org), a small web application written in Typescript and React to quickly build an extensible markdown-based blog.
-
-It provides:
-
-- Plugin-system to extend Markdown using [markdown-it](https://github.com/markdown-it/markdown-it)
-- Uses JSON5 to directly map properties from Markdown to their respective React components
-- Short hash routing to map paths to staticly-hosted Markdown files
 
 :::::
 

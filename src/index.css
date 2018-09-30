@@ -226,6 +226,7 @@ code .token.number {
 
     a {
         font-weight: inherit;
+        text-decoration: none !important;
     }
 
     em > strong {

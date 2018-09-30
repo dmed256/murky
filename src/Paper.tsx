@@ -33,6 +33,7 @@ const styles = {
     },
   },
   paper: {
+    position: 'relative' as 'relative',
     maxWidth: 1100,
     width: '93%',
     padding: '75px 0',
