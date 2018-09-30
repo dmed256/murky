@@ -1,4 +1,3 @@
-// Based on the markdown-it plugin 'markdown-it-container'
 import JSON5 from 'json5';
 import mdit from 'markdown-it';
 
@@ -10,9 +9,67 @@ export interface ContainerInfo {
   props: any,
 }
 
-// TODO: Get the line number and print a nice error message
 const makeSourceError = (message: string, src: string, pos: number) => {
-  return Error(message.substring(100));
+  let linePos = 0;
+  let errorLine = -1;
+  const lines = src.split('\n').map((line, lineNumber) => {
+    const thisLinePos = linePos;
+    linePos += line.length + 1;
+    // Find the error line
+    if ((errorLine < 0) && (pos <= linePos)) {
+      errorLine = lineNumber;
+    }
+    // Return line information
+    return {
+      line,
+      lineNumber,
+      linePos: thisLinePos,
+    };
+  });
+
+  const errorLines = [];
+  for (let i = -2; i <= 2; ++i) {
+    const lineNumber = errorLine + i;
+    if ((lineNumber < 0) || (lineNumber >= lines.length)) {
+      continue;
+    }
+    errorLines.push(lineNumber);
+  }
+  const prefixLength = Math.max(...errorLines.map((p) => `${p + 1}`.length));
+
+  let errorMessage = message;
+  const separator = '  |  ';
+  for (let i = 0; i < errorLines.length; ++i) {
+    const { line, lineNumber, linePos } = lines[errorLines[i]];
+    // Get the line number prefix
+    let prefix = `${lineNumber + 1}`;
+    if (prefix.length < prefixLength) {
+      prefix += ' '.repeat(prefixLength - prefix.length);
+    }
+    errorMessage += `\n${prefix}${separator}${line}`;
+    // Print a marker if this matches the error line
+    if (lineNumber === errorLine) {
+      errorMessage += '\n';
+      errorMessage += ' '.repeat(prefix.length);
+      errorMessage += separator;
+      errorMessage += ' '.repeat(pos - linePos);
+      errorMessage += '^';
+    }
+  }
+  if (process.env.NODE_ENV !== 'production') {
+    // Convert the react-error-overlay error message monospace ;)
+    setTimeout(() => {
+      const errorOverlayIframe = document.getElementsByTagName('iframe')[0] as any;
+      const divs = errorOverlayIframe.contentWindow.document.getElementsByTagName('div') as any || [];
+      Array.from(divs).forEach((d: any) => {
+        if (d.style.fontFamily === 'sans-serif') {
+          d.style.fontSize = '12px';
+          d.style.fontFamily = 'monospace';
+        }
+      })
+    }, 1000);
+  }
+  return Error(errorMessage);
 };
 
 const nextNewlinePos = (s: string, pos: number) => {
@@ -30,7 +87,7 @@ const linesBetween = (s: string, start: number, end: number): number => {
   let count = 0;
   for (let i = start; i < safeEnd; ++i) {
     if (s[i] === '\n') {
-      ++count;
+        ++count;
     }
   }
   return count;
@@ -42,10 +99,10 @@ const getBraceStack = (s: string, pos: number, initStack: number): any => {
   let stack = initStack;
   while ((i < s.length) && (stack > 0)) {
     switch (s[i]) {
-      case '{': ++stack; break;
-      case '}': --stack; break;
+    case '{': ++stack; break;
+    case '}': --stack; break;
     }
-    ++i;
+      ++i;
   }
   return [i, stack];
 }
@@ -57,8 +114,8 @@ const container = (md: mdit.MarkdownIt) => {
 
     // Make sure we start with at least :::
     if ((src[startPos] !== ':') ||
-        (src.substring(startPos, startPos + 3) !== ':::')) {
-      return false;
+      (src.substring(startPos, startPos + 3) !== ':::')) {
+        return false;
     }
 
     // Extract the delimiter, can include more than 3 ':' to help with nesting
@@ -78,7 +135,7 @@ const container = (md: mdit.MarkdownIt) => {
 
     // Close token
     if (lineSrc.length === 0) {
-      ++state.line;
+        ++state.line;
       state.push('murky_container_close', 'murky', -1);
       return true;
     }
@@ -100,6 +157,8 @@ const container = (md: mdit.MarkdownIt) => {
       pos = lineEndPos + 1;
       content = `{${content}}`;
     } else {
+      const bracePos = src.indexOf('{', pos);
+
       // Skip the initial {
       let stack = 1;
       [, stack] = getBraceStack(content.substring(1), 0, stack);
@@ -110,7 +169,7 @@ const container = (md: mdit.MarkdownIt) => {
       }
       if (stack > 0) {
         throw makeSourceError("Unable to find a closing '}'",
-                              src, contentStartPos);
+          src, bracePos);
       }
       pos = state.skipSpaces(pos);
       // Check if there is a closing :::*
@@ -135,7 +194,7 @@ const container = (md: mdit.MarkdownIt) => {
     } catch (error) {
       console.error(content);
       throw makeSourceError('Unable to parse',
-                            src, contentStartPos);
+        src, contentStartPos);
     }
 
     state.line = startLine + linesBetween(src, startPos, pos);
