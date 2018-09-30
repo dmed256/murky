@@ -65,6 +65,10 @@ const styles = {
     fontSize: 14,
     fontStyle: 'italic' as 'italic',
     lineHeight: '1.5em',
+    '@media print': {
+      marginTop: 0,
+      fontSize: 12,
+    },
   },
   me: {
     color: 'var(--theme-strong, #19a98a)',
