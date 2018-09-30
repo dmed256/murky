@@ -66,8 +66,9 @@ const styles = {
     },
   },
   me: {
-    fontSize: '1.3em',
-    '@media(max-width: 700px)': {
+    fontSize: '1.6em',
+    '@media(max-width: 425px)': {
+      fontSize: '1.3em',
     },
   },
   button: {
