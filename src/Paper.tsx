@@ -42,8 +42,8 @@ const styles = {
     boxShadow: '0 7px 15px 0 rgba(1, 1, 1, 0.15)',
     '@media(max-width: 700px)': {
       width: '100%',
-      padding: '2em 0',
       margin: 0,
+      padding: '2em 0',
       boxShadow: 'none' as 'none',
       overflow: 'auto' as 'auto',
     },

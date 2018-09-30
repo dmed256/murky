@@ -81,7 +81,7 @@ const styles = {
       letterSpacing: 2,
       textTransform: 'uppercase' as 'uppercase',
     },
-    '@media(max-width: 700px)': {
+    '@media (max-width: 700px)': {
       textAlign: 'center' as 'center',
       '& .name': {
         fontSize: 20,
@@ -92,11 +92,13 @@ const styles = {
       },
     },
     '@media print': {
+      textAlign: 'left !important' as any,
       '& .name': {
-        fontSize: 30,
+        fontSize: '30px !important',
       },
       '& .title': {
-        fontSize: 18,
+        marginTop: '0 !important',
+        fontSize: '18px !important',
       },
     },
   },
@@ -123,7 +125,7 @@ const styles = {
         color: 'var(--theme-primary-color, #2980b9)',
       },
     },
-    '@media(max-width: 700px)': {
+    '@media (max-width: 700px)': {
       '& .svg': {
         fontSize: 16,
         marginRight: 12,
@@ -134,7 +136,8 @@ const styles = {
     },
     '@media print': {
       '& .svg': {
-        fontSize: 12,
+        fontSize: '12px !important',
+        marginRight: 12,
       },
       '& .link': {
         fontSize: 12,

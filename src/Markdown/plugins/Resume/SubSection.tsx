@@ -111,6 +111,7 @@ const styles = {
       borderColor: 'var(--theme-primary-color, #2980b9)',
       backgroundColor: 'var(--theme-primary-color, #2980b9)',
     },
+    // The dot needs to be changed in phone + print
     '@media(max-width: 700px)': {
       top: '28px !important',
     },

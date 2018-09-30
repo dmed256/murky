@@ -65,7 +65,7 @@ const styles = {
     fontSize: 14,
     fontStyle: 'italic' as 'italic',
     lineHeight: '1.5em',
-    '@media(max-width: 700px)': {
+    '@media (max-width: 700px)': {
       fontSize: 12,
     },
     '@media print': {

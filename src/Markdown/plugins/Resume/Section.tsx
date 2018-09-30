@@ -43,15 +43,18 @@ const styles = {
       marginTop: 30,
     },
     '@media print': {
-      marginTop: 15,
+      marginTop: '15px !important',
     },
   },
   innerRoot: {
     display: 'flex',
     borderTop: '1px solid #c2c8ce',
     paddingTop: 20,
-    '@media(max-width: 700px)': {
+    '@media (max-width: 700px)': {
       flexDirection: 'column' as 'column',
+    },
+    '@media print': {
+      flexDirection: 'row !important' as any,
     },
   },
   title: {
@@ -60,14 +63,15 @@ const styles = {
     fontWeight: 600,
     textTransform: 'uppercase' as 'uppercase',
     lineHeight: '1.1em',
-    '@media(max-width: 700px)': {
+    '@media (max-width: 700px)': {
       width: '100%',
       fontSize: 16,
       marginBottom: 20,
     },
     '@media print': {
-      width: 110,
-      fontSize: 15,
+      width: '110px !important',
+      fontSize: '15px !important',
+      marginBottom: '0 !important',
     },
   },
   content: {
@@ -83,6 +87,7 @@ const styles = {
     '& > ul, p': {
       margin: 0,
     },
+    // The dot needs to be changed in phone + print
     '@media(max-width: 700px)': {
       '& > div:first-child  .subsection-date .subsection-dot': {
         top: '4px !important',
