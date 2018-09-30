@@ -20,7 +20,7 @@ const styles = {
     margin: '0 10px',
     paddingLeft: 10,
     borderLeft: '1px solid #dadada',
-    fontWeight: 300,
+    fontWeight: 400,
   },
 };
 

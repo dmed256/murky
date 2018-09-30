@@ -56,7 +56,7 @@ blockquote {
     margin: 0 10px;
     padding-left: 10px;
     border-left: 1px solid #dadada;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 em {
@@ -171,7 +171,7 @@ pre:after {
     top: 0.5em;
     color: #73797d;
     font-size: 0.85em !important;
-    font-weight: 300;
+    font-weight: 400;
     text-transform: uppercase;
 }
 
