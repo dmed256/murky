@@ -12,6 +12,7 @@ interface Props {
   date?: string,
   start?: string,
   end?: string,
+  location?: string,
 }
 
 const SubSection = ({
@@ -21,16 +22,21 @@ const SubSection = ({
   date,
   start,
   end,
+  location,
 }: Props) => (
   <div className={classes.root}>
     <div className={classnames(classes.date, 'subsection-date')}>
       <div>{date || start}</div>
       <div>{end}</div>
-      <div className={classnames('dot', (end === 'Present') && 'present')} />
+      <div className={classnames(classes.dot, 'subsection-dot',
+                                 (end === 'Present') && 'present')} />
     </div>
     <div className={classes.content}>
       <div className="title">
         {title}
+      </div>
+      <div className="location">
+        {location}
       </div>
       <div className="description">
         <Tokens tokens={tokens} />
@@ -50,6 +56,7 @@ const styles = {
     '@media print': {
       fontSize: 12,
       marginTop: '0.7em',
+      breakInside: 'avoid' as 'avoid',
     },
   },
   date: {
@@ -60,25 +67,29 @@ const styles = {
     marginTop: -24,
     paddingTop: 24,
     borderRight: '1px solid #c3c8ce',
+    fontSize: 14,
     fontWeight: 100,
     textAlign: 'right' as 'right',
-    '& .dot': {
-      position: 'absolute' as 'absolute',
-      width: 7,
-      height: 7,
-      right: -5,
-      top: 31,
-      borderRadius: 100,
-      border: '1px solid #c3c8ce',
-      backgroundColor: 'white',
-      '&.present': {
-        borderColor: 'var(--theme-primary-color, #2980b9)',
-        backgroundColor: 'var(--theme-primary-color, #2980b9)',
-      },
-    },
     '@media print': {
       width: 80,
-      '& .dot.present': {
+      fontSize: 11,
+    },
+  },
+  dot: {
+    position: 'absolute' as 'absolute',
+    width: 7,
+    height: 7,
+    right: -5,
+    top: 31,
+    borderRadius: 100,
+    border: '1px solid #c3c8ce',
+    backgroundColor: 'white',
+    '&.present': {
+      borderColor: 'var(--theme-primary-color, #2980b9)',
+      backgroundColor: 'var(--theme-primary-color, #2980b9)',
+    },
+    '@media print': {
+      '&.present': {
         borderColor: '#c3c8ce !important',
         backgroundColor: 'white !important',
       },
@@ -89,14 +100,27 @@ const styles = {
     '& .title': {
       fontWeight: 600,
     },
+    '& .location': {
+      marginTop: '-0.2em',
+      fontSize: 14,
+      fontWeight: 100,
+      fontStyle: 'italic' as 'italic',
+    },
     '& .description': {
       fontWeight: 300,
       '& ul': {
         paddingLeft: 18,
       },
     },
+    '& .description ul, p': {
+      margin: '0.5em 0',
+    },
     '@media print': {
-      '& .description ul,p': {
+      '& .location': {
+        fontSize: 12,
+        marginBottom: '0.2em',
+      },
+      '& .description ul, p': {
         margin: 0,
       },
     },
@@ -109,7 +133,7 @@ export const plugin = {
   name: 'resume-subsection',
   Component: SubSectionWithStyles,
   requiredProps: ['title'],
-  optionalProps: ['date', 'start', 'end'],
+  optionalProps: ['date', 'start', 'end', 'location'],
 };
 
 export default SubSectionWithStyles;

@@ -30,7 +30,6 @@ const styles = {
     marginTop: 50,
     // Fake border to keep the bold line in the same page
     borderTop: '1px solid white',
-    breakInside: 'avoid' as 'avoid',
     '&:before': {
       content: '""',
       position: 'absolute' as 'absolute',
@@ -66,8 +65,16 @@ const styles = {
     '& > div:first-child .subsection-date': {
       marginTop: 0,
       paddingTop: 0,
-      '& .dot': {
+      '& .subsection-dot': {
         top: 7,
+      },
+    },
+    '& > ul': {
+      margin: 0,
+    },
+    '@media print': {
+      '& p': {
+        fontSize: 12,
       },
     },
   },

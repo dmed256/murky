@@ -3,6 +3,8 @@
     --theme-secondary-color: #f9a753;
     --theme-grey: #34495e;
     --theme-bg: #e7ecf0;
+    --theme-em: #7f8c8d;
+    --theme-strong: #19a98a;
 }
 
 html {
@@ -52,12 +54,16 @@ blockquote {
 }
 
 em {
-    color: #7f8c8d;
+    color: var(--theme-em, #7f8c8d);
 }
 
 strong {
-    color: #19a98a;
+    color: var(--theme-strong, #19a98a);
     font-weight: 400;
+}
+
+em > strong {
+    text-decoration: underline;
 }
 
 li > p {
@@ -208,6 +214,18 @@ code .token.number {
     /* Convert background-color to border for printing */
     pre {
         border: 1px solid #cbd2da;
+    }
+
+    a, em, strong {
+        color: inherit;
+    }
+
+    a {
+        font-weight: inherit;
+    }
+
+    em > strong {
+        font-weight: 600;
     }
 }
 /*====================================*/

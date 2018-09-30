@@ -5,52 +5,59 @@
 :::: resume-section title: 'Work Experience'
 
 ::::: resume-subsection {
-  title: 'Software Engineer at Two Sigma',
-  start: 'August 2018',
+  title: 'Software Engineer',
+  start: 'August 2015',
   end: 'Present',
+  location: 'Two Sigma',
 }
 
-hi
+???
 
 :::::
 
 ::::: resume-subsection {
-  title: 'Intern at Shell',
+  title: 'Contractor',
+  start: 'December 2016',
+  end: 'Present',
+  location: 'Lawrence Livermore National Laboratory',
+}
+
+- Core developer of [OCCA](https://libocca.org)
+- Implemented an OCCA-backed solution in [MFEM](http://mfem.org), providing a **GPU** solution
+- Developed **GPU**-enabled methods for high-order finite element implementations
+
+:::::
+
+::::: resume-subsection {
+  title: 'Intern',
   date: 'Summer 2014',
+  location: 'Shell',
 }
 
-- Optimized finite difference codes on multiple architectures
-- Investigated hybrid kernels with portable performance across varying architectures
+Optimized finite difference codes on **CPU** and **GPU** architectures.
+Additionally, investigated hybrid kernels that would achieve portable performance across varying architectures.
 
 :::::
 
 ::::: resume-subsection {
-  title: 'Contractor at Shell',
+  title: 'Contractor',
   start: 'Spring 2014',
   end: 'Fall 2014',
+  location: 'Shell',
 }
 
-Worked on numerical methods in parallel architectures using OpenMP, OpenCL, and CUDA
+Implemented numerical methods for parallel architectures through **OpenMP**, **OpenCL**, and **CUDA**.
 
 :::::
 
 ::::: resume-subsection {
-  title: 'Intern at Shell',
+  title: 'Intern',
   date: 'Summer 2013',
+  location: 'Shell',
 }
 
-Worked on Discontinuous Galerkin implementations for wave equations
-
-Applied a portability layer to enable OpenMP, OpenCL and CUDA
-
-:::::
-
-::::: resume-subsection {
-  title: 'Staff in HPC Summer Institute',
-  date: 'Summer 2012',
-}
-
-Helped attendees with GPGPU programming during the hands-on workshop section.
+Worked on Discontinuous Galerkin implementations for wave equations.
+Begin work on a portability layer to enable **OpenMP**, **OpenCL**, and **CUDA**.
 
 :::::
 
@@ -61,27 +68,26 @@ Helped attendees with GPGPU programming during the hands-on workshop section.
 ::::: resume-subsection {
   title: 'Ph.D. in Computational and Applied Mathematics',
   date: 'May 2015',
+  location: 'Rice University',
 }
-
-TODO
 
 :::::
 
 ::::: resume-subsection {
   title: 'Masters in Computational and Applied Mathematics',
   date: 'April 2014',
+  location: 'Rice University',
 }
-
-TODO
 
 :::::
 
 ::::: resume-subsection {
   title: 'Bachelor of Science in Mathematics',
   date: 'May 2011',
+  location: 'University of Texas Pan-American',
 }
 
-TODO
+Double major in Computer Science
 
 :::::
 
@@ -89,25 +95,74 @@ TODO
 
 :::: resume-section title: 'Publications'
 
-TODO
+::::: resume-subsection {
+  title: 'A model evaluation study for treatment planning of laser-induced thermal therapy',
+  date: 'October 2015',
+}
+
+:::::: resume-publication {
+  me: 'Medina, D.',
+  authors: 'Fahrenholtz, S. J., Moon, T., Franco, M., Medina, D., Danish, S., \
+  Gowda, A., Shetty, A., Maier, F., Hazle, J., Stafford, R. J., Warburton, T. and Fuentes, D',
+} ::::::
+
+:::::
+
+::::: resume-subsection {
+  title: 'Portability and performance of nuclear reactor simulations on many-core architectures',
+  date: 'May 2015',
+}
+
+:::::: resume-publication {
+  me: 'Medina, D.',
+  authors: 'Rahaman, R., Medina, D., Lund, A., Tramm, J., Warburton, T. and Seigel, A.',
+} ::::::
+
+:::::
+
+::::: resume-subsection {
+  title: 'GPU accelerated discontinuous Galerkin methods for shallow water equations',
+  date: 'May 2015',
+}
+
+:::::: resume-publication {
+  me: 'Medina, D.',
+  authors: 'Gandham, R., Medina, D. and Warburton, T.',
+} ::::::
+
+:::::
+
+::::: resume-subsection {
+  title: 'High-Order Finite-differences on multi-threaded architectures using OCCA',
+  date: 'October 2014',
+}
+
+:::::: resume-publication {
+  me: 'Medina, D. S.',
+  authors: 'Medina, D. S., St-Cyr, A. and Warburton T.',
+} ::::::
+
+:::::
+
+::::: resume-subsection {
+  title: 'OCCA: A united approach to multi-threading languages',
+  date: 'February 2014',
+}
+
+:::::: resume-publication {
+  me: 'Medina, D. S.',
+  authors: 'Medina, D. S., St-Cyr, A. and Warburton T.',
+} ::::::
+
+:::::
 
 ::::
 
-:::: resume-section title: 'Talks'
+:::: resume-section title: 'Open-Source Projects'
 
-TODO
-
-::::
-
-:::: resume-section title: 'Projects'
-
-TODO
-
-::::
-
-:::: resume-section title: 'Awards'
-
-TODO
+- OCCA: Hi
+- MFEM: Hi
+- Murky: Hi
 
 ::::
 
