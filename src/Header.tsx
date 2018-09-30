@@ -77,6 +77,20 @@ const styles = {
       backgroundColor: 'rgba(255, 255, 255, 0.18)',
       boxShadow: '0 5px 20px 0 rgba(0, 0, 0, 0.15)',
     },
+    '&:active': {
+      backgroundColor: 'rgba(255, 255, 255, 0.07)',
+      boxShadow: '0 2px 5px 0 rgba(0, 0, 0, 0.15)',
+    },
+    '@media (pointer: coarse)': {
+      '&:hover': {
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+      },
+      '&:active': {
+        backgroundColor: 'rgba(255, 255, 255, 0.18) !important',
+        boxShadow: '0 5px 20px 0 rgba(0, 0, 0, 0.15) !important',
+      },
+    },
     '@media(max-width: 700px)': {
       padding: '1em',
     },
