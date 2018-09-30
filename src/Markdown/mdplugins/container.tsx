@@ -1,6 +1,12 @@
 import JSON5 from 'json5';
 import mdit from 'markdown-it';
 
+import {
+  makeSourceError,
+  nextNewlinePos,
+  linesBetween,
+} from './utils';
+
 
 export interface ContainerInfo {
   __plugin: string,
@@ -9,103 +15,63 @@ export interface ContainerInfo {
   props: any,
 }
 
-const makeSourceError = (message: string, src: string, pos: number) => {
-  let linePos = 0;
-  let errorLine = -1;
-  const lines = src.split('\n').map((line, lineNumber) => {
-    const thisLinePos = linePos;
-    linePos += line.length + 1;
-    // Find the error line
-    if ((errorLine < 0) && (pos <= linePos)) {
-      errorLine = lineNumber;
-    }
-    // Return line information
-    return {
-      line,
-      lineNumber,
-      linePos: thisLinePos,
-    };
-  });
+type OpeningChars = `{` | `'` | `"` | `'''`;
 
-  const errorLines = [];
-  for (let i = -2; i <= 2; ++i) {
-    const lineNumber = errorLine + i;
-    if ((lineNumber < 0) || (lineNumber >= lines.length)) {
-      continue;
-    }
-    errorLines.push(lineNumber);
-  }
-  const prefixLength = Math.max(...errorLines.map((p) => `${p + 1}`.length));
-
-  let errorMessage = message;
-  const separator = '  |  ';
-  for (let i = 0; i < errorLines.length; ++i) {
-    const { line, lineNumber, linePos } = lines[errorLines[i]];
-    // Get the line number prefix
-    let prefix = `${lineNumber + 1}`;
-    if (prefix.length < prefixLength) {
-      prefix += ' '.repeat(prefixLength - prefix.length);
-    }
-    errorMessage += `\n${prefix}${separator}${line}`;
-    // Print a marker if this matches the error line
-    if (lineNumber === errorLine) {
-      errorMessage += '\n';
-      errorMessage += ' '.repeat(prefix.length);
-      errorMessage += separator;
-      errorMessage += ' '.repeat(pos - linePos);
-      errorMessage += '^';
-    }
-  }
-  if (process.env.NODE_ENV !== 'production') {
-    // Convert the react-error-overlay error message monospace ;)
-    setTimeout(() => {
-      const errorOverlayIframe = document.getElementsByTagName('iframe')[0] as any;
-      const divs = errorOverlayIframe.contentWindow.document.getElementsByTagName('div') as any || [];
-      Array.from(divs).forEach((d: any) => {
-        if (d.style.fontFamily === 'sans-serif') {
-          d.style.fontSize = '12px';
-          d.style.fontFamily = 'monospace';
-        }
-      })
-    }, 1000);
-  }
-  return Error(errorMessage);
-};
-
-const nextNewlinePos = (s: string, pos: number) => {
-  for (let i = pos; i < s.length; ++i) {
-    if (s[i] === '\n') {
-      return i;
-    }
-  }
-  return s.length;
+const CLOSING_PAIRS = {
+  '{': `}`,
+  "'": `'`,
+  '"': `"`,
+  "'''": `'''`,
 }
 
-const linesBetween = (s: string, start: number, end: number): number => {
-  const safeEnd = Math.min(s.length, end);
+type CharStack = OpeningChars[];
 
-  let count = 0;
-  for (let i = start; i < safeEnd; ++i) {
-    if (s[i] === '\n') {
-        ++count;
-    }
+const updateCharStack = (s: string, pos: number, charStack: CharStack): number => {
+  if (charStack.length === 0) {
+    return pos;
   }
-  return count;
-}
 
-const getBraceStack = (s: string, pos: number, initStack: number): any => {
-  // TODO: Keep stacks for ['"{]
   let i = pos;
-  let stack = initStack;
-  while ((i < s.length) && (stack > 0)) {
-    switch (s[i]) {
-    case '{': ++stack; break;
-    case '}': --stack; break;
+  let closingChar = CLOSING_PAIRS[charStack[charStack.length - 1]];
+  while ((i < s.length) && (charStack.length > 0)) {
+    const c = s[i];
+
+    switch (c) {
+    case closingChar:
+      charStack.pop();
+      closingChar = CLOSING_PAIRS[charStack[charStack.length - 1]];
+      break;
+    case '\\':
+      i += 1;
+      break;
+    default:
+      if (c in CLOSING_PAIRS) {
+        charStack.push(c as OpeningChars);
+        closingChar = CLOSING_PAIRS[c];
+      }
     }
-      ++i;
+
+    i += 1;
   }
-  return [i, stack];
+
+  return i;
 }
+
+// Add multiline strings using '''
+const escapeMultilineStrings = (s: string) => {
+  const parts = s.split("'''");
+  let escapedContent = '';
+  for (let i = 0; i < parts.length; ++i) {
+    const part = parts[i];
+    if (i % 2) {
+      const p = part.replace(/\n/g, '\\\n');
+      escapedContent += `'${p}'`;
+    } else {
+      escapedContent += part;
+    }
+  }
+  return escapedContent;
+};
 
 const container = (md: mdit.MarkdownIt) => {
   function parser(state: any, startLine: any) {
@@ -160,14 +126,14 @@ const container = (md: mdit.MarkdownIt) => {
       const bracePos = src.indexOf('{', pos);
 
       // Skip the initial {
-      let stack = 1;
-      [, stack] = getBraceStack(content.substring(1), 0, stack);
+      const charStack = ['{' as '{'];
+      updateCharStack(content.substring(1), 0, charStack);
 
-      if (stack > 0) {
-        [pos, stack] = getBraceStack(src, lineEndPos, stack);
+      if (charStack.length > 0) {
+        pos = updateCharStack(src, lineEndPos, charStack);
         content += src.substring(lineEndPos, pos);
       }
-      if (stack > 0) {
+      if (charStack.length > 0) {
         throw makeSourceError("Unable to find a closing '}'",
           src, bracePos);
       }
@@ -184,15 +150,16 @@ const container = (md: mdit.MarkdownIt) => {
     pos = nextNewlinePos(src, pos) + 1;
 
     let info;
+    const propsStr = escapeMultilineStrings(content);
     try {
       info = {
         __plugin: plugin,
         __depth: depth,
         __inline: inline,
-        props: JSON5.parse(content),
+        props: JSON5.parse(propsStr),
       };
     } catch (error) {
-      console.error(content);
+      console.error(propsStr);
       throw makeSourceError('Unable to parse',
         src, contentStartPos);
     }
