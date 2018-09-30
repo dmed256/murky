@@ -41,7 +41,7 @@ const styles = {
     zIndex: 1,
     backgroundColor: 'var(--theme-primary-color, #2980b9)',
     '@media(max-width: 700px)': {
-      height: 80,
+      height: 65,
     },
     '@media print': {
       display: 'none' as 'none',
@@ -62,7 +62,7 @@ const styles = {
       fontWeight: '100 !important' as any,
     },
     '@media(max-width: 700px)': {
-      height: 80,
+      height: 65,
     },
   },
   me: {

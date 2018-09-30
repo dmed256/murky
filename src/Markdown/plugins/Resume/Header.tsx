@@ -81,6 +81,16 @@ const styles = {
       letterSpacing: 2,
       textTransform: 'uppercase' as 'uppercase',
     },
+    '@media(max-width: 700px)': {
+      textAlign: 'center' as 'center',
+      '& .name': {
+        fontSize: 20,
+      },
+      '& .title': {
+        marginTop: 10,
+        fontSize: 14,
+      },
+    },
     '@media print': {
       '& .name': {
         fontSize: 30,
@@ -111,6 +121,15 @@ const styles = {
       fontSize: 14,
       '&:hover': {
         color: 'var(--theme-primary-color, #2980b9)',
+      },
+    },
+    '@media(max-width: 700px)': {
+      '& .svg': {
+        fontSize: 16,
+        marginRight: 12,
+      },
+      '& .link': {
+        fontSize: 12,
       },
     },
     '@media print': {

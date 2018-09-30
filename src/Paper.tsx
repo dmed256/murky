@@ -28,7 +28,7 @@ const styles = {
     backgroundColor: 'var(--theme-bg, #e7ecf0)',
     zIndex: 2,
     '@media(max-width: 700px)': {
-      marginTop: 80,
+      marginTop: 65,
       backgroundColor: 'white',
     },
   },

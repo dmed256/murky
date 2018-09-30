@@ -39,6 +39,9 @@ const styles = {
       // Use border to show up when printing
       borderTop: '3px solid #34495e',
     },
+    '@media(max-width: 700px)': {
+      marginTop: 30,
+    },
     '@media print': {
       marginTop: 15,
     },
@@ -47,6 +50,9 @@ const styles = {
     display: 'flex',
     borderTop: '1px solid #c2c8ce',
     paddingTop: 20,
+    '@media(max-width: 700px)': {
+      flexDirection: 'column' as 'column',
+    },
   },
   title: {
     width: 160,
@@ -54,6 +60,11 @@ const styles = {
     fontWeight: 600,
     textTransform: 'uppercase' as 'uppercase',
     lineHeight: '1.1em',
+    '@media(max-width: 700px)': {
+      width: '100%',
+      fontSize: 16,
+      marginBottom: 20,
+    },
     '@media print': {
       width: 110,
       fontSize: 15,

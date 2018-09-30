@@ -19,7 +19,6 @@ const Resume = ({ classes, tokens }: Props) => (
 
 const styles = {
   root: {
-    minWidth: 600,
     letterSpacing: '0.05em',
   },
 };

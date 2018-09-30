@@ -54,6 +54,10 @@ const styles = {
     height: 200,
     margin: '0 auto 40px',
     transition: 'transform 200ms',
+    '& > img': {
+      width: 336,
+      height: 200,
+    },
     '&:after': {
       content: 'attr(href)',
       position: 'absolute' as 'absolute',
@@ -74,6 +78,11 @@ const styles = {
     '@media(max-width: 700px)': {
       width: '100%',
       height: 'auto',
+      margin: 0,
+      '& > img ': {
+        width: '100%',
+        height: 'auto',
+      }
     },
   },
 };
