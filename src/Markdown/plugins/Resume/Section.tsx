@@ -40,6 +40,9 @@ const styles = {
       // Use border to show up when printing
       borderTop: '3px solid #34495e',
     },
+    '@media print': {
+      marginTop: 15,
+    },
   },
   innerRoot: {
     display: 'flex',

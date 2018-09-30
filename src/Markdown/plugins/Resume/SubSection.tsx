@@ -48,7 +48,8 @@ const styles = {
       marginTop: 0,
     },
     '@media print': {
-      fontSize: 13,
+      fontSize: 12,
+      marginTop: '0.7em',
     },
   },
   date: {
@@ -92,6 +93,11 @@ const styles = {
       fontWeight: 300,
       '& ul': {
         paddingLeft: 18,
+      },
+    },
+    '@media print': {
+      '& .description ul,p': {
+        margin: 0,
       },
     },
   },
