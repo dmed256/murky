@@ -83,6 +83,11 @@ const styles = {
     '& > ul, p': {
       margin: 0,
     },
+    '@media(max-width: 700px)': {
+      '& > div:first-child  .subsection-date .subsection-dot': {
+        top: '4px !important',
+      },
+    },
     '@media print': {
       '& p': {
         fontSize: 12,

@@ -111,6 +111,9 @@ const styles = {
       borderColor: 'var(--theme-primary-color, #2980b9)',
       backgroundColor: 'var(--theme-primary-color, #2980b9)',
     },
+    '@media(max-width: 700px)': {
+      top: '28px !important',
+    },
     '@media print': {
       '&.present': {
         borderColor: '#c3c8ce !important',
