@@ -12,6 +12,16 @@ let blog = {
   },
 };
 
+const BLOG_LISTENERS = new Set<any>();
+
+const addListener = (listener: any) => {
+  BLOG_LISTENERS.add(listener);
+}
+
+const removeListener = (listener: any) => {
+  BLOG_LISTENERS.delete(listener);
+}
+
 // Convert date to Dates and sort by date
 const convertBlogPosts = (
   posts: types.BlogPostJson[]
@@ -104,6 +114,10 @@ const processBlogEntries = (jsonPosts: types.BlogPostJson[]) => {
   blog.postsBy.month = aggregateByMonth(blog.posts) as any;
   blog.postsBy.tag = aggregateByTag(blog.posts) as any;
   blog.initialized = true;
+
+  BLOG_LISTENERS.forEach((listener: any) => {
+    listener();
+  });
 }
 
 const initBlog = () => {
@@ -119,12 +133,14 @@ const initBlog = () => {
       return res.text();
     })
     .then((info) => {
-      processBlogEntries(JSON5.parse(info))
+      processBlogEntries(JSON5.parse(info));
     });
 };
 
 export {
   initBlog,
+  addListener,
+  removeListener,
 };
 
 export default blog as types.Blog;

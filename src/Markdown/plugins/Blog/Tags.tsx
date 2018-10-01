@@ -1,12 +1,14 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import blog from '../../../blog';
 import classnames from '../../../classnames';
+import withBlog from '../../../withBlog'
+import * as types from '../../../types';
 
 
 interface Props {
   classes: any,
+  blog: types.Blog,
   tags: string[],
   selectedTags?: Set<string>,
   disabledTags?: Set<string>,
@@ -15,6 +17,7 @@ interface Props {
 
 const Tags = ({
   classes,
+  blog,
   tags,
   selectedTags,
   disabledTags,
@@ -88,4 +91,4 @@ const styles = {
   },
 };
 
-export default withStyles(styles)(Tags);
+export default withBlog(withStyles(styles)(Tags));

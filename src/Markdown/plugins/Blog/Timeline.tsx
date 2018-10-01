@@ -1,7 +1,8 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import blog from '../../../blog';
+import withBlog from '../../../withBlog'
+import * as types from '../../../types';
 import Post from './Post';
 
 
@@ -25,9 +26,10 @@ const humanMonth = (month: number) => {
 
 interface Props {
   classes: any,
+  blog: types.Blog,
 }
 
-const Timeline = ({ classes }: Props) => {
+const Timeline = ({ classes, blog }: Props) => {
   let month = -1;
   const content = blog.posts.map((post) => {
     const { publishDate } = post;
@@ -61,7 +63,7 @@ const styles = {
   },
 };
 
-const TimelineWithStyles = withStyles(styles)(Timeline);
+const TimelineWithStyles = withBlog(withStyles(styles)(Timeline));
 
 export const plugin = {
   name: 'blog-entries',

@@ -1,16 +1,18 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import blog from '../../../blog';
+import withBlog from '../../../withBlog';
+import * as types from '../../../types';
 import Heading from '../../Heading';
 import Tags from './Tags';
 import Timeline from './Timeline';
 
 interface Props {
   classes: any,
+  blog: types.Blog,
 }
 
-const LandingPage = ({ classes }: Props) => (
+const LandingPage = ({ classes, blog }: Props) => (
   <div className={classes.root}>
     <Heading Tag="h1" label="Blog" />
     <Tags
@@ -33,7 +35,7 @@ const styles = {
   },
 };
 
-const LandingPageWithStyles = withStyles(styles)(LandingPage);
+const LandingPageWithStyles = withBlog(withStyles(styles)(LandingPage));
 
 export const plugin = {
   name: 'blog-landing-page',
