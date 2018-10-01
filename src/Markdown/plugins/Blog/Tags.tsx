@@ -2,19 +2,33 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import blog from '../../../blog';
+import classnames from '../../../classnames';
 
 
 interface Props {
   classes: any,
   tags: string[],
+  selectedTags?: Set<string>,
+  disabledTags?: Set<string>,
   withCount?: boolean,
 }
 
-const Tags = ({ classes, tags, withCount }: Props) => (
+const Tags = ({
+  classes,
+  tags,
+  selectedTags,
+  disabledTags,
+  withCount,
+}: Props) => (
   <div className={classes.root}>
   {
     tags.sort().map((tag) => (
-      <div key={tag} className={classes.tag}>
+      <div
+        key={tag}
+        className={classnames(classes.tag,
+                              selectedTags && selectedTags.has(tag) && 'selected',
+                              disabledTags && disabledTags.has(tag) && 'disabled')}
+      >
         { withCount && (
             <span className={classes.count}>
               {blog.postsBy.tag[tag]}
@@ -51,6 +65,20 @@ const styles = {
     '&:hover': {
       backgroundColor: '#f0f3f5',
       boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
+    },
+    '&.selected': {
+      fontWeight: 300,
+      color: 'white',
+      backgroundColor: 'var(--theme-primary-color, #2980b9)'
+    },
+    '&.disabled': {
+      fontWeight: 300,
+      color: '#828f9d',
+      backgroundColor: '#f3f5f7 !important',
+      '&:hover': {
+        cursor: 'default',
+        boxShadow: 'none',
+      },
     },
   },
   count: {
