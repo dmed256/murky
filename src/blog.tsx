@@ -52,6 +52,7 @@ const aggregateByMonth = (
     const year = date.getFullYear();
     const month = date.getMonth();
     monthCounts[`${year}-${month}`] = { year, month, count: 0 };
+    date.setDate(1);
     date.setMonth(month + 1);
   }
 
@@ -126,4 +127,4 @@ export {
   initBlog,
 };
 
-export default blog;
+export default blog as types.Blog;

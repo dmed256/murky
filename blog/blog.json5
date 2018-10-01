@@ -1,6 +1,7 @@
 [
   {
-    filename: '2018/intro-to-jss',
+    filename: '/2018/intro-to-jss',
+    title: 'Intro to JSS',
     publishDate: '2018-10-10',
     readingTime: '10 min',
     tags: [
@@ -10,21 +11,41 @@
     ],
   },
   {
-    filename: '2018/intro-to-bash',
-    publishDate: '2018-10-01',
+    filename: '/2018/intro-to-bash',
+    title: 'Intro to Bash',
+    publishDate: '2018-09-01',
     readingTime: '25 min',
     tags: [
       'bash',
       'development',
+      // 'development1',
+      // 'development2',
+      // 'development3',
+      // 'development4',
+      // 'development5',
+      // 'development6',
+      // 'development7',
+      // 'development8',
+      // 'development9',
     ],
   },
   {
-    filename: '2018/customizing-emacs',
+    filename: '/2018/customizing-emacs',
+    title: 'Customizing Emacs',
     publishDate: '2018-09-27',
     readingTime: '20 min',
     tags: [
       'emacs',
       'development',
+      // 'foo1',
+      // 'foo2',
+      // 'foo3',
+      // 'foo4',
+      // 'foo5',
+      // 'foo6',
+      // 'foo7',
+      // 'foo8',
+      // 'foo9',
     ],
   },
 ]

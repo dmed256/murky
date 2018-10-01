@@ -1,3 +1,4 @@
+export { plugin as BlogLandingPage } from './Blog/LandingPage';
 export { plugin as Html } from './Html';
 export { plugin as Indent } from './Indent';
 export { plugin as Note } from './Note';

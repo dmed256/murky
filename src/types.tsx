@@ -1,6 +1,7 @@
 //---[ Blog ]---------------------------
 export interface BlogPostJson {
   filename: string,
+  title: string,
   publishDate: string,
   readingTime: string,
   tags: string[],
@@ -8,6 +9,7 @@ export interface BlogPostJson {
 
 export interface BlogPost {
   filename: string,
+  title: string,
   publishDate: Date,
   readingTime: string,
   tags: string[],

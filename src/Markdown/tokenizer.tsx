@@ -65,7 +65,7 @@ const processMurkyContainer = (
   // Check if plugin exists
   const plugin = plugins[__plugin];
   if (!plugin) {
-    throw Error(`Unknown plugin: '${__plugin}' (props: '${props}')`);
+    throw Error(`Unknown plugin: '${__plugin}' (props: ${JSON.stringify(props)})`);
   }
 
   const missingProps = (

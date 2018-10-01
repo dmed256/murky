@@ -2,6 +2,7 @@ import React from 'react';
 
 import history from '../history';
 import Tokens from './Tokens';
+import Heading from './Heading';
 import { Indent, Note, Tabs } from './plugins';
 import { attrProps, getText } from './tokenizer';
 import * as types from './types';
@@ -13,53 +14,47 @@ interface Props {
 
 const MurkyToken = ({ token }: Props) => {
   switch (token.type) {
-    case 'blockquote':
-    case 'bullet_list':
-    case 'em':
-    case 'inline':
-    case 'link':
-    case 'list_item':
-    case 'paragraph':
-    case 'strong':
-    case 'heading': {
-      let tag = token.tag as any;
-      let props = attrProps(token.attrs);
-      // Setup id and <a> wrapper for headers
-      if (token.type === 'heading') {
-        const Tag = tag;
-        const id = (
-          getText(token)
-          .replace(/\s+/g, '-')
-          .toLowerCase()
-        );
-        props = { ...props, id };
-        tag = ({ children, ...props }: any) => (
-          <Tag id={id} {...props}>
-            <a href={`#${history.pathname}#${id}`}>
-              {children}
-            </a>
-          </Tag>
-        );
-      }
-      // Open links in another tab
-      else if (token.type === 'link') {
-        if (props.href && !props.href.startsWith('/')) {
-          props.target = '_blank';
-          props.rel = 'noopener noreferrer';
-        }
-      }
+  case 'blockquote':
+  case 'bullet_list':
+  case 'em':
+  case 'inline':
+  case 'link':
+  case 'list_item':
+  case 'paragraph':
+  case 'strong':
+  case 'heading': {
+    let tag = token.tag as any;
+    let props = attrProps(token.attrs);
 
+    if (token.type === 'heading') {
       return (
-        <Tokens
-          tokens={token.children}
-          tag={tag}
-          props={props}
+        <Heading
+          Tag={tag}
+          label={getText(token)}
+          {...props}
         />
       );
     }
-    default:
-      throw Error(`Cannot handle murky token with type: ${token.type}`);
-      return null;
+
+    // Open links in another tab
+    if (token.type === 'link') {
+      if (props.href && !props.href.startsWith('/')) {
+        props.target = '_blank';
+        props.rel = 'noopener noreferrer';
+      }
+    }
+
+    return (
+      <Tokens
+        tokens={token.children}
+        tag={tag}
+        props={props}
+      />
+    );
+  }
+  default:
+    throw Error(`Cannot handle murky token with type: ${token.type}`);
+    return null;
   }
 };
 
