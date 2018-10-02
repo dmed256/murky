@@ -15,11 +15,6 @@ interface Props {
 const LandingPage = ({ classes, blog }: Props) => (
   <div className={classes.root}>
     <h1>Blog</h1>
-    <Tags
-      classes={{ root: classes.padding }}
-      tags={Object.keys(blog.postsBy.tag)}
-      withCount
-    />
     <Timeline classes={{ root: classes.padding }} />
   </div>
 );

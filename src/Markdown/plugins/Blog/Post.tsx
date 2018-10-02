@@ -34,6 +34,7 @@ const Post = ({ classes, post, dateLabel }: Props) => (
       <span className={classes.fullDate}>
         {stringifyDate(post.publishDate)}
       </span>
+      &nbsp;
       <a className={classes.link} href={getHashPathname(post.filename)}>
         {post.title}
       </a>

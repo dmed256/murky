@@ -84,11 +84,15 @@ const styles = {
         top: 7,
       },
     },
-    '& > ul, p': {
+    '& > ul': {
       margin: 0,
     },
-    '& > p:not(:first-child)': {
-      marginTop: 8,
+    '& > p': {
+      margin: 0,
+      letterSpacing: 0,
+      '&:not(:first-child)': {
+        marginTop: 8,
+      },
     },
     // The dot needs to be changed in phone + print
     '@media(max-width: 700px)': {
