@@ -2,7 +2,7 @@
 export interface BlogPostJson {
   filename: string,
   title: string,
-  publishDate: string,
+  publishDate: string | null,
   readingTime: string,
   tags: string[],
 };

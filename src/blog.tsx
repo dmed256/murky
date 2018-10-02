@@ -29,6 +29,11 @@ const convertBlogPosts = (
   const today = new Date();
   return (
     posts
+      // Remove unpublished posts
+      .filter((entry) => (
+        entry.publishDate !== null
+      ))
+      // Convert string -> Date
       .map((entry) => ({
         ...entry,
         publishDate: new Date(entry.publishDate as string),

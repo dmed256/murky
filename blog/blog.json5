@@ -1,5 +1,12 @@
 [
   {
+    filename: '/dummy',
+    title: 'Dummy',
+    publishDate: null,
+    readingTime: '0',
+    tags: [],
+  },
+  {
     filename: '/2018/intro-to-jss',
     title: 'Intro to JSS',
     publishDate: '2018-10-10',
@@ -18,15 +25,6 @@
     tags: [
       'bash',
       'development',
-      // 'development1',
-      // 'development2',
-      // 'development3',
-      // 'development4',
-      // 'development5',
-      // 'development6',
-      // 'development7',
-      // 'development8',
-      // 'development9',
     ],
   },
   {
@@ -37,15 +35,6 @@
     tags: [
       'emacs',
       'development',
-      // 'foo1',
-      // 'foo2',
-      // 'foo3',
-      // 'foo4',
-      // 'foo5',
-      // 'foo6',
-      // 'foo7',
-      // 'foo8',
-      // 'foo9',
     ],
   },
 ]
