@@ -99,9 +99,11 @@ const styles = {
     color: '#6F6F6F',
     backgroundColor: 'inherit',
     cursor: 'pointer' as 'pointer',
-    transition: 'color 350ms',
+    transition: 'color 500ms',
+    transitionDelay: '200ms',
     '&:hover': {
       color: 'var(--theme-primary-color, #2980b9)',
+      transition: 'color 200ms',
     },
     '&:hover:after': {
       content: '"Click to copy email to clipboard"',
