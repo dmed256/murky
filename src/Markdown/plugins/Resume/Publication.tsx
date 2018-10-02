@@ -75,6 +75,10 @@ const styles = {
   },
   me: {
     color: 'var(--theme-strong, #19a98a)',
+    '@media print': {
+      color: 'inherit',
+      fontWeight: 400,
+    },
   },
 };
 

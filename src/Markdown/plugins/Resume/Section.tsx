@@ -87,6 +87,9 @@ const styles = {
     '& > ul, p': {
       margin: 0,
     },
+    '& > p:not(:first-child)': {
+      marginTop: 8,
+    },
     // The dot needs to be changed in phone + print
     '@media(max-width: 700px)': {
       '& > div:first-child  .subsection-date .subsection-dot': {
@@ -94,8 +97,11 @@ const styles = {
       },
     },
     '@media print': {
-      '& p': {
-        fontSize: 12,
+      '& > p': {
+        fontSize: 10,
+        '&:not(:first-child)': {
+          marginTop: 5,
+        },
       },
     },
   },

@@ -1,6 +1,7 @@
-# About
-
-::: html { html: '<br>' } :::
+::: html { html: '''
+<h1>About</h1>
+<br>
+''' } :::
 
 Howdy, my name is David Medina!
 

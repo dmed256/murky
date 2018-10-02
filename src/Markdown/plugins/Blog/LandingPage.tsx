@@ -14,7 +14,7 @@ interface Props {
 
 const LandingPage = ({ classes, blog }: Props) => (
   <div className={classes.root}>
-    <Heading Tag="h1" label="Blog" />
+    <h1>Blog</h1>
     <Tags
       classes={{ root: classes.padding }}
       tags={Object.keys(blog.postsBy.tag)}
