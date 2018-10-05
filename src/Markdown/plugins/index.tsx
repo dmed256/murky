@@ -1,3 +1,4 @@
+export { plugin as BlogHeader } from './Blog/Header';
 export { plugin as BlogLandingPage } from './Blog/LandingPage';
 export { plugin as Html } from './Html';
 export { plugin as Indent } from './Indent';

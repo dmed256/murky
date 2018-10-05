@@ -59,7 +59,7 @@ const styles = {
       color: 'white !important',
       textTransform: 'uppercase' as 'uppercase',
       textDecoration: 'none !important',
-      fontWeight: '100 !important' as any,
+      fontWeight: '300 !important' as any,
     },
     '@media(max-width: 700px)': {
       height: 65,

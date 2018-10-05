@@ -85,7 +85,7 @@ const styles = {
     paddingTop: 24,
     borderRight: '1px solid #c3c8ce',
     fontSize: 14,
-    fontWeight: 100,
+    fontWeight: 300,
     textAlign: 'right' as 'right',
     '&.dateless': {
       width: 0,
@@ -130,7 +130,7 @@ const styles = {
     '& .location': {
       marginTop: '-0.2em',
       fontSize: 14,
-      fontWeight: 100,
+      fontWeight: 300,
       fontStyle: 'italic' as 'italic',
     },
     '& .description': {

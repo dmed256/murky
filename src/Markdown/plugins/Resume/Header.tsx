@@ -77,7 +77,7 @@ const styles = {
     },
     '& .title': {
       fontSize: 20,
-      fontWeight: 200,
+      fontWeight: 300,
       letterSpacing: 2,
       textTransform: 'uppercase' as 'uppercase',
     },
@@ -119,7 +119,7 @@ const styles = {
     },
     '& > .link': {
       color: 'var(--theme-grey, #34495e)',
-      fontWeight: 100,
+      fontWeight: 300,
       fontSize: 14,
       '&:hover': {
         color: 'var(--theme-primary-color, #2980b9)',

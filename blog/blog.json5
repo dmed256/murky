@@ -28,8 +28,8 @@
     ],
   },
   {
-    filename: '/2018/customizing-emacs',
-    title: 'Customizing Emacs',
+    filename: '/2018/what-is-emacs',
+    title: 'What is Emacs',
     publishDate: '2018-09-27',
     readingTime: '20 min',
     tags: [

@@ -22,6 +22,13 @@ const removeListener = (listener: any) => {
   BLOG_LISTENERS.delete(listener);
 }
 
+const getPublishDate = (yyyymmdd: string) => {
+  const [yyyy, mm, dd] = yyyymmdd.split('-');
+  return new Date(Number.parseInt(yyyy),
+                  Number.parseInt(mm) - 1,
+                  Number.parseInt(dd));
+};
+
 // Convert date to Dates and sort by date
 const convertBlogPosts = (
   posts: types.BlogPostJson[]
@@ -36,7 +43,7 @@ const convertBlogPosts = (
       // Convert string -> Date
       .map((entry) => ({
         ...entry,
-        publishDate: new Date(entry.publishDate as string),
+        publishDate: getPublishDate(entry.publishDate as string),
       }))
       // Filter future entries
       .filter((entry) => (
@@ -58,6 +65,9 @@ const convertBlogPosts = (
 const aggregateByMonth = (
   posts: types.BlogPost[]
 ): types.MonthMetadata[] => {
+  if (!posts.length) {
+    return [];
+  }
   let date = new Date(posts[posts.length - 1].publishDate);
   const today = new Date();
 
