@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'source-sans-pro/source-sans-pro.css'
-import 'typeface-ubuntu-mono';
 
 import App from './App';
 import init from './init';
