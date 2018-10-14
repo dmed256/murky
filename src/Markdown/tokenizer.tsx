@@ -42,25 +42,12 @@ const getPlugin = (plugin: string): any => (
   plugins[plugin]
 );
 
-const argToProp = (arg: string) => {
-  let key = '';
-  let value = arg;
-  // Try to find a : to split the values
-  const splitMatch = arg.match(/[^\\]:/) as any;
-  if (splitMatch) {
-    let splitIndex = splitMatch.index + splitMatch[0].length - 1;
-    key = arg.slice(0, splitIndex);
-    value = arg.slice(splitIndex + 1);
-  }
-  return { key, value };
-}
-
 const processMurkyContainer = (
   token: mdit.Token,
   children: any[],
 ): types.MurkyPluginToken | undefined => {
   // TODO: Handle __depth for help debugging
-  const { __plugin, __inline, props } = token.info as unknown as ContainerInfo;
+  const { __plugin, props } = token.info as unknown as ContainerInfo;
 
   // Check if plugin exists
   const plugin = plugins[__plugin];
@@ -180,7 +167,7 @@ const attrProps = (attrs: string[][] | null) => {
     return {};
   }
   return attrs.reduce((obj: any, [prop, value]) => {
-    let reactProp = prop;
+    const reactProp = prop;
     let reactValue = value;
     switch (prop) {
       case 'href':

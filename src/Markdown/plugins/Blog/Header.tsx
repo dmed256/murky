@@ -18,8 +18,8 @@ const Header = ({ classes, blog }: Props) => {
   if (!blog) {
     return null;
   }
-  const posts = blog.posts.filter((post) => (
-    post.filename === history.pathname
+  const posts = blog.posts.filter((blogPost) => (
+    blogPost.filename === history.pathname
   ));
   if (posts.length !== 1) {
     return null;

@@ -34,7 +34,7 @@ export interface MurkyConfig {
 // @ts-ignore
 const murkyConfig = (window.murkyConfig || {}) as any;
 
-let config: MurkyConfig = {
+const config: MurkyConfig = {
   root: '/',
   profile: {
     name: 'My Name',

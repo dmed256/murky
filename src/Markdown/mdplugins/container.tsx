@@ -96,8 +96,8 @@ const container = (md: mdit.MarkdownIt) => {
     const contentStartPos = pos;
 
     // Get the line and trim it
-    let lineEndPos = nextNewlinePos(src, pos);
-    let lineSrc = src.substring(pos, lineEndPos).trim();
+    const lineEndPos = nextNewlinePos(src, pos);
+    const lineSrc = src.substring(pos, lineEndPos).trim();
 
     // Close token
     if (lineSrc.length === 0) {

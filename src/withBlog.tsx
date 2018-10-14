@@ -1,7 +1,6 @@
 import React from 'react';
 
 import blog, { addListener, removeListener } from './blog';
-import * as types from './types';
 
 const withBlog = (Component: any): any => {
   class BlogProvider extends React.Component<any> {

@@ -16,8 +16,8 @@
   "scripts": {
     "start": "BROWSER=none REACT_EDITOR=none react-scripts-ts start",
     "start:prod": "node server.js",
-    "build": "rm -rf dist && NODE_ENV=development webpack --config webpack.config.js",
-    "build:prod": "rm -rf dist && NODE_ENV=production webpack --config webpack.production.config.js",
+    "build": "rm -rf dist && NODE_ENV=production webpack --config webpack.production.config.js",
+    "lint": "tslint -p tsconfig.prod.json",
     "bundle-stats": "yarn build:prod --profile --json > stats.json && mv stats.json dist/",
     "bundle-analyze": "webpack-bundle-analyzer dist/stats.json"
   },
@@ -32,7 +32,9 @@
     "prismjs": "^1.15.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts-ts": "2.17.0"
+    "react-scripts-ts": "3.1.0",
+    "source-sans-pro": "^2.20.2",
+    "typescript": "^3.0.3"
   },
   "devDependencies": {
     "@types/clipboard": "^2.0.1",
@@ -46,11 +48,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^1.0.0",
     "source-map-loader": "^0.2.4",
-    "style-loader": "^0.23.0",
-    "typescript": "^3.0.3",
-    "webpack": "^4.19.1",
-    "webpack-bundle-analyzer": "^3.0.2",
-    "webpack-cli": "^3.1.1"
+    "style-loader": "^0.23.0"
   },
   "proxy": "http://localhost:3001"
 }

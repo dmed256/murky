@@ -20,6 +20,7 @@
     "esModuleInterop": true
   },
   "exclude": [
+    "build",
     "node_modules",
     "dist",
     "scripts",

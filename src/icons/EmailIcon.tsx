@@ -19,9 +19,9 @@ interface State {
   snackbarOpened: boolean,
 }
 
-let clipboard: any = null;
-
 class EmailIcon extends React.Component<Props, State> {
+  clipboard: any = null;
+
   state: State = {
     snackbarOpened: false,
   }
@@ -43,7 +43,7 @@ class EmailIcon extends React.Component<Props, State> {
     if (!fullEmail) {
       throw Error("Email must be set in murky config");
     }
-    clipboard = new ClipboardJS('.email-button', {
+    this.clipboard = new ClipboardJS('.email-button', {
       text: () => fullEmail,
     });
   }

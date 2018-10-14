@@ -2,6 +2,7 @@ import React from 'react';
 
 import ErrorPage from './ErrorPage';
 import Markdown from './Markdown';
+import LoadingBar from './LoadingBar';
 import config from './config';
 
 
@@ -42,6 +43,9 @@ class MarkdownFetch extends React.Component<Props, State> {
       return;
     }
 
+    this.setState({
+      fetchState: 'loading',
+    });
     fetch(pathname)
       .then((res) => {
         const text = res.text();
@@ -95,17 +99,19 @@ class MarkdownFetch extends React.Component<Props, State> {
       fetchState,
       content,
     } = this.state;
-    switch (fetchState) {
-      case 'loading':
-      case 'data':
-        return (
-          <Markdown content={content || ''} />
-        );
-      case 'error':
-        return (
-          <ErrorPage pathname={pathname} />
-        );
-    }
+
+    const body = (
+      (fetchState !== 'error')
+        ? <Markdown content={content || ''} />
+        : <ErrorPage pathname={pathname} />
+    );
+
+    return (
+      <React.Fragment>
+        <LoadingBar loading={fetchState === 'loading'} />
+        {body}
+      </React.Fragment>
+    );
   }
 };
 

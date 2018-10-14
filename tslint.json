@@ -1,1 +1,16 @@
-{}
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "ordered-imports": false,
+    "member-access": false,
+    "object-literal-sort-keys": false,
+    "interface-name": false,
+    "no-console": [true, "log"],
+    "prefer-for-of": false,
+    "comment-format": false
+  }
+}

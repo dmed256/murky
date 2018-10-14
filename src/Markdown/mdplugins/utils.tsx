@@ -29,19 +29,19 @@ const makeSourceError = (message: string, src: string, pos: number) => {
   let errorMessage = message;
   const separator = '  |  ';
   for (let i = 0; i < errorLines.length; ++i) {
-    const { line, lineNumber, linePos } = lines[errorLines[i]];
+    const errorInfo = lines[errorLines[i]];
     // Get the line number prefix
-    let prefix = `${lineNumber + 1}`;
+    let prefix = `${errorInfo.lineNumber + 1}`;
     if (prefix.length < prefixLength) {
       prefix += ' '.repeat(prefixLength - prefix.length);
     }
-    errorMessage += `\n${prefix}${separator}${line}`;
+    errorMessage += `\n${prefix}${separator}${errorInfo.line}`;
     // Print a marker if this matches the error line
-    if (lineNumber === errorLine) {
+    if (errorInfo.lineNumber === errorLine) {
       errorMessage += '\n';
       errorMessage += ' '.repeat(prefix.length);
       errorMessage += separator;
-      errorMessage += ' '.repeat(pos - linePos);
+      errorMessage += ' '.repeat(pos - errorInfo.linePos);
       errorMessage += '^';
     }
   }

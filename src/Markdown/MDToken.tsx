@@ -15,7 +15,7 @@ const MDToken = ({ token }: Props) => {
     case 'hr':
       return <hr />;
     case 'softbreak':
-      return <React.Fragment> </React.Fragment>;
+      return <React.Fragment />;
     case 'text':
       return <React.Fragment>{token.content}</React.Fragment>;
     case 'paragraph':

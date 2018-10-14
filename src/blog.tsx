@@ -3,7 +3,7 @@ import JSON5 from 'json5';
 import config from './config';
 import * as types from './types';
 
-let blog = {
+const blog = {
   initialized: false,
   posts: [],
   postsBy: {
@@ -24,9 +24,9 @@ const removeListener = (listener: any) => {
 
 const getPublishDate = (yyyymmdd: string) => {
   const [yyyy, mm, dd] = yyyymmdd.split('-');
-  return new Date(Number.parseInt(yyyy),
-                  Number.parseInt(mm) - 1,
-                  Number.parseInt(dd));
+  return new Date(Number.parseInt(yyyy, 10),
+                  Number.parseInt(mm, 10) - 1,
+                  Number.parseInt(dd, 10));
 };
 
 // Convert date to Dates and sort by date
@@ -68,7 +68,7 @@ const aggregateByMonth = (
   if (!posts.length) {
     return [];
   }
-  let date = new Date(posts[posts.length - 1].publishDate);
+  const date = new Date(posts[posts.length - 1].publishDate);
   const today = new Date();
 
   // Fill out possible entries since the first post with 0

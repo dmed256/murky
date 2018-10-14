@@ -18,7 +18,7 @@ const Timeline = ({ classes, blog }: Props) => {
     const { publishDate } = post;
     const postMonth = publishDate.getMonth() + 1;
     let dateLabel;
-    if (month != postMonth) {
+    if (month !== postMonth) {
       month = postMonth;
       dateLabel = utils.timelineDate(publishDate);
     }

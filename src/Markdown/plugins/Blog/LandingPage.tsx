@@ -3,8 +3,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import withBlog from '../../../withBlog';
 import * as types from '../../../types';
-import Heading from '../../Heading';
-import Tags from './Tags';
 import Timeline from './Timeline';
 
 interface Props {

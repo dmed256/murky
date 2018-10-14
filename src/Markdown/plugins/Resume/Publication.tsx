@@ -1,7 +1,6 @@
 import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import Tokens from '../../Tokens';
 import * as types from '../../types';
 
 interface Props {

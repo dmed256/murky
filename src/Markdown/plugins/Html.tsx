@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { getText } from '../tokenizer';
 import * as types from '../types';
 
 interface Props {

@@ -1,9 +1,7 @@
 import React from 'react';
 
-import history from '../history';
 import Tokens from './Tokens';
 import Heading from './Heading';
-import { Indent, Note, Tabs } from './plugins';
 import { attrProps, getText } from './tokenizer';
 import * as types from './types';
 
@@ -23,8 +21,8 @@ const MurkyToken = ({ token }: Props) => {
   case 'paragraph':
   case 'strong':
   case 'heading': {
-    let tag = token.tag as any;
-    let props = attrProps(token.attrs);
+    const tag = token.tag as any;
+    const props = attrProps(token.attrs);
 
     if (token.type === 'heading') {
       return (

@@ -12,9 +12,13 @@ const stringifyDate = (d: Date) => {
   const month = d.getMonth() + 1;
   const day = d.getDate();
   let s = '';
-  if (month < 10) s += '0';
+  if (month < 10) {
+    s += '0';
+  }
   s += `${month}/`;
-  if (day < 10) s += '0';
+  if (day < 10) {
+    s += '0';
+  }
   s += `${day}`;
   return s;
 };
