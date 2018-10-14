@@ -13,12 +13,14 @@ interface Props {
 }
 
 interface State {
+  pathname: string,
   fetchState: FetchState;
   content: any;
 }
 
 class MarkdownFetch extends React.Component<Props, State> {
   state: State = {
+    pathname: '',
     fetchState: 'loading',
     content: undefined,
   }
@@ -36,32 +38,36 @@ class MarkdownFetch extends React.Component<Props, State> {
       pathname += '.md';
     }
 
-    if (pathname !== this.props.pathname) {
-      fetch(pathname)
-        .then((res) => {
-          const text = res.text();
-          if (res.ok) {
-            return text;
-          }
-          return text.then((t) => Promise.reject(t));
-        })
-        .then((content) => {
-          if (this.props.pathname === newPathname) {
-            this.setState({
-              fetchState: 'data',
-              content,
-            });
-          }
-        })
-        .catch(() => {
-          if (this.props.pathname === newPathname) {
-            this.setState({
-              fetchState: 'error',
-              content: undefined,
-            });
-          }
-        })
+    if (pathname === this.props.pathname) {
+      return;
     }
+
+    fetch(pathname)
+      .then((res) => {
+        const text = res.text();
+        if (res.ok) {
+          return text;
+        }
+        return Promise.reject(text);
+      })
+      .then((content) => {
+        if (this.props.pathname === newPathname) {
+          this.setState({
+            pathname,
+            fetchState: 'data',
+            content,
+          });
+        }
+      })
+      .catch(() => {
+        if (this.props.pathname === newPathname) {
+          this.setState({
+            pathname,
+            fetchState: 'error',
+            content: undefined,
+          });
+        }
+      });
   }
 
   componentDidMount() {
@@ -71,8 +77,9 @@ class MarkdownFetch extends React.Component<Props, State> {
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     return (
       (this.props.pathname !== nextProps.pathname)
-      || (this.state.content !== nextState.content)
-      || (this.state.fetchState !== nextState.fetchState)
+        || (this.state.pathname !== nextState.pathname)
+        || (this.state.content !== nextState.content)
+        || (this.state.fetchState !== nextState.fetchState)
     );
   }
 
@@ -83,7 +90,11 @@ class MarkdownFetch extends React.Component<Props, State> {
   }
 
   render() {
-    const { fetchState, content } = this.state;
+    const {
+      pathname,
+      fetchState,
+      content,
+    } = this.state;
     switch (fetchState) {
       case 'loading':
       case 'data':
@@ -92,7 +103,7 @@ class MarkdownFetch extends React.Component<Props, State> {
         );
       case 'error':
         return (
-          <ErrorPage pathname={this.props.pathname} />
+          <ErrorPage pathname={pathname} />
         );
     }
   }

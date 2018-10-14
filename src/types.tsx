@@ -3,7 +3,6 @@ export interface BlogPostJson {
   filename: string,
   title: string,
   publishDate: string | null,
-  readingTime: string,
   tags: string[],
 };
 
@@ -11,7 +10,6 @@ export interface BlogPost {
   filename: string,
   title: string,
   publishDate: Date,
-  readingTime: string,
   tags: string[],
 };
 

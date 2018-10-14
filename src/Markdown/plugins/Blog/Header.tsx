@@ -32,10 +32,6 @@ const Header = ({ classes, blog }: Props) => {
         <span>
           {utils.blogDate(post.publishDate)}
         </span>
-        &nbsp;
-        <span className={classes.readingTime}>
-          Estimated reading time: {post.readingTime}
-        </span>
       </div>
       <Tags
         classes={{ root: classes.tagsRoot }}
@@ -54,12 +50,6 @@ const styles = {
     color: '#626c76',
     fontSize: 14,
     letterSpacing: '0.04em',
-  },
-  readingTime: {
-    marginLeft: 10,
-    color: '#afb1b7',
-    fontStyle: 'italic' as 'italic',
-    fontWeight: 300,
   },
   tagsRoot: {
     marginTop: 10,

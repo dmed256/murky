@@ -3,14 +3,12 @@
     filename: '/dummy',
     title: 'Dummy',
     publishDate: null,
-    readingTime: '0',
     tags: [],
   },
   {
     filename: '/2018/intro-to-jss',
     title: 'Intro to JSS',
     publishDate: '2018-10-10',
-    readingTime: '10 min',
     tags: [
       'web',
       'react',
@@ -21,7 +19,6 @@
     filename: '/2018/intro-to-bash',
     title: 'Intro to Bash',
     publishDate: '2018-09-01',
-    readingTime: '25 min',
     tags: [
       'bash',
       'development',
@@ -31,7 +28,6 @@
     filename: '/2018/what-is-emacs',
     title: 'What is Emacs',
     publishDate: '2018-09-27',
-    readingTime: '20 min',
     tags: [
       'emacs',
       'development',
